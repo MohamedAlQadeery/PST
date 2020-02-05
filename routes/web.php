@@ -16,6 +16,7 @@ use App\Product;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('lang/{lang?}',['as'=>'local.change', 'uses'=>'Back\LangController@change'],);
 
 Route::get('back','Back\DashboardController@index');
 Auth::routes();
