@@ -14,7 +14,6 @@
     @include('base_layouts.navbar')
 
 
-
     {{-- yeild your content here --}}
     @yield('content')
 

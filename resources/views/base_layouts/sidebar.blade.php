@@ -4,7 +4,7 @@
             <!-- logo -->
             <div class="logo" >
 				<a href="dashboard/main/" >
-					 <img src="{{ url('/workImages/logo.png')}}" width="120" alt=""> 
+					 <img src="{{ url('/workImages/logo.png')}}" width="120" alt="">
 				</a>
             </div>
             <!-- logo collapse icon -->
@@ -18,7 +18,7 @@
                     <!-- add class "with-animation" to support animation --><i class="entypo-menu"></i> </a>
             </div>
 		</header>
-		
+
 		<div class="sidebar-user-info">
 
 			<div class="sui-normal">
@@ -46,12 +46,12 @@
 					Log Off
 				</a>
 
-				<span class="close-sui-popup">&times;</span><!-- this is mandatory -->				
+				<span class="close-sui-popup">&times;</span><!-- this is mandatory -->
 			</div>
 		</div>
-		
+
         <ul id="main-menu" class="main-menu">
-	  
+
 			<li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title">Dashboard</span></a>
 				<ul class="">
 					<li class="active"> <a href=""><span class="title">Dashboard 1</span></a> </li>
@@ -70,12 +70,12 @@
 							<li> <a href=""><span class="title">Facebook Skin</span><span class="badge badge-secondary badge-roundless">New</span></a> </li>
 						</ul>
 					</li>
-					<li> <a href=""><span class="title">What's New</span><span class="badge badge-success badge-roundless">v2.0</span></a> </li>
+					<li> <a href=""><span class="title">Whats New</span><span class="badge badge-success badge-roundless">v2.0</span></a> </li>
 				</ul>
 			</li>
 
 
-			<li class="has-sub root-level"> <a href="https://demo.neontheme.com/layouts/layout-api/"><i class="entypo-layout"></i><span class="title">Layouts</span></a>
+			{{-- <li class="has-sub root-level"> <a href="https://demo.neontheme.com/layouts/layout-api/"><i class="entypo-layout"></i><span class="title">Layouts</span></a>
 				<ul style="">
 					<li> <a href="https://demo.neontheme.com/layouts/layout-api/"><span class="title">Layout API</span></a> </li>
 					<li> <a href="https://demo.neontheme.com/layouts/collapsed-sidebar/"><span class="title">Collapsed Sidebar</span></a> </li>
@@ -96,7 +96,7 @@
 					</li>
 					<li> <a href="https://demo.neontheme.com/layouts/boxed/"><span class="title">Boxed Layout</span></a> </li>
 				</ul>
-			</li>
+			</li> --}}
 
         </ul>
     </div>
