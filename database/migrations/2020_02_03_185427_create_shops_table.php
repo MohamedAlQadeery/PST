@@ -18,7 +18,7 @@ class CreateShopsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('telephone_number');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('email')->unique();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e09290694fa67ec9e973f6ed2fed556",
+    "content-hash": "a72c1fdff811a78bbdb464040e214963",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -934,6 +934,40 @@
             "time": "2019-12-20T14:22:59+00:00"
         },
         {
+            "name": "needim/noty",
+            "version": "v3.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/needim/noty.git",
+                "reference": "77268c46b6db6a1eb7a920ed7c859fbc8de17993"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/needim/noty/zipball/77268c46b6db6a1eb7a920ed7c859fbc8de17993",
+                "reference": "77268c46b6db6a1eb7a920ed7c859fbc8de17993",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nedim Arabaci",
+                    "homepage": "http://ned.im",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Noty is a library that makes it easy to create alert - success - error - warning - information - confirmation messages as an alternative the standard alert dialog.",
+            "homepage": "http://ned.im/noty",
+            "keywords": [
+                "notification",
+                "noty"
+            ],
+            "time": "2017-12-13T20:36:34+00:00"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "2.29.1",
             "source": {
@@ -1520,6 +1554,72 @@
                 "uuid"
             ],
             "time": "2019-12-17T08:18:51+00:00"
+        },
+        {
+            "name": "realrashid/sweet-alert",
+            "version": "v3.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/realrashid/sweet-alert.git",
+                "reference": "05b6726005cfb46dcdea2f1b21d58b9d403c7956"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/realrashid/sweet-alert/zipball/05b6726005cfb46dcdea2f1b21d58b9d403c7956",
+                "reference": "05b6726005cfb46dcdea2f1b21d58b9d403c7956",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.4|^6.0|^7.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "symfony/thanks": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RealRashid\\SweetAlert\\SweetAlertServiceProvider"
+                    ],
+                    "aliases": {
+                        "Alert": "RealRashid\\SweetAlert\\Facades\\Alert"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RealRashid\\SweetAlert\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rashid Ali",
+                    "email": "realrashid05@gmail.com",
+                    "homepage": "https://realrashid.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A BEAUTIFUL, RESPONSIVE, CUSTOMIZABLE, ACCESSIBLE (WAI-ARIA) REPLACEMENT FOR JAVASCRIPT'S POPUP BOXES FOR LARAVEL BY RASHID ALI",
+            "homepage": "https://github.com/realrashid/sweet-alert",
+            "keywords": [
+                "alert",
+                "laravel",
+                "laravel-package",
+                "notifier",
+                "noty",
+                "sweet-alert",
+                "sweet-alert2",
+                "toast"
+            ],
+            "time": "2020-01-24T18:38:56+00:00"
         },
         {
             "name": "spatie/laravel-permission",

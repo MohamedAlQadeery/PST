@@ -1,17 +1,18 @@
 
 
-@include('base_layouts.header')
+@include('back.base_layouts.header')
 
 <body class="page-body page-fade gray" data-url="https://demo.neontheme.com">
 
+    @include('sweetalert::alert')
 
     <div class="page-container">
 
-@include('base_layouts.sidebar')
+@include('back.base_layouts.sidebar')
 
 <div class="main-content">
 
-    @include('base_layouts.navbar')
+    @include('back.base_layouts.navbar')
 
 
     {{-- yeild your content here --}}
@@ -79,5 +80,5 @@ Chat
 </div>
 
 
-@include('base_layouts.footer')
+@include('back.base_layouts.footer')
 

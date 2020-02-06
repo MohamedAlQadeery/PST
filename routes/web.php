@@ -19,7 +19,10 @@ Route::get('/', function () {
 Route::get('lang/{lang?}',['as'=>'local.change', 'uses'=>'Back\LangController@change'],);
 
 Route::get('back','Back\DashboardController@index');
-Auth::routes();
+
+Route::get('sregister','Back\SellerController@create')->name('seller.create');
+Route::post('sregister','Back\SellerController@store')->name('seller.store');
+Auth::routes(['register'=>false]);
 
 // Route::get('test',function(){
 //     $product = Product::findOrFail(1);
@@ -28,3 +31,6 @@ Auth::routes();
 // });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+

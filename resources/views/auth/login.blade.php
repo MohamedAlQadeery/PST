@@ -1,73 +1,205 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{app()->getLocale()}}" dir="{{app()->getLocale()== 'ar' ? 'rtl': 'ltr'}}">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Neon Admin Panel" />
+	<meta name="author" content="" />
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+	<link rel="icon" href="{{asset('neon-theme/html/neon')}}/assets/images/favicon.ico">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+	<title>Neon | Login</title>
+    @if(app()->getLocale()=='en')
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/css/font-icons/entypo/css/entypo.css">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/css/bootstrap.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/css/neon-core.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/css/neon-theme.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/css/neon-forms.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/css/custom.css">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+    <script src="{{asset('neon-theme/html/neon')}}/assets/js/jquery-1.11.3.min.js"></script>
+    @else
+    <link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/css/font-icons/entypo/css/entypo.css">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/css/bootstrap.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/css/neon-core.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/css/neon-theme.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/css/neon-forms.css">
+	<link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/css/custom.css">
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+    <script src="{{asset('neon-theme/html/neon')}}/assets/js/jquery-1.11.3.min.js"></script>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+@endif
+	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+</head>
+<body class="page-body login-page login-form-fall" data-url="http://neon.dev">
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- This is needed when you send requests via Ajax -->
+<script type="text/javascript">
+var baseurl = '';
+</script>
+
+<div class="login-container">
+
+	<div class="login-header login-caret">
+
+		<div class="login-content">
+
+			<a href="index.html" class="logo">
+				<img src="{{asset('neon-theme/html/neon')}}/assets/images/logo@2x.png" width="120" alt="" />
+			</a>
+
+			<p class="description">@lang('site.login_description')</p>
+
+			<!-- progress bar indicator -->
+			<div class="login-progressbar-indicator">
+				<h3>43%</h3>
+				<span>logging in...</span>
+			</div>
+		</div>
+
+        <ul class="list-inline links-list  text-center">
+            <li class="dropdown language-selector">
+                Language:{{app()->getLocale()}} &nbsp;
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true" aria-expanded="false">
+
+                <img src={{app()->getLocale()=='en'? url('/neon-theme/html/neon/assets/images/flags/flag-uk.png') :url('/neon-theme/html/neon/assets/images/flags/flag-ar.png') }} style="border-radius:15px" width="16" height="16">
+
+                    </a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                    <a href="{{route('local.change',['lang'=>'ar'])}}"> <img style="border-radius:15px" src="{{ url('/neon-theme/html/neon/assets/images/flags/flag-ar.png')}}" width="16" height="16"> <span>Arabic</span> </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{route('local.change',['lang'=>'en'])}}"> <img src="{{url('/neon-theme/html/neon/assets/images/flags/flag-uk.png')}}" width="16" height="16"> <span>English</span> </a>
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+	</div>
+
+	<div class="login-progressbar">
+		<div></div>
+	</div>
+
+	<div class="login-form">
+
+        @include('sweetalert::alert')
+        @include('partials._errors')
+
+
+		<div class="login-content">
+
+
+			<form method="post" action="{{route('login')}}" role="form" id="form_login">
+                @csrf
+				<div class="form-group">
+
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="entypo-user"></i>
+						</div>
+
+						<input type="text" class="form-control" name="email" placeholder="@lang('site.email')" />
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="entypo-key"></i>
+						</div>
+
+						<input type="password" class="form-control" name="password"  placeholder="@lang('site.password')" />
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-block btn-login">
+						<i class="entypo-login"></i>
+						@lang('site.login')
+					</button>
+				</div>
+
+
+
+
+
+
+
+			</form>
+
+
+			<div class="login-bottom-links">
+
+				<a href="{{route('seller.create')}}" class="link">@lang('site.register_page')</a>
+
+				<br />
+
+			</div>
+
+		</div>
+
+	</div>
+
 </div>
-@endsection
+
+
+    <!-- Bottom scripts (common) -->
+    <script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-login.js"></script>
+
+    @if(app()->getLocale()=='en')
+
+	<script src="{{asset('neon-theme/html/neon')}}/assets/js/gsap/TweenMax.min.js"></script>
+	<script src="{{asset('neon-theme/html/neon')}}/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script src="{{asset('neon-theme/html/neon')}}/assets/js/bootstrap.js"></script>
+	<script src="{{asset('neon-theme/html/neon')}}/assets/js/joinable.js"></script>
+	<script src="{{asset('neon-theme/html/neon')}}/assets/js/resizeable.js"></script>
+	<script src="{{asset('neon-theme/html/neon')}}/assets/js/neon-api.js"></script>
+	<script src="{{asset('neon-theme/html/neon')}}/assets/js/jquery.validate.min.js"></script>
+
+
+	<!-- JavaScripts initializations and stuff -->
+	<script src="{{asset('neon-theme/html/neon')}}/assets/js/neon-custom.js"></script>
+
+
+	<!-- Demo Settings -->
+    <script src="{{asset('neon-theme/html/neon')}}/assets/js/neon-demo.js"></script>
+    @else
+	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/gsap/TweenMax.min.js"></script>
+	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/bootstrap.js"></script>
+	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/joinable.js"></script>
+	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/resizeable.js"></script>
+	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-api.js"></script>
+	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/jquery.validate.min.js"></script>
+
+
+	<!-- JavaScripts initializations and stuff -->
+	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-custom.js"></script>
+
+
+	<!-- Demo Settings -->
+    <script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-demo.js"></script>
+    @endif
+</body>
+</html>

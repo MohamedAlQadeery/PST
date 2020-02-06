@@ -9,10 +9,8 @@
 	<meta name="author" content="" />
 
 	<link rel="icon" href="{{asset('neon-theme/html/neon')}}/assets/images/favicon.ico">
-    <link href="lib/noty.css" rel="stylesheet">
-    <script src="lib/noty.js" type="text/javascript"></script>
+    <title>Neon | Register</title>
 
-	<title>Neon | Register</title>
     @if(app()->getLocale()=='en')
 	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/css/font-icons/entypo/css/entypo.css">
@@ -50,7 +48,6 @@
 
 </head>
 <body class="page-body login-page login-form-fall" data-url="http://neon.dev">
-
 
 <!-- This is needed when you send requests via Ajax -->
 <script type="text/javascript">
@@ -103,17 +100,16 @@ var baseurl = '';
 		<div></div>
 	</div>
 
+
 	<div class="login-form">
+
+        @include('partials._errors')
 
 		<div class="login-content">
 
 			<form role="form" id="form_register" method="post" action="{{route('seller.store')}}">
                 @csrf
-				<div class="form-register-success">
-					<i class="entypo-check"></i>
-					<h3>You have been successfully registered.</h3>
-					<p>We have emailed you the confirmation link for your account.</p>
-				</div>
+
 
 				<div class="form-steps">
 
@@ -214,8 +210,14 @@ var baseurl = '';
 
                         </div>
 
-
-
+                        <div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="entypo-mail"></i>
+								</div>
+								<input type="text" class="form-control"  name="mobile_number" placeholder="@lang('site.mobile_number')" />
+							</div>
+                        </div>
 
                         <div class="form-group">
 							<div class="input-group">

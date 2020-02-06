@@ -173,5 +173,19 @@ return [
         'time'                  => 'الوقت',
         'available'             => 'مُتاح',
         'size'                  => 'الحجم',
+        'second_name'=>'الاسم الاب',
+        'third_name'=>'الاسم الجد',
+
+        'shop_name'=>'اسم المحل',
+    'shop_address'=>'عنوان المحل',
+    'telephone_number'=>'رقم الهاتف',
+    'shop_telephone_number'=>'رقم هاتف المحل',
+    'shop_email'=>'البريد الالكتروني للمحل',
+    'age'=>'العمر',
+    'dob'=>'تاريخ الميلاد',
+    'mobile_number'=>'رقم الهاتف المتحرك',
+
+
+
     ],
 ];
