@@ -49,6 +49,8 @@ return [
     'register_steps13'=>'الخطوة 1 من 3',
     'register_steps23'=>'الخطوة 2 من 3',
     'register_steps33'=>'الخطوة 3 من 3',
+    'register_steps12'=>'الخطوة 1 من 2',
+    'register_steps22'=>'الخطوة 2 من 2',
     'shop_name'=>'اسم المحل',
     'shop_address'=>'عنوان المحل',
     'telephone_number'=>'رقم الهاتف',

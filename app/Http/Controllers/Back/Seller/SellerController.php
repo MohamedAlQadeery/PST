@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Back;
+namespace App\Http\Controllers\Back\Seller;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\Back\Seller\StoreRequest;
 use App\Shop;
 use App\User;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\Back\Seller\StoreRequest;
 
 class SellerController extends Controller
 {
@@ -29,8 +29,7 @@ class SellerController extends Controller
     public function create()
     {
         //
-        Alert::alert('Title', 'Message', 'Type');
-                      return view('back.seller.create');
+         return view('back.seller.create');
 
     }
 
@@ -43,13 +42,22 @@ class SellerController extends Controller
     public function store(StoreRequest $request)
     {
         //
+
         $seller_data = $request->except(['shop_name','shop_address','telephone_number','shop_email',
-        'password','password_confirmation','dob']);
+        'password','password_confirmation','dob','image']);
         $seller_data['password']= Hash::make($request->password);
         $seller_data['type']=1; //1 is seller 2 is provider
         $date = strtotime($request->dob);
         $seller_data['dob']=date('Y-m-d',$date);
+
         $user = User::create($seller_data);
+
+        if($request->image){
+
+            $image=parent::uploadImage($request->image,'seller\\'.$user->id);
+            User::where('id',$user->id)->update(['image'=>$image]);
+
+       }
         $shop_data=$request->only(['shop_name','shop_address','telephone_number','shop_email']);
         $shop_data['user_id'] = $user->id;
         $shop =Shop::create([

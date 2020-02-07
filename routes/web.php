@@ -20,8 +20,15 @@ Route::get('lang/{lang?}',['as'=>'local.change', 'uses'=>'Back\LangController@ch
 
 Route::get('back','Back\DashboardController@index');
 
-Route::get('sregister','Back\SellerController@create')->name('seller.create');
-Route::post('sregister','Back\SellerController@store')->name('seller.store');
+//routes for registering the seller
+Route::get('sregister','Back\Seller\SellerController@create')->name('seller.create');
+Route::post('sregister','Back\Seller\SellerController@store')->name('seller.store');
+
+//routes for registering the provider
+Route::get('pregister','Back\Provider\ProviderController@create')->name('provider.create');
+Route::post('pregister','Back\Provider\ProviderController@store')->name('provider.store');
+
+
 Auth::routes(['register'=>false]);
 
 // Route::get('test',function(){

@@ -107,7 +107,7 @@ var baseurl = '';
 
 		<div class="login-content">
 
-			<form role="form" id="form_register" method="post" action="{{route('seller.store')}}" enctype="multipart/form-data">
+			<form role="form" id="form_register" method="post" action="{{route('provider.store')}}" enctype="multipart/form-data">
                 @csrf
 
 
@@ -191,7 +191,7 @@ var baseurl = '';
 						</div>
 
 						<div class="form-group">
-							@lang('site.register_steps13')
+							@lang('site.register_steps12')
 						</div>
 
 					</div>
@@ -269,77 +269,7 @@ var baseurl = '';
 								@lang('site.back')
 							</button>
 						</div>
-                        <div class="form-group">
-							<button type="button" data-step="step-3" class="btn btn-primary btn-block btn-login">
-								<i class="entypo-right-open-mini"></i>
-								@lang('site.next')
-							</button>
-                        </div>
 
-{{--
-
-						<div class="form-group">
-							<button type="submit" class="btn btn-success btn-block btn-login">
-								<i class="entypo-right-open-mini"></i>
-								Complete Registration
-							</button>
-						</div> --}}
-
-                        <div class="form-group">
-							@lang('site.register_steps23')
-						</div>
-                    </div>
-
-                    <div class="step" id="step-3">
-
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="entypo-user-add"></i>
-								</div>
-
-                                <input type="text" class="form-control" name="shop_name" placeholder="@lang('site.shop_name')"  />
-							</div>
-						</div>
-
-                        <div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="entypo-user-add"></i>
-								</div>
-
-                                <input type="text" class="form-control" name="shop_address" placeholder="@lang('site.shop_address')"  />
-							</div>
-						</div>
-
-                        <div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="entypo-user-add"></i>
-								</div>
-
-                                <input type="text" class="form-control" name="telephone_number" placeholder="@lang('site.telephone_number')"  />
-							</div>
-						</div>
-
-                        <div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="entypo-user-add"></i>
-								</div>
-
-                                <input type="text" class="form-control" name="shop_email" placeholder="@lang('site.shop_email')"  />
-							</div>
-                        </div>
-
-
-
-                        <div class="form-group">
-							<button type="button" data-step="step-2" class="btn btn-primary btn-block btn-login">
-								<i class="entypo-left-open-mini"></i>
-								@lang('site.back')
-							</button>
-						</div>
 
 						<div class="form-group">
 							<button type="submit" class="btn btn-success btn-block btn-login">
@@ -348,12 +278,10 @@ var baseurl = '';
     							</button>
 						</div>
 
-						<div class="form-group">
-							@lang('site.register_steps33')
+                        <div class="form-group">
+							@lang('site.register_steps22')
 						</div>
-
                     </div>
-
 
 				</div>
 
