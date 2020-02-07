@@ -64,7 +64,9 @@ var baseurl = '';
 				<img src="{{asset('neon-theme/html/neon')}}/assets/images/logo@2x.png" width="120" alt="" />
 			</a>
 
-			<p class="description">@lang('site.register_description')</p>
+            <p class="description">@lang('site.register_description')</p>
+            <h2 class="text-primary">@lang('site.provider_register')</h2>
+
 
 			<!-- progress bar indicator -->
 			<div class="login-progressbar-indicator">

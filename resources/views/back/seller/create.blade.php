@@ -63,8 +63,8 @@ var baseurl = '';
 			<a href="index.html" class="logo">
 				<img src="{{asset('neon-theme/html/neon')}}/assets/images/logo@2x.png" width="120" alt="" />
 			</a>
-
 			<p class="description">@lang('site.register_description')</p>
+            <h2 class="text-primary">@lang('site.seller_register')</h2>
 
 			<!-- progress bar indicator -->
 			<div class="login-progressbar-indicator">

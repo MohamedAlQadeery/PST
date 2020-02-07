@@ -65,7 +65,12 @@ return [
     'register_page'=>'صفحة التسجيل',
     'login'=>'تسجيل الدخول',
     'registerd_successfully'=>'تم التسجيل بنجاح !',
-    'success'=>'نجاح'
+    'success'=>'نجاح',
+    'provider'=>'المزود',
+    'seller'=>'البائع',
+    'provider_register'=>'صفحة تسجيل المزود',
+    'seller_register'=>'صفحة تسجيل البائع'
+
 
 
 
