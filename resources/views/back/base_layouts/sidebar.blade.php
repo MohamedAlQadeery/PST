@@ -52,7 +52,7 @@
 
         <ul id="main-menu" class="main-menu">
 
-			<li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title">Dashboard</span></a>
+			{{-- <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title">Dashboard</span></a>
 				<ul class="">
 					<li class="active"> <a href=""><span class="title">Dashboard 1</span></a> </li>
 					<li> <a href=""><span class="title">Dashboard 2</span></a> </li>
@@ -72,8 +72,11 @@
 					</li>
 					<li> <a href=""><span class="title">Whats New</span><span class="badge badge-success badge-roundless">v2.0</span></a> </li>
 				</ul>
-			</li>
+			</li> --}}
 
+            <li>
+                <a href="{{route('users.index')}}" class="entypo-gauge"><span style="font-size: 17px">@lang('site.users')</span></a>
+            </li>
 
 			{{-- <li class="has-sub root-level"> <a href="https://demo.neontheme.com/layouts/layout-api/"><i class="entypo-layout"></i><span class="title">Layouts</span></a>
 				<ul style="">

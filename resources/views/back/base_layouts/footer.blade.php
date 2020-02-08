@@ -25,7 +25,7 @@
  <script src="{{ url('/neon-theme/html/neon/assets/js/neon-demo.js')}}" id="script-resource-19"></script>
  <script src="{{ url('/neon-theme/html/neon/assets/js/neon-skins.js')}}" id="script-resource-20"></script>
  @endif
- 
+
 
  @if(app()->getLocale()=='ar')
 
@@ -56,7 +56,7 @@
  @endif
 
 
- 
+
  <script type="text/javascript">
      var _gaq = _gaq || [];
      _gaq.push(['_setAccount', 'UA-28991003-7']);
@@ -70,9 +70,10 @@
          var s = document.getElementsByTagName('script')[0];
          s.parentNode.insertBefore(ga, s);
      })();
- 
+
  </script>
 
+ @yield('script')
 </body>
 
 </html>

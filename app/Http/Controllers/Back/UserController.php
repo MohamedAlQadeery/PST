@@ -1,24 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Back\Provider;
+namespace App\Http\Controllers\Back;
 
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Back\Provider\StoreRequest;
-use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert;
 
-class ProviderController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+     protected $page_name ='users';
     public function index()
     {
         //
+        $users = User::where('type','!=',0)->get();
+        return view('back.user.index')->with([
+            'users'=>$users,
+            'page_name'=>$this->page_name
+        ]);
     }
 
     /**
@@ -29,7 +33,6 @@ class ProviderController extends Controller
     public function create()
     {
         //
-        return view('back.provider.create');
     }
 
     /**
@@ -38,27 +41,9 @@ class ProviderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
         //
-        $data = $request->except(['password','image','dob','password_confirmation']);
-
-        $data['password']= Hash::make($request->password);
-        $data['type']=2; // 2 is provider
-
-        $date = strtotime($request->dob);
-        $data['dob']=date('Y-m-d',$date);
-        $user =  User::create($data);
-         if($request->image){
-
-            $image=parent::uploadImage($request->image,'provider\\'.$user->id);
-            User::where('id',$user->id)->update(['image'=>$image]);
-
-       }
-
-        Alert::success(__('site.success'),  __('site.registerd_successfully'));
-        return redirect()->route('login');
-
     }
 
     /**

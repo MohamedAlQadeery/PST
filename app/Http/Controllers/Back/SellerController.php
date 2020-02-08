@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Back\Seller;
+namespace App\Http\Controllers\Back;
 
 use App\Shop;
 use App\User;

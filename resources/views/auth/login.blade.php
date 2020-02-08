@@ -151,7 +151,9 @@ var baseurl = '';
 
 			<div class="login-bottom-links">
 
-				<a href="{{route('seller.create')}}" class="link">@lang('site.register_page')</a>
+                <a href="{{route('seller.create')}}" class="link">@lang('site.seller_register')</a><br>
+                <a href="{{route('provider.create')}}" class="link">@lang('site.provider_register')</a>
+
 
 				<br />
 

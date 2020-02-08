@@ -4,7 +4,7 @@ return [
 
 
     'dashboard'   => 'الرئيسيه',
-    'users'=>'المشرفين',
+    'users'=>'المستخدمين',
     'create'=>'اضافه',
     'update'=>'تعديل',
     'delete'=>'حذف',
@@ -13,6 +13,7 @@ return [
     'first_name'=>'الاسم الاول',
     'second_name'=>'اسم الاب',
     'third_name'=>'الاسم الجد',
+    'full_name'=>'الاسم الكامل',
 
     'last_name'=>'الاسم العائله',
     'email'=>'البريد الالكتروني',
@@ -69,7 +70,11 @@ return [
     'provider'=>'المزود',
     'seller'=>'البائع',
     'provider_register'=>'صفحة تسجيل المزود',
-    'seller_register'=>'صفحة تسجيل البائع'
+    'seller_register'=>'صفحة تسجيل البائع',
+    'gender'=>'الجنس',
+    'type'=>'النوع',
+    'action'=>'العمليه'
+
 
 
 
