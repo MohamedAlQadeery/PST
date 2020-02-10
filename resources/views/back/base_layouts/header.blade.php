@@ -27,6 +27,8 @@
     </script>
 
     <title>Neon | Dashboard 2</title>
+    <link rel="stylesheet" href="{{asset('neon-theme')}}/chosen/css/chosen/chosen.min.css ">
+
     @if(app()->getLocale()=='en')
     <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css')}}" id="style-resource-1">
     <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/css/font-icons/entypo/css/entypo.css')}}" id="style-resource-2">

@@ -32,8 +32,12 @@ Route::post('pregister','Back\ProviderController@store')->name('provider.store')
 Route::group(['prefix'=>'back','namespace'=>'Back'],function(){
 
     Route::group(['prefix'=>'users'],function(){
-        Route::get('/','UserController@index')->name('users.index');
+        Route::get('/','UserController@index')->name('user.index');
     });
+
+    Route::resource('role','RoleController')->except(['show']);
+
+
 });
 
 Auth::routes(['register'=>false]);
@@ -43,6 +47,9 @@ Auth::routes(['register'=>false]);
 
 //     dd($product->shops()->attach('2',['quantity'=>12]));
 // });
+
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

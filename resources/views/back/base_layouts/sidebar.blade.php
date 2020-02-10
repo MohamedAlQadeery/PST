@@ -74,9 +74,25 @@
 				</ul>
 			</li> --}}
 
-            <li>
-                <a href="{{route('users.index')}}" class="entypo-gauge"><span style="font-size: 17px">@lang('site.users')</span></a>
+            <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.users')</span></a>
+				<ul class="">
+					<li> <a href=""><span class="title"><i  class="entypo-gauge" ></i><span  style="font-size: 17px">@lang('site.create_user')</span></a> </li>
+                    <a href="{{route('user.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.users')</span></a>
+
+				</ul>
             </li>
+
+
+
+            <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.roles')</span></a>
+				<ul class="">
+					<li> <a href="{{route('role.create')}}"><span class="title"><i  class="entypo-gauge" ></i><span  style="font-size: 17px">@lang('site.create_role')</span></a> </li>
+                    <a href="{{route('role.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.roles')</span></a>
+
+				</ul>
+			</li>
+
+
 
 			{{-- <li class="has-sub root-level"> <a href="https://demo.neontheme.com/layouts/layout-api/"><i class="entypo-layout"></i><span class="title">Layouts</span></a>
 				<ul style="">

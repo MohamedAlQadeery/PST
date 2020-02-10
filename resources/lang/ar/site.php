@@ -73,8 +73,15 @@ return [
     'seller_register'=>'صفحة تسجيل البائع',
     'gender'=>'الجنس',
     'type'=>'النوع',
-    'action'=>'العمليه'
-
+    'action'=>'العمليه',
+    'create_user'=>'اضافه مستخدم',
+    'create_role'=>'انشاء دور',
+    'roles'=>'الادوار',
+    'permissions'=>'الصلاحيات',
+    'page'=>'صفحة',
+    'name'=>'الاسم',
+    'select_permissions'=>'اختر الصلاحيات',
+    'role_name'=>'اسم الدور'
 
 
 

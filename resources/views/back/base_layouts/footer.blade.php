@@ -1,4 +1,6 @@
  <!-- Imported styles on this page -->
+ <script src="{{asset('neon-theme')}}/chosen/js/chosen/chosen.jquery.min.js"></script>
+
  @if(app()->getLocale()=='en')
  <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/js/jvectormap/jquery-jvectormap-1.2.2.css')}}" id="style-resource-1">
  <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/js/rickshaw/rickshaw.min.css')}}" id="style-resource-2">
