@@ -23,10 +23,7 @@ class CreateProductsTable extends Migration
             $table->double('price_to_sell');
             $table->double('price_to_buy');
             $table->integer('quantity');
-
-
-
-
+            $table->integer('status');
 
             $table->timestamps();
         });
