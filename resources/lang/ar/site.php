@@ -81,7 +81,8 @@ return [
     'page'=>'صفحة',
     'name'=>'الاسم',
     'select_permissions'=>'اختر الصلاحيات',
-    'role_name'=>'اسم الدور'
+    'role_name'=>'اسم الدور',
+    'role'=>'الدور'
 
 
 

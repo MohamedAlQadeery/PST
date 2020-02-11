@@ -68,6 +68,7 @@ class SellerController extends Controller
             'user_id'=>$shop_data['user_id']
         ]);
         User::where('id',$user->id)->update(['shop_id'=>$shop->id]);
+        $user->assignRole('المدير العام');
         Alert::success(__('site.success'),  __('site.registerd_successfully'));
         return redirect()->route('login');
 

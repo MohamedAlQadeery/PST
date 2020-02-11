@@ -46,7 +46,8 @@
 					<th>#</th>
                     <th>@lang('site.full_name')</th>
                     <th>@lang('site.email')</th>
-					<th>@lang('site.type')</th>
+                    <th>@lang('site.type')</th>
+                    <th>@lang('site.role')</th>
 					<th>@lang('site.gender')</th>
                     <th>@lang('site.address')</th>
 					<th>@lang('site.action')</th>
@@ -66,6 +67,15 @@
                       @else
                         @lang('site.provider')
                       @endif
+                    </td>
+                    <td class="center">
+                        @if(count($user->roles()->get()) >0)
+                        <ul style="margin-left: 20px">
+                           @foreach ($user->roles()->get() as $role )
+                            <li>{{$role->name}}</li>
+                           @endforeach
+                        </ul>
+                        @endif
                     </td>
                     <td class="center">
                         @if($user->gender==1)

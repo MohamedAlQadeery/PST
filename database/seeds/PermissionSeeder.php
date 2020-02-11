@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
@@ -14,7 +15,7 @@ class PermissionSeeder extends Seeder
     {
         //
         $faker = Faker\Factory::create();
-        $permissions = array('create-product','update-product','delete-product','index-product','create-user','edit-user');
+        $permissions = array('all','create-product','update-product','delete-product','index-product','create-user','edit-user');
         foreach ($permissions as $permission) {
             Permission::create([
                 'name' => $permission,
@@ -22,5 +23,8 @@ class PermissionSeeder extends Seeder
 
             ]);
         }
+
+       $role= Role::create(['name'=>'المدير العام']);
+       $role->givePermissionTo('all');
     }
 }
