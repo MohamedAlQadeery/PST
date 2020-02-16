@@ -31,9 +31,7 @@ Route::post('pregister','Back\ProviderController@store')->name('provider.store')
 
 Route::group(['prefix'=>'back','namespace'=>'Back'],function(){
 
-    Route::group(['prefix'=>'users'],function(){
-        Route::get('/','UserController@index')->name('user.index');
-    });
+   Route::resource('users', 'UserController');
 
     Route::resource('role','RoleController')->except(['show']);
 
@@ -52,6 +50,7 @@ Auth::routes(['register'=>false]);
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 
 

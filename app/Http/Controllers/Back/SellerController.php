@@ -18,7 +18,6 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -28,94 +27,89 @@ class SellerController extends Controller
      */
     public function create()
     {
-        //
-         return view('back.seller.create');
-
+        return view('back.seller.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
     {
-        //
-
-        $seller_data = $request->except(['shop_name','shop_address','telephone_number','shop_email',
-        'password','password_confirmation','dob','image']);
-        $seller_data['password']= Hash::make($request->password);
-        $seller_data['type']=1; //1 is seller 2 is provider
+        $seller_data = $request->except(['shop_name', 'shop_address', 'telephone_number', 'shop_email',
+        'password', 'password_confirmation', 'dob', 'image', ]);
+        $seller_data['password'] = Hash::make($request->password);
+        $seller_data['type'] = 1; //1 is seller 2 is provider
         $date = strtotime($request->dob);
-        $seller_data['dob']=date('Y-m-d',$date);
+        $seller_data['dob'] = date('Y-m-d', $date);
 
         $user = User::create($seller_data);
 
-        if($request->image){
-
-            $image=parent::uploadImage($request->image,'seller\\'.$user->id);
-            User::where('id',$user->id)->update(['image'=>$image]);
-
-       }
-        $shop_data=$request->only(['shop_name','shop_address','telephone_number','shop_email']);
+        if ($request->image) {
+            $image = parent::uploadImage($request->image);
+            User::where('id', $user->id)->update(['image' => $image]);
+        }
+        $shop_data = $request->only(['shop_name', 'shop_address', 'telephone_number', 'shop_email']);
         $shop_data['user_id'] = $user->id;
-        $shop =Shop::create([
-            'name'=>$shop_data['shop_name'],
-            'address'=>$shop_data['shop_address'],
-            'telephone_number'=>$shop_data['telephone_number'],
-            'email'=>$shop_data['shop_email'],
-            'user_id'=>$shop_data['user_id']
+        $shop = Shop::create([
+            'name' => $shop_data['shop_name'],
+            'address' => $shop_data['shop_address'],
+            'telephone_number' => $shop_data['telephone_number'],
+            'email' => $shop_data['shop_email'],
+            'user_id' => $shop_data['user_id'],
         ]);
-        User::where('id',$user->id)->update(['shop_id'=>$shop->id]);
+        User::where('id', $user->id)->update(['shop_id' => $shop->id]);
         $user->assignRole('المدير العام');
-        Alert::success(__('site.success'),  __('site.registerd_successfully'));
-        return redirect()->route('login');
+        Alert::success(__('site.success'), __('site.registerd_successfully'));
 
+        return redirect()->route('login');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(StoreRequest $request, $id)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
     }
 }

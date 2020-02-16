@@ -308,6 +308,7 @@ var baseurl = '';
 
 </div>
 
+<script src="https://demo.neontheme.com/assets/js/fileinput.js"></script>
 
     <!-- Bottom scripts (common) -->
     <script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-register.js"></script>
@@ -339,7 +340,6 @@ var baseurl = '';
 	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-api.js"></script>
 	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/jquery.validate.min.js"></script>
 	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/jquery.inputmask.bundle.js"></script>
-    <script src="https://demo.neontheme.com/assets/js/fileinput.js"></script>
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-custom.js"></script>

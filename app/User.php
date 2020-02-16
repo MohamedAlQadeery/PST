@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -17,7 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $guarded=[];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -37,6 +36,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getImage()
+    {
+        if (!$this->image) {
+            return asset('uploads/no-image.jpg');
+        }
 
-
+        return asset('uploads/'.$this->image);
+    }
 }

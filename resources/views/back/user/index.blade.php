@@ -17,6 +17,7 @@
 
 
 <div class="row">
+    @include('partials.messages')
 
     <script type="text/javascript">
 		jQuery( document ).ready( function( $ ) {
@@ -86,8 +87,15 @@
                       </td>
                     <td class="center">{{$user->address}}</td>
                     <td class="center">
-                        <a href="" class="btn btn-primary">@lang('site.edit')</a>
-                        <a href="" class="btn btn-danger">@lang('site.delete')</a>
+                        <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary">@lang('site.edit')</a>
+
+                        <form action="{{route('users.destroy',$user->id)}}" method="post" style="display:inline"
+                            onsubmit="return confirm('Are you sure you want to delete this user?');">
+                          @csrf()
+                          @method('DELETE')
+                      <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
+                      </form>
+                        <a href="" class="btn btn-info">@lang('site.show')</a>
 
                     </td>
 

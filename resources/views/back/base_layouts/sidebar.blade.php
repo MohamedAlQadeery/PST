@@ -76,8 +76,8 @@
 
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.users')</span></a>
 				<ul class="">
-					<li> <a href=""><span class="title"><i  class="entypo-gauge" ></i><span  style="font-size: 17px">@lang('site.create_user')</span></a> </li>
-                    <a href="{{route('user.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.users')</span></a>
+					<li> <a href="{{route('users.create')}}"><span class="title"><i  class="entypo-gauge" ></i><span  style="font-size: 17px">@lang('site.create_user')</span></a> </li>
+                    <a href="{{route('users.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.users')</span></a>
 
 				</ul>
             </li>

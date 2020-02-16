@@ -13,15 +13,24 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
-    public function uploadImage($image,$dir,$height=300){
-
-        if(!file_exists(public_path('uploads\\'.$dir))){
+    //upload image to specifc directory
+    public function uploadDirImage($image, $dir, $height = 300)
+    {
+        if (!file_exists(public_path('uploads\\'.$dir))) {
             Storage::disk('public_uploads')->makeDirectory($dir);
         }
         Image::make($image)->resize(null, $height, function ($constraint) {
             $constraint->aspectRatio();
         })->save(public_path('uploads\\'.$dir.'\\'.$image->hashName()));
+
+        return $image->hashName();
+    }
+
+    public function uploadImage($image, $height = 300)
+    {
+        Image::make($image)->resize(null, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(public_path('uploads\\'.$image->hashName()));
 
         return $image->hashName();
     }
