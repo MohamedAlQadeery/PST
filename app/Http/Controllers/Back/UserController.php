@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Back\User\StoreRequest;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -35,8 +36,11 @@ class UserController extends Controller
      */
     public function create()
     {
+        $roles = Role::all();
+
         return view('back.user.create')->with([
             'page_name' => $this->page_name,
+            'roles' => $roles,
         ]);
     }
 
@@ -55,6 +59,8 @@ class UserController extends Controller
         $date = strtotime($request->dob);
         $data['dob'] = date('Y-m-d', $date);
         $user = User::create($data);
+        $user->syncRoles($request->roles);
+
         if ($request->image) {
             $image = parent::uploadImage($request->image);
 
@@ -85,10 +91,14 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+        $selectedRoles = $user->roles()->get()->pluck('id')->toArray();
+        $roles = Role::all();
 
         return view('back.user.edit')->with([
             'page_name' => $this->page_name,
             'user' => $user,
+            'selectedRoles' => $selectedRoles,
+            'roles' => $roles,
         ]);
     }
 
@@ -103,7 +113,7 @@ class UserController extends Controller
     public function update(StoreRequest $request, $id)
     {
         $user = User::findOrFail($id);
-        $data = $request->except(['password', 'image', 'dob', 'password_confirmation']);
+        $data = $request->except(['password', 'image', 'dob', 'password_confirmation', 'roles']);
 
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
@@ -118,6 +128,7 @@ class UserController extends Controller
             $data['image'] = parent::uploadImage($request->image);
         }
         $user->update($data);
+        $user->syncRoles($request->roles);
 
         return redirect()->route('users.index')->with('success', __('site.edit_successfully'));
     }

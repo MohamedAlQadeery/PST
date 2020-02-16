@@ -118,6 +118,20 @@
             <input id="name" name="address" type="text" class="form-control" placeholder="@lang('site.address')"  value="{{$user->address}} ">
         </div>
 
+        <div class="form-group col-md-8">
+            <label class="control-lable">@lang('site.roles')</label>
+            <select name="roles[]"  data-placeholder="@lang('site.roles')"
+             class="form-control myselect" multiple>
+            @foreach ($roles as $role)
+                <option value="{{$role->id}}" {{in_array($role->id,$selectedRoles) ?'selected':''}}>{{$role->name}}</option>
+            @endforeach
+
+            </select>
+                                </div>
+
+                <div>
+
+
 
         <div class="form-group col-md-6">
             <label for="name" class="control-label">@lang('site.gender')</label>

@@ -34,6 +34,8 @@ class StoreRequest extends FormRequest
             'gender' => ['required'],
             'type' => ['required'],
             'mobile_number' => ['required'],
+            'roles' => 'required',
+            'roles.*' => 'required',
         ];
 
         if ($this->getMethod() == 'POST') {
