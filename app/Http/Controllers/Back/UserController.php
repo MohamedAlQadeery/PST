@@ -17,7 +17,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $page_name = 'users';
+    public function __construct(User $model)
+    {
+        parent::__construct($model);
+    }
 
     public function index()
     {
@@ -25,7 +28,7 @@ class UserController extends Controller
 
         return view('back.user.index')->with([
             'users' => $users,
-            'page_name' => $this->page_name,
+            'page_name' => parent::getPluralModelName(),
         ]);
     }
 
@@ -39,7 +42,7 @@ class UserController extends Controller
         $roles = Role::all();
 
         return view('back.user.create')->with([
-            'page_name' => $this->page_name,
+            'page_name' => parent::getPluralModelName(),
             'roles' => $roles,
         ]);
     }
@@ -53,7 +56,7 @@ class UserController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $data = $request->except(['password', 'image', 'dob', 'password_confirmation']);
+        $data = $request->except(['password', 'image', 'dob', 'password_confirmation', 'roles']);
 
         $data['password'] = Hash::make($request->password);
         $date = strtotime($request->dob);
@@ -79,6 +82,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $user = User::findOrFail($id);
+
+        return view('back.user.show')->with([
+            'page_name' => parent::getPluralModelName(),
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -95,7 +104,7 @@ class UserController extends Controller
         $roles = Role::all();
 
         return view('back.user.edit')->with([
-            'page_name' => $this->page_name,
+            'page_name' => parent::getPluralModelName(),
             'user' => $user,
             'selectedRoles' => $selectedRoles,
             'roles' => $roles,

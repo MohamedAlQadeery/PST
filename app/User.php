@@ -44,4 +44,9 @@ class User extends Authenticatable
 
         return asset('uploads/'.$this->image);
     }
+
+    public function shop()
+    {
+        return $this->belongsTo('App\Shop');
+    }
 }

@@ -13,7 +13,7 @@
     </li>
 </ol>
 
-<h2>@lang('site.users')</h2>
+<h2>@lang('site.shops')</h2>
 
 
 <div class="row">
@@ -45,57 +45,31 @@
 			<thead>
 				<tr>
 					<th>#</th>
-                    <th>@lang('site.full_name')</th>
-                    <th>@lang('site.email')</th>
-                    <th>@lang('site.type')</th>
-                    <th>@lang('site.role')</th>
-					<th>@lang('site.gender')</th>
+                    <th>@lang('site.name')</th>
                     <th>@lang('site.address')</th>
+                    <th>@lang('site.owner')</th>
 					<th>@lang('site.action')</th>
 
 
 				</tr>
 			</thead>
 			<tbody>
-                @foreach($users as $index=>$user)
+                @foreach($shops as $index=>$shop)
 				<tr>
 					<td>{{++$index}}</td>
-					<td>{{$user->first_name.' '.$user->second_name.' '.$user->third_name.' '.$user->last_name}}</td>
-					<td>{{$user->email}}</td>
-					<td class="center">
-                      @if($user->type==1)
-                      @lang('site.seller')
-                      @else
-                        @lang('site.provider')
-                      @endif
-                    </td>
+                    <td>{{$shop->name}}</td>
+                    <td class="center">{{$shop->address}}</td>
+					<td><a href="{{route('users.show',$shop->user->id)}}">{{$shop->user->first_name.' '.$shop->user->last_name}}</a></td>
                     <td class="center">
-                        @if(count($user->roles()->get()) >0)
-                        <ul style="margin-left: 20px">
-                           @foreach ($user->roles()->get() as $role )
-                            <li>{{$role->name}}</li>
-                           @endforeach
-                        </ul>
-                        @endif
-                    </td>
-                    <td class="center">
-                        @if($user->gender==1)
-                        @lang('site.male')
-                        @else
-                          @lang('site.female')
-                        @endif
-                      </td>
-                    <td class="center">{{$user->address}}</td>
-                    <td class="center">
-                        <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary">@lang('site.edit')</a>
+                        <a href="{{route('shops.edit',$shop->id)}}" class="btn btn-primary">@lang('site.edit')</a>
 
-                        <form action="{{route('users.destroy',$user->id)}}" method="post" style="display:inline"
+                        <form action="{{route('shops.destroy',$shop->id)}}" method="post" style="display:inline"
                             onsubmit="return confirm('Are you sure you want to delete this user?');">
                           @csrf()
                           @method('DELETE')
                       <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                       </form>
-                        <a href="{{route('users.show',$user->id)}}" class="btn btn-info">@lang('site.show')</a>
+                        <a href="{{route('shops.show',$shop->id)}}" class="btn btn-info">@lang('site.show')</a>
 
                     </td>
 

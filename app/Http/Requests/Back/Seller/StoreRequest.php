@@ -33,14 +33,12 @@ class StoreRequest extends FormRequest
             'age' => ['required', 'numeric'],
             'dob' => ['required'],
             'gender' => ['required'],
-            'shop_name' => ['required'],
+            'shop_name' => ['required', 'unique:shops,name'],
             'shop_address' => ['required'],
-            'telephone_number'=> ['required'],
-            'mobile_number'=> ['required'],
+            'telephone_number' => ['required'],
+            'mobile_number' => ['required'],
 
             'shop_email' => ['required', 'string', 'email', 'max:255', 'unique:shops,email'],
-
-  //
         ];
     }
 }

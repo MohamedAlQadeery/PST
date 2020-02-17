@@ -1,11 +1,36 @@
 <?php
 
 return [
-
-
-    'dashboard'   => 'Dashboard',
-    'register_description'=>'Create an account, its free and takes few moments only!',
-    'login_description'=>'Dear user, log in to access the admin area!',
-    'select_permissions'=>'Select Permissions',
-    'role_name'=>'Role Name'
+    'dashboard' => 'Dashboard',
+    'register_description' => 'Create an account, its free and takes few moments only!',
+    'login_description' => 'Dear user, log in to access the admin area!',
+    'select_permissions' => 'Select Permissions',
+    'role_name' => 'Role Name',
+    'users' => ' Users',
+    'all_users' => 'All users',
+    'manage_users' => 'Manage Users',
+    'create_user' => 'Create user',
+    'show' => 'Show',
+    'co_Founder_at' => 'Co Founder at',
+    'none' => 'none',
+    'personal_info' => 'Personal Information',
+    'first_name' => 'First name',
+    'second_name' => 'Second name',
+    'third_name' => 'Third name',
+    'last_name' => 'Last name',
+    'gender' => 'Gender',
+    'age' => 'Age',
+    'mobile_number' => 'Mobile number',
+    'email' => 'Email',
+    'address' => 'Address',
+    'name' => 'name',
+    'telephone_number' => 'Telephone number',
+    'website' => 'Website',
+    'facebook' => 'Facebook',
+    'twitter' => 'Twitter',
+    'instagram' => 'Instagram',
+    'snapchat' => 'Snapchat',
+    'shop_info' => 'Shop Information',
+    'contact_info' => 'Contact Information',
+    'user_info' => 'User Information',
 ];

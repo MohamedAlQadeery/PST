@@ -41,7 +41,7 @@
         @csrf()
 
         <div class="col-md-4 pull-right">
-            <label class="col-sm-3 control-label">@lang('site.image_upload')</label>
+            <label class="col-sm-3 control-label">Image Upload</label>
 
             <div class="col-sm-5">
 

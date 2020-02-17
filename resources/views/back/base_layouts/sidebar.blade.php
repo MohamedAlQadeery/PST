@@ -90,7 +90,13 @@
                     <a href="{{route('role.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.roles')</span></a>
 
 				</ul>
-			</li>
+            </li>
+
+
+            <li class="active">
+                <a href="{{route('shops.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.shops')</span></a>
+
+            </li>
 
 
 
