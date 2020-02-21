@@ -8,31 +8,28 @@
 
         <div class="member-entry">
 
-            <a href="extra-timeline.html" class="member-img">
-            <img src="{{$user->getImage()}}" class="img-rounded">
+            <a href="#" class="member-img">
+            <img src="{{$shop->getImage()}}" alt="image" class="img-rounded">
             </a>
             <div class="member-details">
-                <h4> {{$user->first_name}} {{$user->last_name}} </h4>
+                <h4>{{$shop->name}}</h4>
                 <div class="row info-list">
-                    <div class="col-sm-4"> <i class="entypo-briefcase"></i> @lang('site.co_Founder_at'): <a href="#">
-                        @if($user->shop)
-                        <b>{{$user->shop->name}}</b>
-                        @else
-                        <b>@lang('site.none')</b>
-                        @endif
-                    </a> </div>
+                    <div class="col-sm-4"> <i class="entypo-briefcase"></i>
+                    {{$shop->user->first_name.' '.$shop->user->last_name}}
+                        <a href="#"></a>
+                    </div>
 
 
-                      <div class="col-sm-4"> <i class="entypo-twitter"></i> <a href="#">@isset($user->shop->twitter)
-                        $user->shop->twitter
+                    <div class="col-sm-4"> <i class="entypo-twitter"></i> <a href="#">@isset($shop->twitter)
+                        $shop->twitter
                       @endisset</a> </div>
-                    <div class="col-sm-4"> <i class="entypo-facebook"></i> <a href="#">@isset($user->shop->facebook)
-                        $user->shop->facebook
+                    <div class="col-sm-4"> <i class="entypo-facebook"></i> <a href="#">@isset($shop->facebook)
+                        $shop->facebook
                       @endisset</a> </div>
-                    <div class="clear"></div>
-                    <div class="col-sm-4"> <i class="entypo-location"></i> <a href="#">{{$user->address}}</a> </div>
-                    <div class="col-sm-4"> <i class="entypo-mail"></i> <a href="#">{{$user->email}}</a> </div>
-                    <div class="col-sm-4"> <i class="entypo-linkedin"></i> <a href="#">johnkennedy</a> </div>
+               <div class="clear"></div>
+                    <div class="col-sm-4"> <i class="entypo-location"></i> {{$shop->address}} </div>
+                    <div class="col-sm-4"> <i class="entypo-mail"></i> {{$shop->email}} </div>
+                    {{-- <div class="col-sm-4"> <i class="entypo-linkedin"></i> <a href="#">johnkennedy</a> </div> --}}
                 </div>
             </div>
         </div>
@@ -42,7 +39,65 @@
 
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <div class="panel-title"><h1>@lang('site.user_info')</h1></div>
+                <div class="panel-title"><h1>@lang('site.shop_info')</h1></div>
+                <div class="panel-options">
+                    <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg">
+                        <i class="entypo-cog"></i></a> <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                         <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> </div>
+            </div>
+            <div class="panel-body with-table" style="display: block;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            {{-- <th width="50%">@lang('site.personal_info')</th>
+                            <th></th> --}}
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="padding-lg" colspan="2">
+                                <div class="list-group">
+                                    <li style="font-size:15px" class="list-group-item active"> @lang('site.shop_info')
+                                    </li>
+                                    <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.name'):</div>{{$shop->name}}
+                                    </li>
+                                    <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.address'):</div>{{$shop->address}}
+                                    </li>
+                                    <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.telephone_number'):</div>{{$shop->telephone_number}}
+                                    </li>
+                                    <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.email'):</div>{{$shop->email}}
+                                    </li>
+                                    <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.website'):</div>{{$shop->website}}
+                                    </li>
+                                    <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.facebook'):</div>{{$shop->facebook}}
+                                    </li>
+                                    <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.twitter'):</div>{{$shop->twitter}}
+                                    </li>
+                                    <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.instagram'):</div>{{$shop->instagram}}
+                                    </li>
+                                    <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.snapchat'):</div> {{$shop->snapchat}}
+                                    </li>
+
+
+
+                                </div>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        {{-- products --}}
+        @if(count($shop_products) >0)
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title"><h1>@lang('site.shop_products')</h1></div>
                 <div class="panel-options"> <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a> <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> </div>
             </div>
             <div class="panel-body with-table" style="display: block;">
@@ -54,83 +109,40 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="padding-lg">
-                                <div class="list-group">
-                                    <li  class="list-group-item active">  @lang('site.personal_info')
-                                    </li>
-                                    <li style="font-size:15px"  class="list-group-item"> <div style="font-size:15px" class="label label-default">@lang('site.first_name'):</div>  {{$user->first_name}}
-                                    </li>
-                                    <li style="font-size:15px"   class="list-group-item"> <div style="font-size:15px" class="label label-default">@lang('site.second_name'):</div> {{$user->second_name}}
-                                    </li>
-                                    <li style="font-size:15px"  class="list-group-item"> <div style="font-size:15px" class="label label-default">@lang('site.third_name'):</div> {{$user->third_name}}
-                                    </li>
-                                    <li style="font-size:15px"  class="list-group-item"> <div style="font-size:15px" class="label label-default">@lang('site.last_name'):</div> {{$user->last_name}}
-                                    </li>
-                                    <li style="font-size:15px"  class="list-group-item"> <div style="font-size:15px" class="label label-default">@lang('site.gender'):</div> {{($user->gender=='1'?'male':'female')}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default">@lang('site.age'):</div> {{$user->age}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default">@lang('site.dob'):</div> {{$user->dob}}
-                                    </li>
 
+                        {{-- loop over here  --}}
+                        @foreach($shop_products as $product)
+                        <div class="member-entry">
 
+                            <a href="extra-timeline.html" class="member-img">
+                            <img src="{{$product->product->getImage()}}" alt="image" class="img-rounded">
+                            </a>
+
+                            <div class="member-details">
+                                <h4>{{$product->name}}</h4>
+                                <div class="row info-list">
+                                    <div style="font-weight:bold; color:black;" class="col-sm-4"> <i class="entypo-vcard"></i> @lang('site.barcode'):{{$product->product->barcode}}</div>
+                                    <div style="font-weight:bold; color:black;" class="col-sm-4"> <i class="entypo-tag"></i>@lang('site.category'): {{$product->product->category->name}} </div>
+                                    <div style="font-weight:bold; color:black;" class="col-sm-4"> <i class="entypo-credit-card"></i> @lang('site.price_to_sell'):{{$product->product->price_to_sell}}</div>
+                                    <div style="font-weight:bold; color:black;" class="col-sm-4"> <i class="entypo-credit-card"></i> @lang('site.price_to_buy'):{{$product->product->price_to_buy}}</div>
+                                    <div style="font-weight:bold; color:black;" class="col-sm-4"> <i class="entypo-basket"></i>  @lang('site.quantity'):{{$product->quantity}}</div>
                                 </div>
-                            </td>
-
-                            <td class="padding-lg">
-                                <div class="list-group">
-                                    <li style="font-size:15px" class="list-group-item active">  @lang('site.contact_info')
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.mobile_number'):  </div>{{$user->mobile_number}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.email'): </div> {{$user->email}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.address'):</div> {{$user->address}}
-                                    </li>
-
-                                </div>
-                            </td>
-                        </tr>
-
-                        @if($user->shop)
-
-                        <tr>
-                            <td class="padding-lg" colspan="2">
-                                <div class="list-group">
-                                    <li style="font-size:15px" class="list-group-item active">  @lang('site.shop_info')
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.name'):</div>  {{$user->shop->name}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.address'):</div>  {{$user->shop->address}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.telephone_number'):</div> {{$user->shop->telephone_number}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.email'):</div> {{$user->shop->email}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.website'):</div> {{$user->shop->website}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.facebook'):</div> {{$user->shop->facebook}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.twitter'):</div> {{$user->shop->twitter}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.instagram'):</div> {{$user->shop->instagram}}
-                                    </li>
-                                    <li style="font-size:15px" class="list-group-item"> <div style="font-size:15px" class="label label-default"> @lang('site.snapchat'):</div> {{$user->shop->snapchat}}
-                                    </li>
+                            </div>
+                        </div>
+                        @endforeach
 
 
-
-                                </div>
-                            </td>
-                        </tr>
-
-                       @endif
+                        <div class="row">
+                            <button type="button" style="margin-right:30px; margin-bottom:10px" class="btn btn-blue pull-right">@lang('site.show_all')</button>
+                        </div>
 
                     </tbody>
+
                 </table>
             </div>
         </div>
+@endif
+
     </div>
 </div>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use App\Shop;
+use App\ProductShop;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -59,6 +60,14 @@ class ShopController extends Controller
      */
     public function show($id)
     {
+        $shop = Shop::findOrFail($id);
+        $shop_products = ProductShop::where(['shop_id' => $shop->id, 'status' => 1])->get();
+
+        return view('back.shop.show')->with([
+            'page_name' => parent::getPluralModelName(),
+            'shop' => $shop,
+            'shop_products' => $shop_products,
+        ]);
     }
 
     /**

@@ -32,6 +32,10 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back'], function () {
     Route::resource('users', 'UserController');
     Route::resource('shops', 'ShopController');
     Route::resource('role', 'RoleController')->except(['show']);
+    Route::get('cashier/{shop_id}/product/{product_id}', 'ProductController@getProduct');
+    Route::get('cashier/{id}', 'CashierController@show');
+    Route::get('cashier', 'CashierController@index')->name('cashier.index');
+    Route::post('cashier/{id}', 'CashierController@store')->name('cashier.store');
 });
 
 Auth::routes(['register' => false]);

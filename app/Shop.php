@@ -14,6 +14,11 @@ class Shop extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function products()
+    {
+        return $this->belongsToMany('App\Product', 'product_shop');
+    }
+
     public function getImage()
     {
         if (!$this->image) {

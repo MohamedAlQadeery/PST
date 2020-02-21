@@ -6,6 +6,8 @@
  <script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/bootstrap-colorpicker.min.js"></script>
 
 
+
+
  @if(app()->getLocale()=='en')
  <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/js/jvectormap/jquery-jvectormap-1.2.2.css')}}" id="style-resource-1">
  <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/js/rickshaw/rickshaw.min.css')}}" id="style-resource-2">

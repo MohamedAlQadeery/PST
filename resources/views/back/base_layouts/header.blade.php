@@ -9,6 +9,7 @@
     <meta name="description" content="Neon Admin Panel" />
     <meta name="author" content="Laborator.co" />
     <link rel="icon" href="{{ url('/neon-theme/html/neon/assets/images/favicon.ico')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141030632-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -30,7 +31,8 @@
     <link rel="stylesheet" href="{{asset('neon-theme')}}/chosen/css/chosen/chosen.min.css ">
 
     <link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/selectboxit/jquery.selectBoxIt.css">
-	<link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/daterangepicker/daterangepicker-bs3.css">
+
     @if(app()->getLocale()=='en')
     <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css')}}" id="style-resource-1">
     <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/css/font-icons/entypo/css/entypo.css')}}" id="style-resource-2">

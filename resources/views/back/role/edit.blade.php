@@ -21,13 +21,17 @@
     <li>
     <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
+    <li>
+        <a href="{{route('role.index')}}"><i class="fa-home"></i>@lang('site.roles')</a>
+
+    </li>
     <li class="active">
 
-        <strong>@lang('site.create_role')</strong>
+        <strong>@lang('site.edit_role')</strong>
     </li>
 </ol>
 
-<h2>@lang('site.create_role')</h2><br>
+<h2>@lang('site.edit_role')</h2><br>
 
 
 

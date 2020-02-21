@@ -8,8 +8,6 @@ class CreateInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -17,14 +15,13 @@ class CreateInvoicesTable extends Migration
             $table->bigIncrements('id');
             $table->dateTime('date');
             $table->double('total');
+            $table->integer('shop_id');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Back;
 
 use App\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Back\User\StoreRequest;
-use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
