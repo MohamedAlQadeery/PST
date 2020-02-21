@@ -14,7 +14,7 @@
 
     <li class="active">
 
-        <strong>{{$products[0]->shop->name}} @lang('site.cashier')</strong>
+        <strong>{{$shop->name}} @lang('site.cashier')</strong>
     </li>
 </ol>
 <h2></h2>
@@ -35,6 +35,8 @@
                     <td id="quantity">@lang('site.quantity')</td>
                     <td id="total">@lang('site.total')</td>
                     <td id="product_id"></td>
+                    <td id="price"></td>
+
                   </tr>
                 </thead>
 
@@ -155,7 +157,7 @@ $.ajax({
     url: url + '/product/' + product_id
 }).done(function(data) {
     product_name = data.product.product.name;
-    product_price = data.product.product.price_to_buy;
+    product_price = data.product.product.price_to_sell;
     product_quantity = document.getElementById(product_id + 'quantity').value; // get the selected quantity from the user
     product_price = product_quantity * product_price; //multply the price by the quantity to get the total item price
 
@@ -165,7 +167,7 @@ $.ajax({
     {{-- currency = currencyFormat(entry); //convert the price format --}}
 
     document.getElementById('entries').innerHTML += '<tr><td>' + product_name + '</td><td>' + product_quantity +
-        '</td><td>' + entry + '</td><td style="display:none;">'+product_id +'</td></tr>';
+        '</td><td>' + entry + '</td><td style="display:none;">'+product_id +'</td><td>'+product_price+'</td></tr>';
     total += entry;
 
     document.getElementById('total').innerHTML =total;
@@ -228,14 +230,13 @@ document.querySelector("#save").addEventListener("click", e => {
 
         type:'POST',
 
-        url:'{{route("cashier.store",$products[0]->shop->id)}}',
+        url:'{{route("cashier.store",$shop->id)}}',
 
         data:{data:tableContent},
 
         success:function(data){
 
-           console.log(data);
-
+            window.open('http://localhost:8000/back/invoice/'+data.id,'_blank');
         },error:function(data){
 
             console.log(data.status);

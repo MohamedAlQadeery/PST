@@ -121,4 +121,10 @@ return [
     'cashier' => 'الكاشير',
     'show_all' => 'اظهر المزيد',
     'edit_role' => 'تعديل الدور',
+    'print_invoice' => 'طباعه الوصل',
+    'product' => 'المنتج',
+    'invoices' => 'الفواتير',
+    'invoice' => 'الفاتورة',
+    'show_invoices' => 'اظهر الفواتير',
+    'price' => 'السعر',
 ];

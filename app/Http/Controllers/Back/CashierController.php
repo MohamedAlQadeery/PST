@@ -47,14 +47,14 @@ class CashierController extends Controller
 
         $sum = 0;
         foreach ($request->data as $row) {
-            $item = Item::create(['product_id' => $row['product_id'], 'quantity' => $row['quantity']]);
+            $item = Item::create(['product_id' => $row['product_id'], 'quantity' => $row['quantity'], 'price' => $row['price']]);
 
             $item->invoices()->attach($invoice->id);
             $sum += $row['total'];
         }
         $invoice->update(['total' => $sum]);
 
-        return parent::success($invoice);
+        return response()->json(['id' => $invoice->id]);
     }
 
     // private function rules()

@@ -7,16 +7,22 @@
     <li>
     <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
+    @if($shop_name != '')
+    <li>
+        <a href="{{route('shops.index')}}"><i class="fa-home"></i>@lang('site.shops')</a>
+        </li>
+    @endif
     <li class="active">
 
         <strong>@lang('site.'.$page_name)</strong>
     </li>
 </ol>
 
-<h2>@lang('site.shops')</h2>
+<h2> {{$shop_name}} @lang('site.invoices')</h2>
 
 
 <div class="row">
+
     @include('partials.messages')
 
     <script type="text/javascript">
@@ -28,10 +34,11 @@
                 "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 "language": {
                     @if(app()->getLocale()=='ar')
-                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Arabic.json"
+                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Arabic.json",
                     @endif
                 },
-				"bStateSave": true
+                "bStateSave": true
+
 			});
 
 			// Initalize Select Dropdown after DataTables is created
@@ -45,39 +52,32 @@
 			<thead>
 				<tr>
 					<th>#</th>
-                    <th>@lang('site.name')</th>
-                    <th>@lang('site.address')</th>
-                    <th>@lang('site.owner')</th>
+                    <th>@lang('site.shop_name')</th>
+                    <th>@lang('site.total')</th>
 					<th>@lang('site.action')</th>
 
 
 				</tr>
 			</thead>
 			<tbody>
-                @foreach($shops as $index=>$shop)
-				<tr>
-					<td>{{++$index}}</td>
-                    <td>{{$shop->name}}</td>
-                    <td class="center">{{$shop->address}}</td>
-					<td><a href="{{route('users.show',$shop->user->id)}}">{{$shop->user->first_name.' '.$shop->user->last_name}}</a></td>
-                    <td class="center">
-                        <a href="{{route('shops.edit',$shop->id)}}" class="btn btn-primary">@lang('site.edit')</a>
+                @foreach ($invoices as $index =>$invoice)
+                <tr>
+                    <td>{{++$index}}</td>
+                    <td>{{$invoice->shop->name}}</td>
+                    <td>{{$invoice->total}}</td>
+                    <td>
+                        <a href="{{route('invoice.show',$invoice->id)}}" class="btn btn-info">@lang('site.show')</a>
 
-                        <form action="{{route('shops.destroy',$shop->id)}}" method="post" style="display:inline"
-                            onsubmit="return confirm('Are you sure you want to delete this user?');">
-                          @csrf()
-                          @method('DELETE')
-                      <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
-                      </form>
-                        <a href="{{route('shops.show',$shop->id)}}" class="btn btn-info">@lang('site.show')</a>
-                        <a href="{{route('shop_invoices.index',$shop->id)}}" class="btn btn-green">@lang('site.show_invoices')</a>
+                        <form action="{{route('invoice.destroy',$invoice->id)}}" method="post" style="display:inline"
+                              onsubmit="return confirm('Are you sure you want to delete this invoice?');">
+                            @csrf()
+                            @method('DELETE')
+                        <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
+                        </form>
 
                     </td>
-
                 </tr>
-
                 @endforeach
-
 			</tbody>
 			<tfoot>
 

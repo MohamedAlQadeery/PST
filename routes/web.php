@@ -31,11 +31,20 @@ Route::post('pregister', 'Back\ProviderController@store')->name('provider.store'
 Route::group(['prefix' => 'back', 'namespace' => 'Back'], function () {
     Route::resource('users', 'UserController');
     Route::resource('shops', 'ShopController');
+    Route::get('shop/{id?}/invoices', 'InvoiceController@index')->name('shop_invoices.index');
     Route::resource('role', 'RoleController')->except(['show']);
-    Route::get('cashier/{shop_id}/product/{product_id}', 'ProductController@getProduct');
-    Route::get('cashier/{id}', 'CashierController@show');
-    Route::get('cashier', 'CashierController@index')->name('cashier.index');
-    Route::post('cashier/{id}', 'CashierController@store')->name('cashier.store');
+
+    //cashier routes
+
+    Route::group(['prefix' => 'cashier'], function () {
+        Route::get('', 'CashierController@index')->name('cashier.index');
+        Route::get('{shop_id}/product/{product_id}', 'ProductController@getProduct');
+        Route::get('{id}', 'CashierController@show');
+        Route::post('{id}', 'CashierController@store')->name('cashier.store');
+    });
+
+    //invoice
+    Route::resource('invoice', 'InvoiceController');
 });
 
 Auth::routes(['register' => false]);

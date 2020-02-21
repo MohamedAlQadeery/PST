@@ -104,6 +104,11 @@
 
             </li>
 
+            <li class="active">
+                <a href="{{route('invoice.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.invoices')</span></a>
+
+            </li>
+
 
 
 			{{-- <li class="has-sub root-level"> <a href="https://demo.neontheme.com/layouts/layout-api/"><i class="entypo-layout"></i><span class="title">Layouts</span></a>

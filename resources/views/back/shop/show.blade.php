@@ -36,6 +36,8 @@
 
 
         <hr>
+        <a href="{{route('shop_invoices.index',$shop->id)}}" class="btn-lg btn-green">@lang('site.show_invoices')</a>
+        <br><br>
 
         <div class="panel panel-primary">
             <div class="panel-heading">
