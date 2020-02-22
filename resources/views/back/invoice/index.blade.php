@@ -51,7 +51,8 @@
 		<table class="table table-bordered datatable" id="table-1">
 			<thead>
 				<tr>
-					<th>#</th>
+                    <th>#</th>
+                    <th>@lang('site.invoice_number')</th>
                     <th>@lang('site.shop_name')</th>
                     <th>@lang('site.total')</th>
 					<th>@lang('site.action')</th>
@@ -63,6 +64,7 @@
                 @foreach ($invoices as $index =>$invoice)
                 <tr>
                     <td>{{++$index}}</td>
+                    <td>{{$invoice->id}}</td>
                     <td>{{$invoice->shop->name}}</td>
                     <td>{{$invoice->total}}</td>
                     <td>

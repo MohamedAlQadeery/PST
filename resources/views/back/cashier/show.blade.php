@@ -33,9 +33,9 @@
                   <tr>
                     <td id="name">@lang('site.name')</td>
                     <td id="quantity">@lang('site.quantity')</td>
-                    <td id="total">@lang('site.total')</td>
-                    <td id="product_id"></td>
-                    <td id="price"></td>
+                    <td id="product_price">@lang('site.price')</td>
+                    <td style="display:none;" id="product_id"></td>
+                    <td id="price">@lang('site.total')</td>
 
                   </tr>
                 </thead>
@@ -131,53 +131,33 @@
 
 
 <script type="text/javascript">
-
-
     $.ajaxSetup({
-
         headers: {
-
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
         }
-
     });
-
-
 var total = 0;
-
 // get the choosen item from the table
 function itemChoose(product_id) {
-
 // ajax request here to get all the product info
-
 url = window.location.href;
 // url = url.replace('/cashier', '');
 $.ajax({
     url: url + '/product/' + product_id
 }).done(function(data) {
     product_name = data.product.product.name;
-    product_price = data.product.product.price_to_sell;
+    single_product_price = data.product.product.price_to_sell;
     product_quantity = document.getElementById(product_id + 'quantity').value; // get the selected quantity from the user
-    product_price = product_quantity * product_price; //multply the price by the quantity to get the total item price
-
+    product_price = product_quantity * single_product_price; //multply the price by the quantity to get the total item price
     // after the ajax request fill the Bill record
-
     var entry = parseFloat(product_price); //convert the price format
     {{-- currency = currencyFormat(entry); //convert the price format --}}
-
     document.getElementById('entries').innerHTML += '<tr><td>' + product_name + '</td><td>' + product_quantity +
-        '</td><td>' + entry + '</td><td style="display:none;">'+product_id +'</td><td>'+product_price+'</td></tr>';
+        '</td><td>'+single_product_price+'</td><td style="display:none;">'+product_id +'</td><td>'+entry+'</td></tr>';
     total += entry;
-
     document.getElementById('total').innerHTML =total;
-
-
-
 });
-
 }
-
 // convert the number to currency Format
 {{-- function currencyFormat(number) {
   var currency = parseFloat(number);
@@ -185,18 +165,10 @@ $.ajax({
   currency = '₪' + currency;
   return currency;
 } --}}
-
-
-
-
 //Run saveInventory function on Save
 document.querySelector("#save").addEventListener("click", e => {
       saveInventory();
-
-
-
     });
-
    //function to save the bill records
     function saveInventory() {
     //Loop over th and crate column Header array
@@ -214,56 +186,36 @@ document.querySelector("#save").addEventListener("click", e => {
           (accum, curr, i) => {
             const obj = { ...accum };
             obj[columnHeader[i]] = curr.innerHTML;
-
             return obj;
           },
           {}
         );
         return tableRow;
       });
-
       // this array object contain the saved content from the bill
       console.log(tableContent);
       empty()
-
       $.ajax({
-
         type:'POST',
-
         url:'{{route("cashier.store",$shop->id)}}',
-
         data:{data:tableContent},
-
         success:function(data){
-
             window.open('http://localhost:8000/back/invoice/'+data.id,'_blank');
         },error:function(data){
-
             console.log(data.status);
-
          }
-
      });
     }
-
-
-
-
 //function to empty the bill records
 function empty(){
-
  //reset the var total to zero
  total = 0;
  document.getElementById('entries').innerHTML='';
  document.getElementById('total').innerHTML = '₪0.00';
-
 }
-
-
 // table script
 		jQuery( document ).ready( function( $ ) {
 			var $table1 = jQuery( '#table-1' );
-
 			// Initialize DataTable
 			$table1.DataTable( {
 				"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -274,14 +226,11 @@ function empty(){
                     @endif
                 },
 			});
-
 			// Initalize Select Dropdown after DataTables is created
 			$table1.closest( '.dataTables_wrapper' ).find( 'select' ).select2( {
 				minimumResultsForSearch: -1
 			});
 		} );
-
-
 </script>
 
 

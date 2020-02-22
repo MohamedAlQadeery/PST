@@ -50,7 +50,7 @@ class CashierController extends Controller
             $item = Item::create(['product_id' => $row['product_id'], 'quantity' => $row['quantity'], 'price' => $row['price']]);
 
             $item->invoices()->attach($invoice->id);
-            $sum += $row['total'];
+            $sum += $row['price'];
         }
         $invoice->update(['total' => $sum]);
 

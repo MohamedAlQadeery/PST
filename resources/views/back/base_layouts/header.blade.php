@@ -3,6 +3,7 @@
 
 
 <head>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,11 +28,14 @@
         });
     </script>
 
+
+
     <title>Neon | Dashboard 2</title>
     <link rel="stylesheet" href="{{asset('neon-theme')}}/chosen/css/chosen/chosen.min.css ">
 
     <link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/selectboxit/jquery.selectBoxIt.css">
     <link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/daterangepicker/daterangepicker-bs3.css">
+
 
     @if(app()->getLocale()=='en')
     <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css')}}" id="style-resource-1">
@@ -65,4 +69,72 @@
     @endif
 
 
+<style>
+    {{-- cahier Css --}}
+    /* body {
+        background: #EEE;
+        font-family: sans-serif;
+        font-size: 20px;
+        margin: 3em;
+        padding: 0;
+      } */
+      #register {
+        width: auto;
+        margin: auto;
+      }
+      #ticket {
+        background: white;
+        margin: 0 1em;
+        padding: 1em;
+        box-shadow: 0 0 5px rgba(0,0,0,.25);
+      }
+      #ticket h1 {
+        text-align: center;
+      }
+      #ticket table {
+        font-family: monospace;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      #ticket td, #ticket th {
+        padding: 5px;
+      }
+      #ticket th {
+        text-align: left;
+      }
+      #ticket td, #ticket #total {
+        text-align: right;
+      }
+      #ticket tfoot th {
+        border-top: 1px solid black;
+      }
+
+      #entry {
+        background: #333;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0,0,0,.25);
+      }
+      #entry input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid black;
+        text-align: right;
+        font-family: sans-serif;
+        font-size: 20px;
+        box-shadow: inset 0 0 3px rgba(0,0,0,.5);
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      #entry input:focus {
+        outline: none;
+        border-color: rgba(255,255,255,.75);
+      }
+    </style>
+
+
+
 </head>
+
+

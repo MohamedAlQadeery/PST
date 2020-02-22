@@ -127,4 +127,5 @@ return [
     'invoice' => 'الفاتورة',
     'show_invoices' => 'اظهر الفواتير',
     'price' => 'السعر',
+    'invoice_number' => 'رقم الفاتورة',
 ];

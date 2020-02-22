@@ -59,6 +59,7 @@
                 <th width="60%">@lang('site.product')</th>
                 <th>@lang('site.quantity')</th>
                 <th>@lang('site.price')</th>
+                <th>@lang('site.total')</th>
             </tr>
         </thead>
 
@@ -69,6 +70,8 @@
                 <td class="text-center">{{++$index}}</td>
                 <td>{{$item->product->name}}</td>
                 <td>{{$item->quantity}}</td>
+                <td>{{$item->product->price_to_sell}}</td>
+
                 <td class="text-right">{{$item->price}}</td>
             </tr>
             @endforeach
