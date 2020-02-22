@@ -25,8 +25,8 @@
         </div>
 
         <div class="col-sm-6 invoice-right">
-
-                <h3>{{$invoice_date}}</h3>
+                <h3> @lang('site.invoice_number') : {{$invoice->id}}</h3>
+                <h5>{{$invoice_date}}</h5>
         </div>
 
     </div>
