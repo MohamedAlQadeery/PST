@@ -8,8 +8,6 @@ class CreatePermissionTables extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -20,6 +18,7 @@ class CreatePermissionTables extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('guard_name');
+            $table->integer('type')->default(0); //0 is all permission ,, 1 permission specife for sellers
             $table->timestamps();
         });
 
@@ -86,8 +85,6 @@ class CreatePermissionTables extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

@@ -82,6 +82,15 @@
 				</ul>
             </li>
 
+            <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.categories')</span></a>
+				<ul class="">
+					<li> <a href="{{route('category.create')}}"><span class="title"><i  class="entypo-gauge" ></i><span  style="font-size: 17px">@lang('site.create_category')</span></a> </li>
+                    <a href="{{route('category.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.categories')</span></a>
+
+				</ul>
+            </li>
+
+
 
 
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.roles')</span></a>

@@ -8,8 +8,6 @@ class CreateReviewsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -17,7 +15,7 @@ class CreateReviewsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('seller_id');
             $table->integer('provider_id');
-            $table->text('body');
+            $table->text('body')->nullable();
             $table->integer('stars')->nullable()->default(0);
             $table->timestamps();
         });
@@ -25,8 +23,6 @@ class CreateReviewsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

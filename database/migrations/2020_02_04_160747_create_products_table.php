@@ -8,8 +8,6 @@ class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -23,7 +21,9 @@ class CreateProductsTable extends Migration
             $table->double('price_to_sell');
             $table->double('price_to_buy');
             $table->integer('quantity');
-            $table->integer('status');
+            $table->integer('status')->default(1);
+            $table->integer('view_count')->default(0);
+            $table->integer('sell_count')->default(0);
 
             $table->timestamps();
         });
@@ -31,8 +31,6 @@ class CreateProductsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

@@ -8,23 +8,18 @@ class PermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
-        //
         $faker = Faker\Factory::create();
-        $permissions = array('all','create-product','update-product','delete-product','index-product','create-user','edit-user');
+        $permissions = array('all', 'create-product', 'update-product', 'delete-product', 'index-product', 'create-user', 'edit-user');
         foreach ($permissions as $permission) {
             Permission::create([
                 'name' => $permission,
-
-
             ]);
         }
 
-       $role= Role::create(['name'=>'المدير العام']);
-       $role->givePermissionTo('all');
+        $role = Role::create(['name' => 'المدير العام']);
+        $role->givePermissionTo('all');
     }
 }

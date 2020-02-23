@@ -45,6 +45,8 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back'], function () {
 
     //invoice
     Route::resource('invoice', 'InvoiceController');
+    Route::resource('category', 'CategoryController');
+    Route::get('category/{id}/status', 'CategoryController@status')->name('category.status');
 });
 
 Auth::routes(['register' => false]);

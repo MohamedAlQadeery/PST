@@ -128,4 +128,13 @@ return [
     'show_invoices' => 'اظهر الفواتير',
     'price' => 'السعر',
     'invoice_number' => 'رقم الفاتورة',
-];
+    'category' => 'القسم',
+    'create_category' => 'انشاء قسم',
+    'edit_category' => 'تعديل القسم',
+    'categories' => 'الاقسام',
+    'change_status_successfully' => 'تم تغير الحاله بنجاح !!',
+    'category_name' => 'اسم القسم',
+    'publish' => 'نشر',
+    'un_publish' => 'الغاء النشر',
+    'status' => 'الحاله',
+    ];
