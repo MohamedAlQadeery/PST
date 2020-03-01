@@ -107,6 +107,15 @@
 
             </li>
 
+            <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.products')</span></a>
+				<ul>
+					<li> <a href="{{route('products.create')}}"><span class="title"><i  class="entypo-gauge" ></i><span  style="font-size: 17px">@lang('site.create_product')</span></a> </li>
+					<li >
+						<a href="{{route('products.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.all_products')</span></a>
+					</li>
+				</ul>
+            </li>
+
 
             <li class="active">
                 <a href="{{route('cashier.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.cashier')</span></a>
@@ -118,6 +127,10 @@
 
             </li>
 
+            <li class="active">
+                <a href="{{route('contactus.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.contact_us')</span></a>
+
+            </li>
 
 
 			{{-- <li class="has-sub root-level"> <a href="https://demo.neontheme.com/layouts/layout-api/"><i class="entypo-layout"></i><span class="title">Layouts</span></a>

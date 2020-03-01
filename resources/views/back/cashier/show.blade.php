@@ -21,6 +21,8 @@
 
 <div class="row">
 
+    @include('partials.messages')
+
     {{-- Invoice  --}}
 
     <div class="col-sm-6">
@@ -36,17 +38,21 @@
                     <td id="product_price">@lang('site.price')</td>
                     <td style="display:none;" id="product_id"></td>
                     <td id="price">@lang('site.total')</td>
+                    <td >@lang('site.delete')</td>
 
                   </tr>
                 </thead>
 
                 <tbody id="entries">
                 </tbody>
+
                 <tfoot>
                   <tr>
                     <th>@lang('site.total')</th>
                     <th></th>
+                    <th></th>
                     <th id="total">₪0.00</th>
+                    <th></th>
                   </tr>
                 </tfoot>
               </table>
@@ -136,7 +142,11 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+
 var total = 0;
+
+
 // get the choosen item from the table
 function itemChoose(product_id) {
 // ajax request here to get all the product info
@@ -151,20 +161,42 @@ $.ajax({
     product_price = product_quantity * single_product_price; //multply the price by the quantity to get the total item price
     // after the ajax request fill the Bill record
     var entry = parseFloat(product_price); //convert the price format
-    {{-- currency = currencyFormat(entry); //convert the price format --}}
+    //  currency = currencyFormat(entry); //convert the price format
+
     document.getElementById('entries').innerHTML += '<tr><td>' + product_name + '</td><td>' + product_quantity +
-        '</td><td>'+single_product_price+'</td><td style="display:none;">'+product_id +'</td><td>'+entry+'</td></tr>';
+        '</td><td>'+single_product_price+'</td><td style="display:none;">'+product_id +'</td><td>'+entry+'</td>'+
+        '<td id="'+product_id+'product"><button type="button" onclick="deleteRow(this,'+entry+')" style="padding:1px;" class="btn btn-danger">'+
+        '<i class="entypo-cancel"></i> </button></td></tr>';
+
     total += entry;
     document.getElementById('total').innerHTML =total;
 });
 }
+
+// Delete row on delete button click and reduce the balance
+function deleteRow(btn,entry) {
+
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+
+  total -= entry;
+  document.getElementById('total').innerHTML =total;
+
+}
+
+
+
+
+
 // convert the number to currency Format
-{{-- function currencyFormat(number) {
-  var currency = parseFloat(number);
-  currency = currency.toFixed(2);
-  currency = '₪' + currency;
-  return currency;
-} --}}
+// function currencyFormat(number) {
+//   var currency = parseFloat(number);
+//   currency = currency.toFixed(2);
+//   currency = '₪' + currency;
+//   return currency;
+// }
+
+
 //Run saveInventory function on Save
 document.querySelector("#save").addEventListener("click", e => {
       saveInventory();
@@ -200,7 +232,11 @@ document.querySelector("#save").addEventListener("click", e => {
         url:'{{route("cashier.store",$shop->id)}}',
         data:{data:tableContent},
         success:function(data){
+           if(data.error==0){
             window.open('http://localhost:8000/back/invoice/'+data.id,'_blank');
+           }else{
+               alert('Error in quantity/مشكله في الكميه');
+           }
         },error:function(data){
             console.log(data.status);
          }

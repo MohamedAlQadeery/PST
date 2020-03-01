@@ -1,5 +1,7 @@
 <?php
 
+use App\ProductShop;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,8 +12,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-use App\Product;
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,6 +47,9 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back'], function () {
     Route::resource('invoice', 'InvoiceController');
     Route::resource('category', 'CategoryController');
     Route::get('category/{id}/status', 'CategoryController@status')->name('category.status');
+    Route::resource('products', 'ProductController');
+
+    Route::resource('contactus', 'ContactusController');
 });
 
 Auth::routes(['register' => false]);
@@ -58,3 +61,7 @@ Auth::routes(['register' => false]);
 // });
 
 Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('carbon', function () {
+//     $product = ProductShop::where('product_id', 1)->first();
+//     dd($product);
+// });

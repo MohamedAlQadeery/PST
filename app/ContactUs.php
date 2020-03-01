@@ -4,19 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ContactUs extends Model
 {
     protected $guarded = [];
-
-    public function shops()
-    {
-        return $this->belongsToMany('App\Shop', 'product_shop');
-    }
-
-    public function category()
-    {
-        return $this->belongsTo('App\Category');
-    }
 
     public function user()
     {

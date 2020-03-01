@@ -44,17 +44,34 @@ class CashierController extends Controller
         $date = Carbon::now()->toDateTimeString();
 
         $invoice = Invoice::create(['date' => $date, 'total' => '0', 'shop_id' => $id]);
-
+        $items_id = array();
         $sum = 0;
+        $error_quantity = false;
         foreach ($request->data as $row) {
-            $item = Item::create(['product_id' => $row['product_id'], 'quantity' => $row['quantity'], 'price' => $row['price']]);
-
-            $item->invoices()->attach($invoice->id);
-            $sum += $row['price'];
+            $product = ProductShop::where('product_id', $row['product_id'])->first();
+            if ($row['quantity'] <= $product->quantity && $row['quantity'] != 0) {
+                $error_quantity = true;
+                break;
+            }
         }
+
+        if (!$error_quantity) {
+            foreach ($request->data as $index => $row) {
+                $product = ProductShop::where('product_id', $row['product_id'])->first();
+                $product->quantity -= $row['quantity'];
+                $product->save();
+                $item = Item::create(['product_id' => $row['product_id'], 'quantity' => $row['quantity'], 'price' => $row['price']]);
+                $items_id[$index] = $item->id;
+                // $item->invoices()->attach($invoice->id);
+                $sum += $row['price'];
+            }
+        } else {
+            return response()->json(['error' => 1]);
+        }
+        $invoice->items()->attach($items_id);
         $invoice->update(['total' => $sum]);
 
-        return response()->json(['id' => $invoice->id]);
+        return response()->json(['id' => $invoice->id, 'error' => 0]);
     }
 
     // private function rules()
