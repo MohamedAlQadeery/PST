@@ -8,6 +8,8 @@ class ContactUs extends Model
 {
     protected $guarded = [];
 
+    protected $with = ['replies'];
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -20,5 +22,16 @@ class ContactUs extends Model
         }
 
         return asset('uploads/'.$this->image);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany('App\ContactUs', 'parent_id');
+    }
+
+    //parent relation
+    public function parent()
+    {
+        return $this->belongsTo('App\Contactus', 'parent_id', 'id');
     }
 }

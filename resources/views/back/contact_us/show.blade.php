@@ -19,6 +19,9 @@
     </li>
 </ol>
 
+@include('partials.messages')
+
+
 
 <div class="mail-env">
 
@@ -48,12 +51,18 @@
                     <i class="entypo-print"></i>
                 </a>
 
-                <a href="#" class="btn btn-default">
-                    <i class="entypo-trash"></i>
-                </a>
 
-                <a class="btn btn-primary btn-icon">
-                    Reply
+
+                <form action="{{route('contactus.destroy',$message->id)}}" method="post" style="display: inline-block"
+                    onsubmit="return confirm('Are you sure you want to delete this message?');">
+                  @csrf()
+                  @method('DELETE')
+              <button class="btn btn-default" ><i class="entypo-trash"></i></button>
+              </form>
+
+
+                <a href="#form" class="btn btn-primary btn-icon">
+                    @lang('site.replay')
                     <i class="entypo-reply"></i>
                 </a>
 
@@ -140,7 +149,7 @@
     </div>
        @endif
 
-        <div class="mail-reply">
+        {{--  <div class="mail-reply">
 
             <div class="fake-form">
                 <div>
@@ -148,24 +157,113 @@
                 </div>
             </div>
 
+        </div>  --}}
+
+
+
+        @if(!is_null($message->replies))
+        @foreach ($message->replies as $replay )
+
+
+
+            <div class="mail-info">
+
+                <div class="mail-sender dropdown">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="{{$replay->user->getImage()}}" class="img-circle" width="30" />
+                        <span>{{$replay->user->first_name.' '.$replay->user->last_name}}</span>
+                        {{$replay->user->email}} to <span>{{$message->user->email}}</span>
+                    </a>
+
+                </div>
+
+
+
+                    <form action="{{route('contactus.destroy',$replay->id)}}" method="post" style="display: inline-block"
+                        onsubmit="return confirm('Are you sure you want to delete this message?');">
+                      @csrf()
+                      @method('DELETE')
+                  <button class="btn btn-danger " ><i class="entypo-trash"></i></button>
+                  </form>
+
+
+
+
+
+
+                <div class="mail-date">
+                    {{$replay->created_at}}
+                </div>
+
+            </div>
+
+            <div class="mail-text">
+
+                <p>
+                    {!!$replay->body!!}
+                </p>
+            </div>
+
+           @if (!is_null($replay->image))
+           <div class="mail-attachments">
+
+            <h4>
+                <i class="entypo-attach"></i>@lang('site.attachments')</span>
+            </h4>
+
+            <ul>
+                <li>
+                    <a href="#" class="thumb">
+                        <img src="{{$replay->getImage()}}" class="img-rounded" />
+                    </a>
+
+                </li>
+
+                  </ul>
+
+                </div>
+        @endif
+        @endforeach
+        @endif
+
+        <br><hr>
+        <h2>@lang('site.replay')</h2>
+
+        <div class="mail-compose">
+
+            <form id="form" method="post" role="form" action="{{route('contactus.store',$message->id)}}">
+                @csrf
+
+                <div class="compose-message-editor">
+                    <textarea name="body" class="form-control wysihtml5" data-stylesheet-url="assets/css/wysihtml5-color.css"  id="sample_wysiwyg"></textarea>
+                </div><br>
+
+                <button class="btn btn-success btn-icon pull-right">
+                    @lang('site.send')
+                    <i class="entypo-mail"></i>
+                </button>
+
+            </form>
+
         </div>
 
     </div>
 
     <div class="mail-sidebar">
 
-        <!-- compose new email button -->
+        {{--  <!-- compose new email button -->
         <div class="mail-sidebar-row hidden-xs">
             <a href="mailbox-compose.html" class="btn btn-success btn-icon btn-block">
                 @lang('site.compose')
                 <i class="entypo-pencil"></i>
             </a>
-        </div>
+        </div>  --}}
 
         <!-- menu -->
         <ul class="mail-menu">
             <li class="active">
-                <a href="#">
+                <a href="{{route('contactus.index')}}">
                     <span class="badge badge-danger pull-right">{{$count_messages}}</span>
                     @lang('site.inbox')
                 </a>
@@ -185,8 +283,12 @@
 
 @section('script')
 
-<!-- Imported scripts on this page -->
+<link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/wysihtml5/bootstrap-wysihtml5.css">
+<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/wysihtml5/wysihtml5-0.4.0pre.min.js"></script>
+
+	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/wysihtml5/bootstrap-wysihtml5.js"></script>
 	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-mail.js"></script>
-	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-chat.js"></script>
+    <script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-chat.js"></script>
+
 
 @endsection

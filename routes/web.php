@@ -1,7 +1,5 @@
 <?php
 
-use App\ProductShop;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +16,6 @@ Route::get('/', function () {
 });
 Route::get('lang/{lang?}', ['as' => 'local.change', 'uses' => 'Back\LangController@change'], );
 
-Route::get('back', 'Back\DashboardController@index')->name('dashboard');
-
 //routes for registering the seller
 Route::get('sregister', 'Back\SellerController@create')->name('seller.create');
 Route::post('sregister', 'Back\SellerController@store')->name('seller.store');
@@ -28,7 +24,9 @@ Route::post('sregister', 'Back\SellerController@store')->name('seller.store');
 Route::get('pregister', 'Back\ProviderController@create')->name('provider.create');
 Route::post('pregister', 'Back\ProviderController@store')->name('provider.store');
 
-Route::group(['prefix' => 'back', 'namespace' => 'Back'], function () {
+Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth', 'isAdmin']], function () {
+    Route::get('', 'DashboardController@index')->name('dashboard');
+
     Route::resource('users', 'UserController');
     Route::resource('shops', 'ShopController');
     Route::get('shop/{id?}/invoices', 'InvoiceController@index')->name('shop_invoices.index');
@@ -49,9 +47,12 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back'], function () {
     Route::get('category/{id}/status', 'CategoryController@status')->name('category.status');
     Route::resource('products', 'ProductController');
 
-    Route::resource('contactus', 'ContactusController');
+    Route::resource('contactus', 'ContactusController')->except(['create', 'store']);
+    Route::post('contactus/{id}', 'ContactusController@store')->name('contactus.store');
 });
 
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth'], function () {
+});
 Auth::routes(['register' => false]);
 
 // Route::get('test',function(){

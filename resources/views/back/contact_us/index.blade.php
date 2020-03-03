@@ -14,15 +14,17 @@
 </ol>
 
 
+@include('partials.messages')
+
 <div class="mail-env">
 
     <!-- compose new email button -->
-    <div class="mail-sidebar-row visible-xs">
+    {{--  <div class="mail-sidebar-row visible-xs">
         <a href="mailbox-compose.html" class="btn btn-success btn-icon btn-block">
             @lang('site.compose')
             <i class="entypo-pencil"></i>
         </a>
-    </div>
+    </div>  --}}
 
 
     <!-- Mail Body -->
@@ -36,14 +38,15 @@
             </h3>
 
             <!-- search -->
-            <form method="get" role="form" class="mail-search">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="s" placeholder="Search for mail..." />
+            <form method="get" role="form" action="{{route('contactus.index')}}" class="mail-search">
+                <div class="form-group">
+                    <input type="text" class="form-control col-md-10" name="title" placeholder="@lang('site.search_message')" />
 
-                    <div class="input-group-addon">
+                    <button class="btn btn-default" >
                         <i class="entypo-search"></i>
-                    </div>
+                    </button>
                 </div>
+
             </form>
         </div>
 
@@ -132,18 +135,18 @@
     <!-- Sidebar -->
     <div class="mail-sidebar">
 
-        <!-- compose new email button -->
+        {{--  <!-- compose new email button -->
         <div class="mail-sidebar-row hidden-xs">
             <a href="mailbox-compose.html" class="btn btn-success btn-icon btn-block">
                 @lang('site.compose')
                 <i class="entypo-pencil"></i>
             </a>
-        </div>
+        </div>  --}}
 
         <!-- menu -->
         <ul class="mail-menu">
             <li class="active">
-                <a href="#">
+                <a href="{{route('contactus.index')}}">
                     <span class="badge badge-danger pull-right">{{count($messages)}}</span>
                     @lang('site.inbox')
                 </a>

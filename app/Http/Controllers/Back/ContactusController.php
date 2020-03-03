@@ -13,9 +13,15 @@ class ContactusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $messages = ContactUs::all();
+        $messages = ContactUs::where('parent_id', null);
+
+        if ($request->has('title')) {
+            $messages = $messages->where('title', 'like', '%'.$request->input('title').'%');
+        }
+
+        $messages = $messages->orderBy('read', 'asc')->get();
 
         return view('back.contact_us.index')->with([
             'messages' => $messages,
@@ -28,8 +34,9 @@ class ContactusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
+        return view('back.contact_us.create');
     }
 
     /**
@@ -39,8 +46,15 @@ class ContactusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+        $request->validate(['body' => 'required']);
+        $data = $request->except(['_wysihtml5_mode']);
+        $data['user_id'] = auth()->user()->id;
+        $data['parent_id'] = $id;
+        ContactUs::create($data);
+
+        return redirect()->route('contactus.show', $id)->with('success', __('site.created_successfully'));
     }
 
     /**
@@ -52,8 +66,13 @@ class ContactusController extends Controller
      */
     public function show($id)
     {
-        $count_messages = ContactUs::count();
-        $message = ContactUs::findOrFail($id);
+        $count_messages = ContactUs::where('parent_id', null)->count();
+        $message = ContactUs::where(['parent_id' => null, 'id' => $id])->first();
+        if (is_null($message)) {
+            return redirect()->route('contactus.index');
+        }
+        $message->read = 1;
+        $message->save();
 
         return view('back.contact_us.show')->with([
             'page_name' => 'contact_us',
@@ -94,5 +113,19 @@ class ContactusController extends Controller
      */
     public function destroy($id)
     {
+        $message = ContactUs::findOrFail($id);
+        if (count($message->replies) > 0) {
+            foreach ($message->replies as $replay) {
+                $replay->delete();
+            }
+
+            $message->delete();
+
+            return redirect()->route('contactus.index')->with('success', __('site.deleted_successfully'));
+        }
+        //deletes a replay only
+        $message->delete();
+
+        return redirect()->route('contactus.show', $message->parent_id)->with('success', __('site.deleted_successfully'));
     }
 }
