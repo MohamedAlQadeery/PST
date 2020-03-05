@@ -26,7 +26,7 @@ class ContactUs extends Model
 
     public function replies()
     {
-        return $this->hasMany('App\ContactUs', 'parent_id');
+        return $this->hasMany('App\ContactUs', 'parent_id')->orderBy('id', 'asc');
     }
 
     //parent relation
