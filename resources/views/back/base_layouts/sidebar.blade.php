@@ -73,7 +73,7 @@
 					<li> <a href=""><span class="title">Whats New</span><span class="badge badge-success badge-roundless">v2.0</span></a> </li>
 				</ul>
 			</li> --}}
-
+            @canany(['all','index-user'])
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.users')</span></a>
 				<ul class="">
 					<li> <a href="{{route('users.create')}}"><span class="title"><i  class="entypo-gauge" ></i><span  style="font-size: 17px">@lang('site.create_user')</span></a> </li>
@@ -82,6 +82,10 @@
 				</ul>
             </li>
 
+            @endcan
+
+            @canany(['all','index-category'])
+
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.categories')</span></a>
 				<ul class="">
 					<li> <a href="{{route('category.create')}}"><span class="title"><i  class="entypo-gauge" ></i><span  style="font-size: 17px">@lang('site.create_category')</span></a> </li>
@@ -89,10 +93,11 @@
 
 				</ul>
             </li>
+            @endcan
 
 
 
-
+            @canany(['all','index-role'])
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.roles')</span></a>
 				<ul class="">
 					<li> <a href="{{route('role.create')}}"><span class="title"><i  class="entypo-gauge" ></i><span  style="font-size: 17px">@lang('site.create_role')</span></a> </li>
@@ -100,12 +105,18 @@
 
 				</ul>
             </li>
+            @endcan
 
+            @canany(['all','index-shop'])
 
             <li class="active">
                 <a href="{{route('shops.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.shops')</span></a>
 
             </li>
+
+            @endcan
+
+            @canany(['all','index-product'])
 
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.products')</span></a>
 				<ul>
@@ -116,22 +127,45 @@
 				</ul>
             </li>
 
+            @endcan
+
+
+            @canany(['all','cashier'])
 
             <li class="active">
                 <a href="{{route('cashier.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.cashier')</span></a>
 
             </li>
 
+            @endcan
+
+            @canany(['all','index-invoice'])
+
             <li class="active">
                 <a href="{{route('invoice.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.invoices')</span></a>
 
             </li>
 
+            @endcan
+            @canany(['all','index-contactus'])
             <li class="active">
                 <a href="{{route('contactus.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.contact_us')</span></a>
 
             </li>
 
+            @endcan
+
+
+            //users siderbar
+
+
+            @canany(['all-shoppermissions','index-usermessage'])
+            <li class="active">
+                <a href="{{route('messages.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.messages')</span></a>
+
+            </li>
+
+            @endcan
 
 			{{-- <li class="has-sub root-level"> <a href="https://demo.neontheme.com/layouts/layout-api/"><i class="entypo-layout"></i><span class="title">Layouts</span></a>
 				<ul style="">

@@ -235,6 +235,7 @@ document.querySelector("#save").addEventListener("click", e => {
            if(data.error==0){
             window.open('http://localhost:8000/back/invoice/'+data.id,'_blank');
            }else{
+               console.log(data.error);
                alert('Error in quantity/مشكله في الكميه');
            }
         },error:function(data){

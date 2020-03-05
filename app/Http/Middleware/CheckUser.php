@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckAdmin
+class CheckUser
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->type != 0) {
+        if (auth()->check() && auth()->user()->type == 0) {
             return redirect()->route('home');
         }
 

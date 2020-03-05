@@ -163,4 +163,5 @@ return [
     'compose' => 'انشاء',
     'send' => 'ارسال',
     'search_message' => 'ابحث عن رساله ...',
+    'messages' => 'الرسائل',
     ];

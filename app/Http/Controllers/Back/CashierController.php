@@ -47,9 +47,11 @@ class CashierController extends Controller
         $items_id = array();
         $sum = 0;
         $error_quantity = false;
+
         foreach ($request->data as $row) {
-            $product = ProductShop::where('product_id', $row['product_id'])->first();
-            if ($row['quantity'] <= $product->quantity && $row['quantity'] != 0) {
+            $product = ProductShop::where(['product_id' => $row['product_id'], 'shop_id' => $id])->first();
+
+            if ($row['quantity'] >= $product->quantity || $row['quantity'] == 0) {
                 $error_quantity = true;
                 break;
             }

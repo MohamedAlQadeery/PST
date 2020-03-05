@@ -51,7 +51,9 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
     Route::post('contactus/{id}', 'ContactusController@store')->name('contactus.store');
 });
 
-Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth', 'isUser']], function () {
+    Route::get('', 'DashboardController@index')->name('user.dashboard');
+    Route::resource('messages', 'MessageController');
 });
 Auth::routes(['register' => false]);
 

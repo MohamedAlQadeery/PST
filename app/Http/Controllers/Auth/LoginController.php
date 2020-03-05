@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -30,15 +31,13 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
 
-     /**
+    /**
      * Show the application's login form.
      *
      * @return \Illuminate\Http\Response
@@ -48,4 +47,20 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    /**
+     * The user has been authenticated.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param mixed                    $user
+     *
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if (auth()->user()->type != 0) {
+            return redirect()->route('user.dashboard');
+        }
+
+        return redirect()->route('dashboard');
+    }
 }
