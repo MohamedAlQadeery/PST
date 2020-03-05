@@ -85,7 +85,7 @@
                         <a href="#" class="star stared">
                             <i class="entypo-star"></i>
                         </a>
-                        <a href="{{route('messages.show',$message->id)}}" class="col-name">{{$message->user->first_name.' '.$message->user->last_name}}</a>
+                        <a href="{{route('messages.show',$message->id)}}" class="col-name">{{$message->from->first_name.' '.$message->from->last_name}}</a>
                     </td>
                     <td class="col-subject">
                         <a href="{{route('messages.show',$message->id)}}">
