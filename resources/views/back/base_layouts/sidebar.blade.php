@@ -156,7 +156,7 @@
             @endcan
 
 
-            //users siderbar
+            {{-- users siderbar --}}
 
 
             @canany(['all-shoppermissions','index-usermessage'])

@@ -54,6 +54,7 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth', 'isUser']], function () {
     Route::get('', 'DashboardController@index')->name('user.dashboard');
     Route::resource('messages', 'MessageController');
+    Route::get('messagessent', 'MessageController@sentIndex')->name('messages.sentIndex');
 });
 Auth::routes(['register' => false]);
 
@@ -68,3 +69,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //     $product = ProductShop::where('product_id', 1)->first();
 //     dd($product);
 // });
+
+Route::get('lfm', function () {
+    return view('lfm');
+});

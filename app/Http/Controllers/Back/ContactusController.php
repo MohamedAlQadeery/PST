@@ -114,7 +114,7 @@ class ContactusController extends Controller
     public function destroy($id)
     {
         $message = ContactUs::findOrFail($id);
-        if (count($message->replies) > 0) {
+        if ($message->parent_id == null) {
             foreach ($message->replies as $replay) {
                 $replay->delete();
             }

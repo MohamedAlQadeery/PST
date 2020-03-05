@@ -8,13 +8,22 @@ class Message extends Model
 {
     protected $guarded = [];
 
-    public function sender()
+    protected $with = ['replies'];
+
+    //returns the user that recived the message
+    public function user()
     {
-        return $this->belongsTo('App\User', 'sender_id');
+        return $this->belongsTo('App\User', 'to_id');
     }
 
-    public function reciever_id()
+    //returns the user that sent the message
+    public function from()
     {
-        return $this->belongsTo('App\User', 'reciever_id');
+        return $this->belongsTo('App\User', 'from_id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany('App\Message', 'parent_id');
     }
 }

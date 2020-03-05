@@ -10,7 +10,7 @@
     </li>
 
     <li>
-        <a href="{{route('contactus.index')}}"><i class="fa-home"></i>@lang('site.contact_us')</a>
+        <a href="{{route('messages.index')}}"><i class="fa-home"></i>@lang('site.messages')</a>
         </li>
 
     <li class="active">
@@ -27,7 +27,7 @@
 
     <!-- compose new email button -->
     <div class="mail-sidebar-row visible-xs">
-        <a href="mailbox-compose.html" class="btn btn-success btn-icon btn-block">
+        <a href="{{route('messages.create')}}" class="btn btn-success btn-icon btn-block">
             @lang('site.compose')
             <i class="entypo-pencil"></i>
         </a>
@@ -53,7 +53,7 @@
 
 
 
-                <form action="{{route('contactus.destroy',$message->id)}}" method="post" style="display: inline-block"
+                <form action="{{route('messages.destroy',$message->id)}}" method="post" style="display: inline-block"
                     onsubmit="return confirm('Are you sure you want to delete this message?');">
                   @csrf()
                   @method('DELETE')
@@ -72,11 +72,11 @@
         <div class="mail-info">
 
             <div class="mail-sender dropdown">
-
+                <span>{{$message->from->first_name.' '. $message->from->last_name}}</span> @lang('site.to')
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <img src="{{$message->user->getImage()}}" class="img-circle" width="30" />
                     <span>{{$message->user->first_name.' '.$message->user->last_name}}</span>
-                    {{$message->user->email}} to <span>me</span>
+                    {{$message->user->email}}
                 </a>
 
                 <ul class="dropdown-menu dropdown-red">
@@ -125,29 +125,11 @@
         <div class="mail-text">
 
             <p>
-                {{$message->body}}
+                {!!$message->body!!}
             </p>
         </div>
 
-       @if (!is_null($message->image))
-       <div class="mail-attachments">
 
-        <h4>
-            <i class="entypo-attach"></i>@lang('site.attachments')</span>
-        </h4>
-
-        <ul>
-            <li>
-                <a href="#" class="thumb">
-                    <img src="{{$message->getImage()}}" class="img-rounded" />
-                </a>
-
-            </li>
-
-              </ul>
-
-    </div>
-       @endif
 
         {{--  <div class="mail-reply">
 
@@ -171,22 +153,25 @@
                 <div class="mail-sender dropdown">
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{$replay->user->getImage()}}" class="img-circle" width="30" />
-                        <span>{{$replay->user->first_name.' '.$replay->user->last_name}}</span>
+                        <img src="{{$replay->from->getImage()}}" class="img-circle" width="30" />
+                        <span>{{$replay->from->first_name.' '.$replay->from->last_name}}</span>
+
                     </a>
 
                 </div>
 
 
+                @if(auth()->user()->id ==$replay->from->id)
 
-                    <form action="{{route('contactus.destroy',$replay->id)}}" method="post" style="display: inline-block"
-                        onsubmit="return confirm('Are you sure you want to delete this message?');">
-                      @csrf()
-                      @method('DELETE')
-                  <button class="btn btn-danger " ><i class="entypo-trash"></i></button>
-                  </form>
+                <form action="{{route('messages.destroy',$replay->id)}}" method="post" style="display: inline-block"
+                    onsubmit="return confirm('Are you sure you want to delete this message?');">
+                  @csrf()
+                  @method('DELETE')
+              <button class="btn btn-danger " ><i class="entypo-trash"></i></button>
+              </form>
 
 
+                @endif
 
 
 
@@ -204,25 +189,7 @@
                 </p>
             </div>
 
-           @if (!is_null($replay->image))
-           <div class="mail-attachments">
 
-            <h4>
-                <i class="entypo-attach"></i>@lang('site.attachments')</span>
-            </h4>
-
-            <ul>
-                <li>
-                    <a href="#" class="thumb">
-                        <img src="{{$replay->getImage()}}" class="img-rounded" />
-                    </a>
-
-                </li>
-
-                  </ul>
-
-                </div>
-        @endif
         @endforeach
         @endif
 
@@ -231,12 +198,12 @@
 
         <div class="mail-compose">
 
-            <form id="form" method="post" role="form" action="{{route('contactus.store',$message->id)}}">
+            <form id="form" method="post" role="form" action="{{route('messages.store')}}">
                 @csrf
 
-                <div class="compose-message-editor">
-                    <textarea name="body" class="form-control wysihtml5" data-stylesheet-url="assets/css/wysihtml5-color.css"  id="sample_wysiwyg"></textarea>
-                </div><br>
+                <textarea name="body" class="form-control"></textarea><br>
+                <input type="hidden" name="replay" value="1">
+                <input type="hidden" name="parent_id" value="{{$message->id}}">
 
                 <button class="btn btn-success btn-icon pull-right">
                     @lang('site.send')
@@ -249,22 +216,29 @@
 
     </div>
 
+
     <div class="mail-sidebar">
 
-        {{--  <!-- compose new email button -->
         <div class="mail-sidebar-row hidden-xs">
-            <a href="mailbox-compose.html" class="btn btn-success btn-icon btn-block">
+            <a href="{{route('messages.create')}}" class="btn btn-success btn-icon btn-block">
                 @lang('site.compose')
                 <i class="entypo-pencil"></i>
             </a>
-        </div>  --}}
+        </div>
 
         <!-- menu -->
         <ul class="mail-menu">
             <li class="active">
-                <a href="{{route('contactus.index')}}">
-                    <span class="badge badge-danger pull-right">{{$count_messages}}</span>
+                <a href="{{route('messages.index')}}">
+                    <span class="badge badge-danger pull-right">{{$inbox_messages_count}}</span>
                     @lang('site.inbox')
+                </a>
+            </li>
+
+            <li >
+                <a href="{{route('messages.sentIndex')}}">
+                    <span class="badge badge-danger pull-right">{{$sent_messages_count}}</span>
+                    @lang('site.sent')
                 </a>
             </li>
 
@@ -275,19 +249,34 @@
 
 
     </div>
+</div>
+
 
 
 @endsection
 
-
 @section('script')
 
-<link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/wysihtml5/bootstrap-wysihtml5.css">
-<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/wysihtml5/wysihtml5-0.4.0pre.min.js"></script>
-
-	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/wysihtml5/bootstrap-wysihtml5.js"></script>
+<!-- Imported scripts on this page -->
 	<script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-mail.js"></script>
     <script src="{{asset('neon-theme/html/neon-rtl')}}/assets/js/neon-chat.js"></script>
 
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.11/ckeditor.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.11/adapters/jquery.js"></script>
+  <script>
+    var route_prefix = "/filemanager";
+    var base_url = "{{url('/')}}";
+
+    $('textarea[name=body]').ckeditor({
+      height: 100,
+      filebrowserImageBrowseUrl:base_url+route_prefix + '?type=Images',
+      filebrowserImageUploadUrl:base_url+route_prefix + '/upload?type=Images&_token={{csrf_token()}}',
+      filebrowserBrowseUrl:base_url+ route_prefix + '?type=Files',
+      filebrowserUploadUrl: base_url+route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
+    });
+  </script>
+
+
 @endsection
+

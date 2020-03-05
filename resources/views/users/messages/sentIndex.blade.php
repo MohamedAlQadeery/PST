@@ -33,14 +33,14 @@
         <div class="mail-header">
             <!-- title -->
             <h3 class="mail-title">
-                @lang('site.inbox')
+                @lang('site.sent')
                 <span class="count">{{count($messages)}}</span>
             </h3>
 
 
 
             <!-- search -->
-            <form method="get" role="form" action="{{route('messages.index')}}" class="mail-search">
+            <form method="get" role="form" action="{{route('messages.sentIndex')}}" class="mail-search">
                 <div class="form-group">
                     <input type="text" class="form-control col-md-10" name="title" placeholder="@lang('site.search_message')" />
 
@@ -137,6 +137,7 @@
     <!-- Sidebar -->
     <div class="mail-sidebar">
 
+         <!-- compose new email button -->
         <div class="mail-sidebar-row hidden-xs">
             <a href="{{route('messages.create')}}" class="btn btn-success btn-icon btn-block">
                 @lang('site.compose')
@@ -148,18 +149,17 @@
         <ul class="mail-menu">
             <li class="active">
                 <a href="{{route('messages.index')}}">
-                    <span class="badge badge-danger pull-right">{{count($messages)}}</span>
+                    <span class="badge badge-danger pull-right">{{$inbox_messages_count}}</span>
                     @lang('site.inbox')
                 </a>
             </li>
 
             <li >
                 <a href="{{route('messages.sentIndex')}}">
-                    <span class="badge badge-danger pull-right">{{$sent_messages_count}}</span>
+                    <span class="badge badge-danger pull-right">{{count($messages)}}</span>
                     @lang('site.sent')
                 </a>
             </li>
-
 
         </ul>
 
