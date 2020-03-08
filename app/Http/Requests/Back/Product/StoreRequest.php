@@ -29,7 +29,7 @@ class StoreRequest extends FormRequest
             'price_to_buy' => ['required', 'numeric'],
             'quantity' => ['required', 'numeric'],
             'category_id' => ['required'],
-            'status' => ['required'],
+            // 'status' => ['required'],
         ];
 
         if ($this->getMethod() == 'POST') {

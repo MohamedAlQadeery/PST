@@ -46,10 +46,17 @@ class StoreRequest extends FormRequest
         }
 
         if ($this->getMethod() == 'PATCH') {
+            $user = '';
+            if ($this->profile) {
+                $user = $this->profile;
+            } else {
+                $user = $this->user;
+            }
+
             $rules += [
                    'email' => [
                        'required',
-                       Rule::unique('users')->ignore($this->user),
+                       Rule::unique('users')->ignore($user),
                    ],
                ];
         }

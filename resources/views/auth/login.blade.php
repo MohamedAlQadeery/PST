@@ -103,6 +103,18 @@ var baseurl = '';
         @include('sweetalert::alert')
         @include('partials._errors')
 
+        @if(session()->has('logged_out'))
+
+        <div class="row">
+            <div class="alert alert-success col-md-4 col-md-offset-4" align="center">
+
+                {{ session('logged_out') }}
+        </div>
+
+        </div>
+
+    @endif
+
 
 		<div class="login-content">
 

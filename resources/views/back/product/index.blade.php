@@ -13,11 +13,12 @@
     </li>
 </ol>
 
+@include('partials.messages')
+
 <h2>@lang('site.all_products')</h2>
 
 
 <div class="row">
-    @include('partials.messages')
 
     <script type="text/javascript">
 		jQuery( document ).ready( function( $ ) {
@@ -90,23 +91,30 @@
                     <td class="center">{{$product->price_to_buy}}</td>
                     <td class="center">{{$product->category->name}}</td>
                     <td class="center">{{$product->quantity}}</td>
-                    @if($product->status === 1)
-                    <td class="center">@lang('site.available')</td>
-                    @else
-                    <td class="center">@lang('site.not_available')</td>
-                    @endif
 
-                    @if($product->user)
+
+                  <td class="center">
+                    @if ($product->status==1)
+
+                    <a href="{{route('product.status',$product->id)}}" class="btn btn-danger">@lang('site.un_publish')</a>
+                    @else
+                    <a href="{{route('product.status',$product->id)}}" class="btn btn-success">@lang('site.publish')</a>
+                    @endif
+                  </td>
+                    {{-- @if($product->user) --}}
                     <td><a href="{{route('users.show',$product->user->id)}}">{{$product->user->first_name.' '.$product->user->last_name}}</a></td>
                     @if($product->user->type === 1)
                         <td class="center">@lang('site.a_seller')</td>
                         @elseif($product->user->type === 2)
+
                          <td class="center">@lang('site.a_provider')</td>
-                      @endif
-                    @else
-                      <td class="center">@lang('site.none')</td>
-                      <td class="center">@lang('site.none')</td>
+                        @else
+                        <td class="center">@lang('site.admin')</td>
                     @endif
+                    {{-- @else --}}
+                      {{-- <td class="center">@lang('site.none')</td> --}}
+                      {{-- <td class="center">@lang('site.none')</td> --}}
+                    {{-- @endif --}}
 
 
 

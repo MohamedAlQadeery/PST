@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row  noPrint">
 
     <!-- Profile Info and Notifications -->
     <div class="col-md-6 col-sm-8 clearfix">
@@ -353,8 +353,16 @@
                     <span class="badge badge-success chat-notifications-badge">3</span> </a>
             </li>
             <li class="sep"></li>
-            <li> <a href="https://demo.neontheme.com/extra/login/">
-Log Out <i class="entypo-logout right"></i> </a> </li>
+            <li>
+                <a href="#" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+Log Out <i class="entypo-logout right"></i> </a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+
+</li>
         </ul>
     </div>
 </div>

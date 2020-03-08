@@ -19,32 +19,41 @@
             </div>
 		</header>
 
-		<div class="sidebar-user-info">
+        <div class="sidebar-user-info">
 
 			<div class="sui-normal">
 				<a href="#" class="user-link">
-					<img src="{{url('/neon-theme/html/neon/assets/images/thumb-1@2x.png')}}" width="55" alt="" class="img-circle" />
+					<img src="{{auth()->user()->getImage()}}" width="55" alt="" class="img-circle" />
 
-					<span>Welcome,</span>
-					<strong>Art Ramadani</strong>
+					<span>@lang('site.welcome'),</span>
+				<strong>{{auth()->user()->first_name}} {{auth()->user()->last_name}}</strong>
 				</a>
 			</div>
 
 			<div class="sui-hover inline-links animate-in"><!-- You can remove "inline-links" class to make links appear vertically, class "animate-in" will make A elements animateable when click on user profile -->
-				<a href="#">
+				<a href="{{route('profile.index')}}">
 					<i class="entypo-pencil"></i>
-					New Page
+					@lang('site.view_profile')
 				</a>
+                @if(auth()->user()->type==0)
 
-				<a href="mailbox.html">
+				<a href="{{route('contactus.index')}}">
 					<i class="entypo-mail"></i>
-					Inbox
-				</a>
+					@lang('site.inbox')
 
-				<a href="extra-lockscreen.html">
+                </a>
+                @else
+                <a href="{{route('messages.index')}}">
+					<i class="entypo-mail"></i>
+					@lang('site.inbox')
+
+				</a>
+                @endif
+
+				{{-- <a href="extra-lockscreen.html">
 					<i class="entypo-lock"></i>
 					Log Off
-				</a>
+				</a> --}}
 
 				<span class="close-sui-popup">&times;</span><!-- this is mandatory -->
 			</div>
@@ -72,7 +81,9 @@
 					</li>
 					<li> <a href=""><span class="title">Whats New</span><span class="badge badge-success badge-roundless">v2.0</span></a> </li>
 				</ul>
-			</li> --}}
+            </li> --}}
+
+
             @canany(['all','index-user'])
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-gauge"></i><span class="title"  style="font-size: 17px">@lang('site.users')</span></a>
 				<ul class="">
@@ -167,6 +178,17 @@
 
             @endcan
 
+
+            @canany(['all','index-settings'])
+            <li class="active">
+                <a href="{{route('settings.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.settings')</span></a>
+
+            </li>
+
+            @endcan
+
+
+
 			{{-- <li class="has-sub root-level"> <a href="https://demo.neontheme.com/layouts/layout-api/"><i class="entypo-layout"></i><span class="title">Layouts</span></a>
 				<ul style="">
 					<li> <a href="https://demo.neontheme.com/layouts/layout-api/"><span class="title">Layout API</span></a> </li>
@@ -176,7 +198,8 @@
 					<li> <a href="https://demo.neontheme.com/layouts/horizontal-menu-boxed/"><span class="title">Horizontal Menu Boxed</span></a> </li>
 					<li> <a href="https://demo.neontheme.com/layouts/horizontal-menu-fluid/"><span class="title">Horizontal Menu Fluid</span></a> </li>
 					<li> <a href="https://demo.neontheme.com/layouts/mixed-menus/"><span class="title">Mixed Menus</span></a> </li>
-					<li> <a href="https://demo.neontheme.com/layouts/right-sidebar/"><span class="title">Right Sidebar</span></a> </li>
+
+                    <li> <a href="https://demo.neontheme.com/layouts/right-sidebar/"><span class="title">Right Sidebar</span></a> </li>
 					<li> <a href="https://demo.neontheme.com/layouts/both-menus-right-sidebar/"><span class="title">Both Menus (Right Sidebar)</span></a> </li>
 					<li class="has-sub"> <a href="https://demo.neontheme.com/layouts/page-transition-fade/"><span class="title">Page Enter Transitions</span></a>
 						<ul style="">

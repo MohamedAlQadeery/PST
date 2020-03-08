@@ -77,19 +77,19 @@
         
         <div class="form-group col-md-8">
             <label for="price_to_sell" class="control-label">@lang('site.price_to_sell')</label>
-            <input id="price_to_sell" name="price_to_sell" type="number" class="form-control" placeholder="@lang('site.price_to_sell')" value="{{$product->price_to_sell}}">
+            <input id="price_to_sell" name="price_to_sell" type="text" class="form-control" placeholder="@lang('site.price_to_sell')" value="{{$product->price_to_sell}}">
         </div>
 
         <div class="form-group col-md-8">
             <label for="price_to_buy" class="control-label">@lang('site.price_to_buy')</label>
-            <input id="price_to_buy" name="price_to_buy" type="number" class="form-control" placeholder="@lang('site.price_to_buy')" value="{{$product->price_to_buy}}">
+            <input id="price_to_buy" name="price_to_buy" type="text" class="form-control" placeholder="@lang('site.price_to_buy')" value="{{$product->price_to_buy}}">
         </div>
 
        
 
         <div class="form-group col-md-8">
             <label for="quantity" class="control-label">@lang('site.quantity')</label>
-            <input id="quantity" name="quantity" type="number" class="form-control" placeholder="@lang('site.quantity')" value="{{$product->quantity}}">
+            <input id="quantity" name="quantity" type="text" class="form-control" placeholder="@lang('site.quantity')" value="{{$product->quantity}}">
         </div>
 
         <div class="form-group col-md-8">
@@ -101,7 +101,7 @@
                 </select> 
         </div>
 
-        <div class="form-group col-md-8">
+        {{-- <div class="form-group col-md-8">
             <label for="status" class="control-label">@lang('site.status')</label>
                  <select name="status" class="form-control">
                      @if ($product->status === 1 )
@@ -113,7 +113,7 @@
                     @endif
 
                 </select> 
-        </div>
+        </div> --}}
 
           <button type="submit" class="btn btn-lg btn-info btn-block" >
             <i class="fa fa-lock fa-lg"></i>

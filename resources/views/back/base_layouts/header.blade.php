@@ -70,7 +70,11 @@
 
 
 <style>
-    {{-- cahier Css --}}
+
+@media print {
+    .noPrint { display: none; }
+} 
+    /* {{-- cahier Css --}} */
     /* body {
         background: #EEE;
         font-family: sans-serif;

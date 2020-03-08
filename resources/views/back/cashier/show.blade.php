@@ -225,6 +225,11 @@ document.querySelector("#save").addEventListener("click", e => {
         return tableRow;
       });
       // this array object contain the saved content from the bill
+      // check first if the bill data is emapty or not
+      if(tableContent.length===0){
+        alert('Empty bill / الفاتورة خاوية');
+        return;
+      }
       console.log(tableContent);
       empty()
       $.ajax({

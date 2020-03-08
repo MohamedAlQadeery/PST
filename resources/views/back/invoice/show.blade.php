@@ -2,7 +2,7 @@
 
 @section('content')
 
-<ol class="breadcrumb bc-3" >
+<ol class="breadcrumb bc-3  noPrint" >
     <li>
     <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>

@@ -46,9 +46,12 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
     Route::resource('category', 'CategoryController');
     Route::get('category/{id}/status', 'CategoryController@status')->name('category.status');
     Route::resource('products', 'ProductController');
+    Route::get('products/{id}/status', 'ProductController@status')->name('product.status');
 
     Route::resource('contactus', 'ContactusController')->except(['create', 'store']);
     Route::post('contactus/{id}', 'ContactusController@store')->name('contactus.store');
+
+    Route::resource('settings', 'SettingController')->only(['index']);
 });
 
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth', 'isUser']], function () {
@@ -56,6 +59,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth'
     Route::resource('messages', 'MessageController');
     Route::get('messagessent', 'MessageController@sentIndex')->name('messages.sentIndex');
 });
+Route::resource('user/profile', 'ProfileController');
+
 Auth::routes(['register' => false]);
 
 // Route::get('test',function(){
