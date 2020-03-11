@@ -39,9 +39,10 @@
         <a href="{{route('shop_invoices.index',$shop->id)}}" class="btn-lg btn-green">@lang('site.show_invoices')</a>
         <br><br>
 
+      <div class="col-sm-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <div class="panel-title"><h1>@lang('site.shop_info')</h1></div>
+                <div class="panel-title"><h3>@lang('site.shop_info')</h3></div>
                 <div class="panel-options">
                     <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg">
                         <i class="entypo-cog"></i></a> <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
@@ -92,7 +93,67 @@
                 </table>
             </div>
         </div>
+      </div>
 
+
+        <div class="col-sm-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title"><h3>@lang('site.workers')</h3></div>
+
+                    <div class="panel-options">
+                        <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a>
+                        <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                        <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+                        <a href="#" data-rel="close"><i class="entypo-cancel"></i></a>
+                    </div>
+                </div>
+
+                <div class="panel-body with-table"><table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@lang('site.image')</th>
+                            <th>@lang('site.name')</th>
+                            <th>@lang('site.role')</th>
+                            <th>@lang('site.action')</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach ($shop->workers as $index=>$user)
+                        <tr>
+                            <td>{{++$index}}</td>
+                            <td><img src="{{$user->getImage()}}" width="54px" height="54px" alt="image" class="img-rounded"></td>
+                            <td>{{$user->first_name.' '.$user->last_name}}</td>
+                            <td>
+                                @if(count($user->roles()->get()) >0)
+                                <ul style="margin-left: 20px">
+                                   @foreach ($user->roles()->get() as $role )
+                                    <li>{{$role->name}}</li>
+                                   @endforeach
+                                </ul>
+                                @endif
+                            </td>
+
+                            <td>
+                                <a href="{{route('profile.show',$user->id)}}" class="btn btn-info">@lang('site.show')</a>
+
+                            </td>
+                        </tr>
+                        @endforeach
+
+
+
+
+                    </tbody>
+                </table></div>
+            </div>
+
+        </div>
+    </div>
 
 
         {{-- products --}}

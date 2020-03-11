@@ -30,8 +30,10 @@
 				</a>
 			</div>
 
-			<div class="sui-hover inline-links animate-in"><!-- You can remove "inline-links" class to make links appear vertically, class "animate-in" will make A elements animateable when click on user profile -->
-				<a href="{{route('profile.index')}}">
+            <div class="sui-hover inline-links animate-in"><!-- You can remove "inline-links" class to make links appear vertically, class "animate-in" will make A elements animateable when click on user
+
+            -->
+				<a href="{{route('profile.show',auth()->user()->id)}}">
 					<i class="entypo-pencil"></i>
 					@lang('site.view_profile')
 				</a>

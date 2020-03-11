@@ -60,7 +60,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth'
     Route::get('messagessent', 'MessageController@sentIndex')->name('messages.sentIndex');
     Route::resource('shoprole', 'RoleController');
 });
-Route::resource('user/profile', 'ProfileController');
+Route::resource('user/profile', 'ProfileController')->except(['index']);
 
 Auth::routes(['register' => false]);
 
@@ -79,3 +79,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('lfm', function () {
     return view('lfm');
 });
+
+// Route::get('test', function () {
+//     $shop = Shop::findOrFail(1);
+
+//     dd($shop->workers);
+// });

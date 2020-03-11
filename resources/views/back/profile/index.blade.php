@@ -9,7 +9,7 @@
        <div class="col-sm-7">
           <ul class="profile-info-sections">
              <li>
-             <div class="profile-name"> <strong> <a href="#">{{$user->first_name}} {{$user->last_name}}</a> <a href="#" class="user-status is-online tooltip-primary" data-toggle="tooltip" data-placement="top" data-original-title="Online"></a> 
+             <div class="profile-name"> <strong> <a href="#">{{$user->first_name}} {{$user->last_name}}</a> <a href="#" class="user-status is-online tooltip-primary" data-toggle="tooltip" data-placement="top" data-original-title="Online"></a>
             </strong> <span><a href="#">
                {{$type}}
             </a></span> </div>
@@ -17,23 +17,23 @@
              {{-- <li>
                 <div class="profile-stat">
                    <h3>643</h3>
-                   <span><a href="#">followers</a></span> 
+                   <span><a href="#">followers</a></span>
                 </div>
              </li>
              <li>
                 <div class="profile-stat">
                    <h3>108</h3>
-                   <span><a href="#">following</a></span> 
+                   <span><a href="#">following</a></span>
                 </div>
              </li> --}}
           </ul>
        </div>
        <div class="col-sm-3">
-          <div class="profile-buttons"> 
+          <div class="profile-buttons">
               {{-- <a href="#" class="btn btn-default"> <i class="entypo-user-add"></i>
              Follow
              </a> --}}
-              <a href="{{route('contactus.index')}}" class="btn btn-default"> <i class="entypo-mail"></i> @lang('site.inbox')</a> 
+              <a href="{{route('contactus.index')}}" class="btn btn-default"> <i class="entypo-mail"></i> @lang('site.inbox')</a>
           </div>
        </div>
     </header>
@@ -43,27 +43,27 @@
              <ul class="user-details">
                 <li> <a> <i class="entypo-location"></i>
                    {{$user->address}}
-                   </a> 
+                   </a>
                 </li>
                 <li> <a > <i class="entypo-suitcase"></i>
                 @lang('site.work_as') <span>
                {{$type}}
-                  </span> </a> 
+                  </span> </a>
                   </li>
                 <li> <a > <i class="entypo-calendar"></i>
                     {{$user->dob}}
-                   </a> 
+                   </a>
                 </li>
              </ul>
-             <!-- tabs for the profile links --> 
+             <!-- tabs for the profile links -->
              <ul class="nav nav-tabs">
-                <li class="active"><a href="{{route('profile.index')}}">@lang('site.profile')</a></li>
+                <li class="active"><a href="{{route('profile.show',$user->id)}}">@lang('site.profile')</a></li>
                 <li><a href="{{route('profile.edit',$user->id)}}">@lang('site.edit') @lang('site.profile')</a></li>
              </ul>
           </div>
        </div>
     </section>
-  
+
  </div>
 
  <hr>
@@ -120,7 +120,7 @@
                          </div>
                      </td>
                  </tr>
- 
+
                 </tbody>
             </table>
         </div>

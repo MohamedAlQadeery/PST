@@ -8,6 +8,8 @@ class Shop extends Model
 {
     protected $guarded = [];
 
+    protected $with = ['user', 'workers'];
+
     //returns the owner of the shop
     public function user()
     {
@@ -26,5 +28,10 @@ class Shop extends Model
         }
 
         return asset('uploads/'.$this->image);
+    }
+
+    public function workers()
+    {
+        return $this->hasMany('App\User');
     }
 }
