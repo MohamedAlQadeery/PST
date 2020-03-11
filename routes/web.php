@@ -58,6 +58,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth'
     Route::get('', 'DashboardController@index')->name('user.dashboard');
     Route::resource('messages', 'MessageController');
     Route::get('messagessent', 'MessageController@sentIndex')->name('messages.sentIndex');
+    Route::resource('shoprole', 'RoleController');
 });
 Route::resource('user/profile', 'ProfileController');
 

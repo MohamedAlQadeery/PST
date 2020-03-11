@@ -31,31 +31,43 @@
     </li>
 </ol>
 
-<h2>@lang('site.edit_product')</h2><br>
-
 
 
 <div class="row">
     @include('partials.messages')
 
-    <form action="{{route('products.update',$product->id)}}" method="post" enctype="multipart/form-data">
+    <div class="col-md-12">
+        <div class="panel panel-primary" data-collapsed="0">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h2>@lang('site.edit_product')</h2><br>
+
+                </div>
+                <div class="panel-options"> <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a> <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> </div>
+            </div>
+            <div class="panel-body">
+
+    <form action="{{route('products.update',$product->id)}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
         @csrf()
         @method('patch')
-        <div class="col-md-4 pull-right">
+
+
+        <div class="form-group">
+
             <label class="col-sm-3 control-label">@lang('site.image_upload')</label>
 
             <div class="col-sm-5">
 
                 <div class="fileinput fileinput-new" data-provides="fileinput">
                     <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
-                    <img src="{{$product->getImage()}}" alt="image">
+                        <img src="{{$product->getImage()}}" alt="image">
                     </div>
                     <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
                     <div>
                         <span class="btn btn-white btn-file">
-                            <span class="fileinput-new">@lang('site.product_image')</span>
-                            <span class="fileinput-exists">@lang('site.edit')</span>
-                            <input type="file" name="image" accept="image/*">
+            <span class="fileinput-new">@lang('site.profile_image')</span>
+                        <span class="fileinput-exists">@lang('site.edit')</span>
+                        <input type="file" name="image" accept="image/*">
                         </span>
                         <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">@lang('site.remove')</a>
                     </div>
@@ -65,64 +77,84 @@
 
         </div>
 
-          <div class="form-group col-md-8">
-              <label for="name" class="control-label">@lang('site.name')</label>
-              <input id="name" name="name" type="text" class="form-control" placeholder="@lang('site.product_name')" value="{{$product->name}}">
-          </div>
+              
+        <div class="form-group">
+            <label class="col-sm-3 control-label">@lang('site.name')</label>
+            <div class="col-sm-5">
+                <div class="input-group minimal"> <span class="input-group-addon"><i class="entypo-user"></i></span>
+                    <input  name="name" value="{{$product->name}}" type="text" class="form-control" placeholder="@lang('site.name')"> </div>
+                <br>
+            </div>
+        </div>
 
-          <div class="form-group col-md-8">
-            <label for="barcode" class="control-label">@lang('site.barcode')</label>
-            <input id="barcode" name="barcode" type="text" class="form-control" placeholder="@lang('site.barcode')" value="{{$product->barcode}}">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">@lang('site.barcode')</label>
+            <div class="col-sm-5">
+                <div class="input-group minimal"> <span class="input-group-addon"><i class="entypo-vcard"></i></span>
+                    <input  name="barcode" value="{{$product->barcode}}"  type="text" class="form-control" placeholder="@lang('site.barcode')"> </div>
+                <br>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">@lang('site.price_to_sell')</label>
+            <div class="col-sm-5">
+                <div class="input-group"> <span class="input-group-addon">₪</span>
+                    <input type="text" value="{{$product->price_to_sell}}" name="price_to_sell" class="form-control"  placeholder="@lang('site.price_to_sell')"> <span class="input-group-addon">.00</span> </div>
+            </div>
         </div>
         
-        <div class="form-group col-md-8">
-            <label for="price_to_sell" class="control-label">@lang('site.price_to_sell')</label>
-            <input id="price_to_sell" name="price_to_sell" type="text" class="form-control" placeholder="@lang('site.price_to_sell')" value="{{$product->price_to_sell}}">
+       
+        <div class="form-group">
+            <label class="col-sm-3 control-label">@lang('site.price_to_buy')</label>
+            <div class="col-sm-5">
+                <div class="input-group"> <span class="input-group-addon">₪</span>
+                    <input type="text" value="{{$product->price_to_buy}}" name="price_to_buy" class="form-control"  placeholder="@lang('site.price_to_buy')"> <span class="input-group-addon">.00</span> </div>
+            </div>
         </div>
-
-        <div class="form-group col-md-8">
-            <label for="price_to_buy" class="control-label">@lang('site.price_to_buy')</label>
-            <input id="price_to_buy" name="price_to_buy" type="text" class="form-control" placeholder="@lang('site.price_to_buy')" value="{{$product->price_to_buy}}">
-        </div>
+        
 
        
+        <div class="form-group">
+            <label class="col-sm-3 control-label">@lang('site.quantity')</label>
+            <div class="col-sm-5">
+                <div class="input-group minimal"> <span class="input-group-addon"><i class="entypo-bag"></i></span>
+                    <input  name="quantity"  value="{{$product->quantity}}" type="text" class="form-control" placeholder="@lang('site.quantity')"> </div>
+                <br>
+            </div>
+        </div>
+     
+        <div class="form-group">
+            <label class="col-sm-3 control-label">@lang('site.category')</label>
+            <div class="col-sm-5">
+                <div class="input-group minimal"> <span class="input-group-addon"><i class="entypo-tag"></i></span>
+                    <select name="category_id" class="form-control">
+                        @foreach ($categories as $category)
+                           <option value="{{$category->id}}">{{$category->name}}</option> 
+                        @endforeach
+                   </select> 
+                </div>
+                <br>
 
-        <div class="form-group col-md-8">
-            <label for="quantity" class="control-label">@lang('site.quantity')</label>
-            <input id="quantity" name="quantity" type="text" class="form-control" placeholder="@lang('site.quantity')" value="{{$product->quantity}}">
+            </div>
         </div>
 
-        <div class="form-group col-md-8">
-            <label for="category_id" class="control-label">@lang('site.category')</label>
-                 <select name="category_id" class="form-control">
-                     @foreach ($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option> 
-                     @endforeach
-                </select> 
+
+    
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-4">
+                <br>
+                <button type="submit" class=" btn btn-success btn-lg">
+                    <i class="fa fa-lock fa-lg"></i> @lang('site.store')
+                </button>
+            </div>
         </div>
-
-        {{-- <div class="form-group col-md-8">
-            <label for="status" class="control-label">@lang('site.status')</label>
-                 <select name="status" class="form-control">
-                     @if ($product->status === 1 )
-                        <option selected value="1">@lang('site.available')</option> 
-                        <option value="0">@lang('site.not_available')</option> 
-                    @else 
-                         <option value="1">@lang('site.available')</option> 
-                         <option selected value="0">@lang('site.not_available')</option> 
-                    @endif
-
-                </select> 
-        </div> --}}
-
-          <button type="submit" class="btn btn-lg btn-info btn-block" >
-            <i class="fa fa-lock fa-lg"></i>
-            @lang('site.update')
-        </button>
 
       </form>
+    </div>
 </div>
-
+</div>
+</div>
 
 
 
