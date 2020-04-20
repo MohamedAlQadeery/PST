@@ -8,6 +8,8 @@ class Product extends Model
 {
     protected $guarded = [];
 
+    protected $with = ['category'];
+
     public function shops()
     {
         return $this->belongsToMany('App\Shop', 'product_shop');

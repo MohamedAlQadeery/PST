@@ -50,8 +50,8 @@
         @csrf()
         @method('post')
 
+        <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
 
-        
         <div class="form-group">
 
             <label class="col-sm-3 control-label">@lang('site.image_upload')</label>
@@ -77,7 +77,7 @@
 
         </div>
 
-            
+
         <div class="form-group">
             <label class="col-sm-3 control-label">@lang('site.name')</label>
             <div class="col-sm-5">
@@ -86,7 +86,7 @@
                 <br>
             </div>
         </div>
-        
+
 
         <div class="form-group">
             <label class="col-sm-3 control-label">@lang('site.barcode')</label>
@@ -113,7 +113,7 @@
                     <input type="text" name="price_to_buy" class="form-control"  placeholder="@lang('site.price_to_buy')"> <span class="input-group-addon">.00</span> </div>
             </div>
         </div>
-     
+
 
         <div class="form-group">
             <label class="col-sm-3 control-label">@lang('site.quantity')</label>
@@ -124,18 +124,18 @@
             </div>
         </div>
 
-      
+
         <div class="form-group">
             <label class="col-sm-3 control-label">@lang('site.category')</label>
             <div class="col-sm-5">
                 <div class="input-group minimal"> <span class="input-group-addon"><i class="entypo-tag"></i></span>
                     <select name="category_id" class="form-control">
-                        <option disabled selected >@lang('site.choose_category')</option> 
-    
+                        <option disabled selected >@lang('site.choose_category')</option>
+
                          @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option> 
+                            <option value="{{$category->id}}">{{$category->name}}</option>
                          @endforeach
-                    </select> 
+                    </select>
                 </div>
                 <br>
 
@@ -147,9 +147,9 @@
             <div class="col-sm-5">
                 <div class="input-group minimal"> <span class="input-group-addon"><i class="entypo-eye"></i></span>
                     <select name="status" class="form-control">
-                        <option selected disabled>@lang('site.choose_status')</option> 
-                        <option value="0">@lang('site.not_available')</option> 
-                         <option value="1">@lang('site.available')</option> 
+                        <option selected disabled>@lang('site.choose_status')</option>
+                        <option value="0">@lang('site.not_available')</option>
+                         <option value="1">@lang('site.available')</option>
 
                 </select>
                 </div>

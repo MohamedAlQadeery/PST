@@ -129,7 +129,7 @@
 
             @endcan
 
-            @canany(['all','index-product'])
+            @canany(['all'])
 
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-basket"></i><span class="title"  style="font-size: 17px">@lang('site.products')</span></a>
 				<ul>
@@ -191,7 +191,7 @@
 
 
 
-            @canany(['all','all-shoppermissions','create-shoproles','index-shoproles'])
+            @canany(['all-shoppermissions','create-shoproles','index-shoproles'])
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-list"></i><span class="title"  style="font-size: 17px">@lang('site.roles')</span></a>
 				<ul class="">
 					<li> <a href="{{route('shoprole.create')}}"><span class="title"><i  class="entypo-list-add" ></i><span  style="font-size: 17px">@lang('site.create_role')</span></a> </li>
@@ -201,6 +201,18 @@
             </li>
             @endcan
 
+            {{--  @canany(['all','index-userproducts'])
+
+            <li class="active active has-sub root-level"> <a href=""><i class="entypo-basket"></i><span class="title"  style="font-size: 17px">@lang('site.products')</span></a>
+				<ul>
+					<li> <a href="{{route('products.create')}}"><span class="title"><i  class="entypo-pencil" ></i><span  style="font-size: 17px">@lang('site.create_product')</span></a> </li>
+					<li >
+						<a href="{{route('userproducts.index')}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.all_products')</span></a>
+					</li>
+				</ul>
+            </li>
+
+            @endcan  --}}
 
 
 			{{-- <li class="has-sub root-level"> <a href="https://demo.neontheme.com/layouts/layout-api/"><i class="entypo-layout"></i><span class="title">Layouts</span></a>

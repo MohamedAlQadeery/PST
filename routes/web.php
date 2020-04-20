@@ -31,6 +31,7 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
     Route::resource('shops', 'ShopController');
     Route::get('shop/{id?}/invoices', 'InvoiceController@index')->name('shop_invoices.index');
     Route::resource('role', 'RoleController')->except(['show']);
+    Route::resource('products', 'ProductController');
 
     //cashier routes
 
@@ -45,7 +46,6 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
     Route::resource('invoice', 'InvoiceController');
     Route::resource('category', 'CategoryController');
     Route::get('category/{id}/status', 'CategoryController@status')->name('category.status');
-    Route::resource('products', 'ProductController');
     Route::get('products/{id}/status', 'ProductController@status')->name('product.status');
 
     Route::resource('contactus', 'ContactusController')->except(['create', 'store']);
@@ -60,6 +60,13 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth'
     Route::get('messagessent', 'MessageController@sentIndex')->name('messages.sentIndex');
     Route::resource('shoprole', 'RoleController');
 });
+
+Route::group(['prefix' => 'site', 'namespace' => 'Site', 'middleware' => 'auth', 'as' => 'site.'], function () {
+    Route::get('', 'HomeController@index')->name('home');
+    Route::resource('products', 'ProductController');
+    Route::resource('providers', 'ProviderController');
+});
+
 Route::resource('user/profile', 'ProfileController')->except(['index']);
 
 Auth::routes(['register' => false]);

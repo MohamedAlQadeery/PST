@@ -124,6 +124,9 @@
                     <tbody>
 
                         @foreach ($shop->workers as $index=>$user)
+                                @if ($index==6)
+                                    @break
+                                @endif
                         <tr>
                             <td>{{++$index}}</td>
                             <td><img src="{{$user->getImage()}}" width="54px" height="54px" alt="image" class="img-rounded"></td>

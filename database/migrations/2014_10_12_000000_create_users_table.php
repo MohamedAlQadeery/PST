@@ -8,8 +8,6 @@ class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -19,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('second_name')->nullable();
             $table->string('third_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->text('bio');
             $table->string('mobile_number');
             $table->date('dob');
             $table->string('image')->nullable();
@@ -38,8 +37,6 @@ class CreateUsersTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

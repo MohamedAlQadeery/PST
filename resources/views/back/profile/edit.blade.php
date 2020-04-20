@@ -22,7 +22,7 @@
     <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li>
-        <a href="{{route('profile.index')}}"><i class="fa-home"></i>@lang('site.profile')</a>
+        <a href="{{route('profile.show',$user->id)}}"><i class="fa-home"></i>@lang('site.profile')</a>
 
     </li>
     <li class="active">
@@ -46,7 +46,7 @@
             <div class="panel-body">
 
                 <form action="{{route('profile.update',$user->id)}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
-                    @csrf() 
+                    @csrf()
                     @method('patch')
 
                     <div class="form-group">
@@ -172,7 +172,7 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@lang('site.roles')</label>
                         <div class="col-sm-5">
@@ -189,7 +189,7 @@
                     <br>
 
                     <div class="col-md-6">
-                        <div class="form-group">                      
+                        <div class="form-group">
                         <label class="col-sm-3 control-label">@lang('site.gender')</label>
                         <div class="col-sm-8">
 
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                 </div>
-              
+
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-4">
                             <br>
@@ -227,7 +227,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
 
                 </form>
             </div>

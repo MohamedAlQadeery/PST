@@ -49,4 +49,19 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Shop');
     }
+
+    public function products()
+    {
+        return $this->hasMany('App\Product');
+    }
+
+    public function providerReviews()
+    {
+        return $this->hasMany('App\Review', 'provider_id', 'id');
+    }
+
+    public function sellerReviews()
+    {
+        return $this->hasMany('App\Review', 'seller_id', 'id');
+    }
 }

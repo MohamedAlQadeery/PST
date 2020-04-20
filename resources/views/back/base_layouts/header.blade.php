@@ -73,7 +73,7 @@
 
 @media print {
     .noPrint { display: none; }
-} 
+}
     /* {{-- cahier Css --}} */
     /* body {
         background: #EEE;

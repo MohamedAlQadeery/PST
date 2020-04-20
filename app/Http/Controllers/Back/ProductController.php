@@ -11,6 +11,15 @@ use App\Http\Requests\Back\Product\StoreRequest;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create-product|all|create-userproducts')->only('create');
+        $this->middleware('permission:index-product|all')->only('index');
+        $this->middleware('permission:update-product|all|update-userproducts')->only('edit');
+        $this->middleware('permission:delete-product|all|delete-userproducts')->only('destroy');
+        $this->middleware('permission:cashier|all')->only('getProduct');
+    }
+
     public function getProduct($shop_id, $product_id)
     {
         $product = ProductShop::with(['product', 'shop'])->where(['product_id' => $product_id, 'shop_id' => $shop_id])->first();
@@ -67,7 +76,11 @@ class ProductController extends Controller
             Product::where('id', $product->id)->update(['image' => $image]);
         }
 
-        return redirect()->route('products.index')->with('success', __('site.created_successfully'));
+        if (auth()->user()->type == 0) {
+            return redirect()->route('products.index')->with('success', __('site.created_successfully'));
+        }
+
+        return redirect()->route('userproducts.index')->with('success', __('site.created_successfully'));
     }
 
     /**
@@ -128,7 +141,11 @@ class ProductController extends Controller
         }
         $product->update($data);
 
-        return redirect()->route('products.index')->with('success', __('site.edit_successfully'));
+        if (auth()->user()->type == 0) {
+            return redirect()->route('products.index')->with('success', __('site.edit_successfully'));
+        }
+
+        return redirect()->route('userproducts.index')->with('success', __('site.edit_successfully'));
     }
 
     /**
@@ -146,7 +163,11 @@ class ProductController extends Controller
         }
         $shop->delete();
 
-        return redirect()->route('products.index')->with('success', __('site.deleted_successfully'));
+        if (auth()->user()->type == 0) {
+            return redirect()->route('products.index')->with('success', __('site.deleted_successfully'));
+        }
+
+        return redirect()->route('userproducts.index')->with('success', __('site.deleted_successfully'));
     }
 
     //change the status of the category to publish or not
@@ -155,7 +176,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->status == 1 ? $product->status = 0 : $product->status = 1;
         $product->save();
+        if (auth()->user()->type == 0) {
+            return redirect()->route('products.index')->with('success', __('site.change_status_successfully'));
+        }
 
-        return redirect()->route('products.index')->with('success', __('site.change_status_successfully'));
+        return redirect()->route('userproducts.index')->with('success', __('site.change_status_successfully'));
     }
 }
