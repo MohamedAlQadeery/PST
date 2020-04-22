@@ -220,6 +220,13 @@
 					</li>
             @endcan
 
+            @canany(['all'])
+            <li class="active active">
+                    <a href="{{route('transaction.index')}}">
+                            <i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.transactions')</span></a>
+					</li>
+            @endcan
+
 
             {{--  @canany(['all','index-userproducts'])
 

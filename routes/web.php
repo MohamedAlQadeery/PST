@@ -32,6 +32,7 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
     Route::get('shop/{id?}/invoices', 'InvoiceController@index')->name('shop_invoices.index');
     Route::resource('role', 'RoleController')->except(['show']);
     Route::resource('products', 'ProductController');
+    Route::resource('transaction', 'TransactionController');
 
     //cashier routes
 
@@ -59,6 +60,9 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middl
     Route::get('messagessent', 'MessageController@sentIndex')->name('messages.sentIndex');
     Route::resource('shoprole', 'RoleController');
     Route::resource('products', 'ProductController');
+});
+
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middleware' => ['auth']], function () {
     Route::resource('transaction', 'TransactionController');
 });
 
