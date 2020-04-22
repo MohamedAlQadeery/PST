@@ -34,4 +34,9 @@ class Shop extends Model
     {
         return $this->hasMany('App\User');
     }
+
+    public function trasnactions()
+    {
+        return $this->hasMany('App\Transaction', 'shop_id', 'id');
+    }
 }

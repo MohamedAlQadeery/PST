@@ -2,6 +2,23 @@
 
 @section('content')
 
+
+<ol class="breadcrumb bc-3" >
+    <li>
+    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    </li>
+    <li>
+        <a href="{{route('user.products.index')}}"><i class="fa-home"></i>@lang('site.products')</a>
+
+    </li>
+    <li class="active">
+
+        <strong>{{$product->name}}</strong>
+    </li>
+</ol>
+
+
+
 <div class="row">
 
     <div class="col-md-12">
@@ -20,12 +37,6 @@
                     </div> --}}
 
 
-            @if(!count($shop_products) >0)
-            <br>
-            <br>
-            <br>
-                <div style="color:red" class="col-sm-4"> <i class="entypo-briefcase"></i> @lang('site.not_in_any_shop')</div>
-            @endif
 
                 </div>
             </div>
@@ -100,61 +111,6 @@
 
 
         {{-- Shops info --}}
-        @if(count($shop_products) >0)
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <div class="panel-title"><h1>@lang('site.products_shop')</h1></div>
-                <div class="panel-options"> <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a> <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> </div>
-            </div>
-            <div class="panel-body with-table" style="display: block;">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            {{-- <th width="50%">@lang('site.personal_info')</th>
-                            <th></th> --}}
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {{-- loop over here  --}}
-                        @foreach($shop_products as $shop)
-                        <div class="member-entry">
-
-                            <a href="extra-timeline.html" class="member-img">
-                            <img src="{{$shop->shop->getImage()}}" alt="image" class="img-rounded">
-                            </a>
-
-                            <div class="member-details">
-                                <h4>{{$shop->shop->name}}</h4>
-                                <div class="row info-list">
-                                    <div class="col-sm-4"> <i class="entypo-briefcase"></i>
-                                    {{$shop->shop->user->first_name.' '.$shop->shop->user->last_name}}
-                                        <a href="#"></a>
-                                    </div>
-                                    <div class="col-sm-4"> <i class="entypo-twitter"></i> <a href="#">@isset($shop->shop->twitter)
-                                        $shop->shop->twitter
-                                      @endisset</a> </div>
-                                    <div class="col-sm-4"> <i class="entypo-facebook"></i> <a href="#">@isset($shop->shop->facebook)
-                                        $shop->shop->facebook
-                                      @endisset</a> </div>
-                               <div class="clear"></div>
-                                    <div class="col-sm-4"> <i class="entypo-location"></i> {{$shop->shop->address}} </div>
-                                    <div class="col-sm-4"> <i class="entypo-mail"></i> {{$shop->shop->email}} </div>
-                            </div>
-                        </div>
-                        @endforeach
-
-
-                        <div class="row">
-                            <button type="button" style="margin-right:30px; margin-bottom:10px" class="btn btn-blue pull-right">@lang('site.show_all')</button>
-                        </div>
-
-                    </tbody>
-
-                </table>
-            </div>
-        </div>
-@endif
 
     </div>
 </div>

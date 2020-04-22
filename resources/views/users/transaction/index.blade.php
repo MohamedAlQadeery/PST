@@ -7,16 +7,19 @@
     <li>
     <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
+
     <li class="active">
 
         <strong>@lang('site.'.$page_name)</strong>
     </li>
 </ol>
 
-<h2>@lang('site.roles')</h2>
+<h2> {{auth()->user()->first_name.' '.auth()->user()->last_name}} @lang('site.transactions')</h2>
 
 
 <div class="row">
+
+    @include('partials.messages')
 
     <script type="text/javascript">
 		jQuery( document ).ready( function( $ ) {
@@ -44,36 +47,35 @@
 		<table class="table table-bordered datatable" id="table-1">
 			<thead>
 				<tr>
-					<th>#</th>
-                    <th>@lang('site.name')</th>
-                    <th>@lang('site.permissions')</th>
+                    <th>#</th>
+                    <th>@lang('site.transaction_number')</th>
+                    <th>@lang('site.shop_name')</th>
+                    <th>@lang('site.type')</th>
+                    <th>@lang('site.total')</th>
 					<th>@lang('site.action')</th>
 
 
 				</tr>
 			</thead>
 			<tbody>
-                @foreach ($roles as $index =>$role)
+                @foreach ($transactions as $index =>$transaction)
                 <tr>
                     <td>{{++$index}}</td>
-                    <td>{{$role->name}}</td>
+                    <td>{{$transaction->id}}</td>
+                    <td>{{$transaction->shop->name}}</td>
+
                     <td>
-                        @if(count($role->permissions()->get()) >0)
-                        <ul>
-                           @foreach ($role->permissions()->get() as $permission )
-                            <li>{{$permission->name}}</li>
-                           @endforeach
-                        </ul>
+                        @if ($transaction->type==0)
+                            @lang('site.debt')
+                            @else
+                            @lang('site.paid')
                         @endif
                     </td>
+                    <td>{{$transaction->total}}</td>
                     <td>
-                        <a href="{{route('user.shoprole.edit',$role->id)}}" class="btn btn-info">@lang('site.edit')</a>
-                        <form action="{{route('user.shoprole.destroy',$role->id)}}" method="post" style="display:inline"
-                              onsubmit="return confirm('Are you sure you want to delete this role?');">
-                            @csrf()
-                            @method('DELETE')
-                        <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
-                        </form>
+                        <a href="{{route('user.transaction.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
+
+
 
                     </td>
                 </tr>

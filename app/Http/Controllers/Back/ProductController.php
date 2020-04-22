@@ -68,19 +68,13 @@ class ProductController extends Controller
     {
         $data = $request->except(['image']);
 
+        if ($request->image) {
+            $data['image'] = parent::uploadImage($request->image);
+        }
+
         $product = Product::create($data);
 
-        if ($request->image) {
-            $image = parent::uploadImage($request->image);
-
-            Product::where('id', $product->id)->update(['image' => $image]);
-        }
-
-        if (auth()->user()->type == 0) {
-            return redirect()->route('products.index')->with('success', __('site.created_successfully'));
-        }
-
-        return redirect()->route('userproducts.index')->with('success', __('site.created_successfully'));
+        return redirect()->route('products.index')->with('success', __('site.created_successfully'));
     }
 
     /**
@@ -141,11 +135,7 @@ class ProductController extends Controller
         }
         $product->update($data);
 
-        if (auth()->user()->type == 0) {
-            return redirect()->route('products.index')->with('success', __('site.edit_successfully'));
-        }
-
-        return redirect()->route('userproducts.index')->with('success', __('site.edit_successfully'));
+        return redirect()->route('products.index')->with('success', __('site.edit_successfully'));
     }
 
     /**
@@ -163,11 +153,7 @@ class ProductController extends Controller
         }
         $shop->delete();
 
-        if (auth()->user()->type == 0) {
-            return redirect()->route('products.index')->with('success', __('site.deleted_successfully'));
-        }
-
-        return redirect()->route('userproducts.index')->with('success', __('site.deleted_successfully'));
+        return redirect()->route('products.index')->with('success', __('site.deleted_successfully'));
     }
 
     //change the status of the category to publish or not
@@ -180,6 +166,6 @@ class ProductController extends Controller
             return redirect()->route('products.index')->with('success', __('site.change_status_successfully'));
         }
 
-        return redirect()->route('userproducts.index')->with('success', __('site.change_status_successfully'));
+        return redirect()->route('user.products.index')->with('success', __('site.change_status_successfully'));
     }
 }

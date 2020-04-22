@@ -59,9 +59,12 @@ class CashierController extends Controller
 
         if (!$error_quantity) {
             foreach ($request->data as $index => $row) {
+                //product not in invoice decerment the product qunaintity
                 $product = ProductShop::where('product_id', $row['product_id'])->first();
                 $product->quantity -= $row['quantity'];
                 $product->save();
+
+                //create first row (item) in transaction
                 $item = Item::create(['product_id' => $row['product_id'], 'quantity' => $row['quantity'], 'price' => $row['price']]);
                 $items_id[$index] = $item->id;
                 // $item->invoices()->attach($invoice->id);

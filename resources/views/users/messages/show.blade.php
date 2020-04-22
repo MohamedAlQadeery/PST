@@ -6,11 +6,11 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
 
     <li>
-        <a href="{{route('messages.index')}}"><i class="fa-home"></i>@lang('site.messages')</a>
+        <a href="{{route('user.messages.index')}}"><i class="fa-home"></i>@lang('site.messages')</a>
         </li>
 
     <li class="active">
@@ -27,7 +27,7 @@
 
     <!-- compose new email button -->
     <div class="mail-sidebar-row visible-xs">
-        <a href="{{route('messages.create')}}" class="btn btn-success btn-icon btn-block">
+        <a href="{{route('user.messages.create')}}" class="btn btn-success btn-icon btn-block">
             @lang('site.compose')
             <i class="entypo-pencil"></i>
         </a>
@@ -53,7 +53,7 @@
 
 
 
-                <form action="{{route('messages.destroy',$message->id)}}" method="post" style="display: inline-block"
+                <form action="{{route('user.messages.destroy',$message->id)}}" method="post" style="display: inline-block"
                     onsubmit="return confirm('Are you sure you want to delete this message?');">
                   @csrf()
                   @method('DELETE')
@@ -163,7 +163,7 @@
 
                 @if(auth()->user()->id ==$replay->from->id)
 
-                <form action="{{route('messages.destroy',$replay->id)}}" method="post" style="display: inline-block"
+                <form action="{{route('user.messages.destroy',$replay->id)}}" method="post" style="display: inline-block"
                     onsubmit="return confirm('Are you sure you want to delete this message?');">
                   @csrf()
                   @method('DELETE')
@@ -198,7 +198,7 @@
 
         <div class="mail-compose">
 
-            <form id="form" method="post" role="form" action="{{route('messages.store')}}">
+            <form id="form" method="post" role="form" action="{{route('user.messages.store')}}">
                 @csrf
 
                 <textarea name="body" class="form-control"></textarea><br>
@@ -220,7 +220,7 @@
     <div class="mail-sidebar">
 
         <div class="mail-sidebar-row hidden-xs">
-            <a href="{{route('messages.create')}}" class="btn btn-success btn-icon btn-block">
+            <a href="{{route('user.messages.create')}}" class="btn btn-success btn-icon btn-block">
                 @lang('site.compose')
                 <i class="entypo-pencil"></i>
             </a>
@@ -229,14 +229,14 @@
         <!-- menu -->
         <ul class="mail-menu">
             <li class="active">
-                <a href="{{route('messages.index')}}">
+                <a href="{{route('user.messages.index')}}">
                     <span class="badge badge-danger pull-right">{{$inbox_messages_count}}</span>
                     @lang('site.inbox')
                 </a>
             </li>
 
             <li >
-                <a href="{{route('messages.sentIndex')}}">
+                <a href="{{route('user.messages.sentIndex')}}">
                     <span class="badge badge-danger pull-right">{{$sent_messages_count}}</span>
                     @lang('site.sent')
                 </a>

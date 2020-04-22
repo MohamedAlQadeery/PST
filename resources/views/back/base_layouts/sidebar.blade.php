@@ -45,7 +45,7 @@
 
                 </a>
                 @else
-                <a href="{{route('messages.index')}}">
+                <a href="{{route('user.messages.index')}}">
 					<i class="entypo-mail"></i>
 					@lang('site.inbox')
 
@@ -174,7 +174,7 @@
 
             @canany(['all-shoppermissions','index-usermessage'])
             <li class="active">
-                <a href="{{route('messages.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.messages')</span></a>
+                <a href="{{route('user.messages.index')}}"><i  class="entypo-gauge" ></i><span style="font-size: 17px">@lang('site.messages')</span></a>
 
             </li>
 
@@ -194,12 +194,32 @@
             @canany(['all-shoppermissions','create-shoproles','index-shoproles'])
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-list"></i><span class="title"  style="font-size: 17px">@lang('site.roles')</span></a>
 				<ul class="">
-					<li> <a href="{{route('shoprole.create')}}"><span class="title"><i  class="entypo-list-add" ></i><span  style="font-size: 17px">@lang('site.create_role')</span></a> </li>
-                    <a href="{{route('shoprole.index')}}"><i  class="entypo-list" ></i><span style="font-size: 17px">@lang('site.roles')</span></a>
+					<li> <a href="{{route('user.shoprole.create')}}"><span class="title"><i  class="entypo-list-add" ></i><span  style="font-size: 17px">@lang('site.create_role')</span></a> </li>
+                    <a href="{{route('user.shoprole.index')}}"><i  class="entypo-list" ></i><span style="font-size: 17px">@lang('site.roles')</span></a>
 
 				</ul>
             </li>
             @endcan
+
+
+            @canany(['index-userproducts'])
+            <li class="active active has-sub root-level"> <a href=""><i class="entypo-basket"></i><span class="title"  style="font-size: 17px">@lang('site.products')</span></a>
+				<ul>
+					<li> <a href="{{route('user.products.create')}}"><span class="title"><i  class="entypo-pencil" ></i><span  style="font-size: 17px">@lang('site.create_product')</span></a> </li>
+					<li >
+						<a href="{{route('user.products.index')}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.all_products')</span></a>
+					</li>
+				</ul>
+            </li>
+            @endcan
+
+            @canany(['index-usertransaction'])
+            <li class="active active">
+						<a href="{{route('user.transaction.index')}}">
+                            <i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.my_transactions')</span></a>
+					</li>
+            @endcan
+
 
             {{--  @canany(['all','index-userproducts'])
 

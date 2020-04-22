@@ -19,4 +19,9 @@ class Item extends Model
     {
         return $this->belongsTo('App\Product');
     }
+
+    public function transactions()
+    {
+        return $this->belongsToMany('App\Transaction', 'item_transaction');
+    }
 }

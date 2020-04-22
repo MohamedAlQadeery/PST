@@ -17,10 +17,10 @@
 
 <ol class="breadcrumb bc-3">
     <li>
-        <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+        <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li>
-        <a href="{{route('shoprole.index')}}"><i class="fa-home"></i>@lang('site.roles')</a>
+        <a href="{{route('user.shoprole.index')}}"><i class="fa-home"></i>@lang('site.roles')</a>
 
     </li>
     <li class="active">
@@ -43,7 +43,7 @@
                 <div class="panel-options"> <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a> <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> </div>
             </div>
             <div class="panel-body">
-                <form action="{{route('shoprole.update',$role->id)}}" method="post">
+                <form action="{{route('user.shoprole.update',$role->id)}}" method="post">
                     @csrf() @method('patch')
                     <div class="form-group">
                         <label for="name" class="control-label mb-1">@lang('site.name')</label>

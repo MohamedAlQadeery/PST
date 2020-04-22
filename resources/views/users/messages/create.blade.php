@@ -50,7 +50,7 @@
 
         <div class="mail-compose">
 
-            <form method="post" role="form" action="{{route('messages.store')}}">
+            <form method="post" role="form" action="{{route('user.messages.store')}}">
                 @csrf
                 <div class="form-group">
                     <label for="to">To:</label>
@@ -94,7 +94,7 @@
     <div class="mail-sidebar">
 
         <div class="mail-sidebar-row hidden-xs">
-            <a href="{{route('messages.create')}}" class="btn btn-success btn-icon btn-block">
+            <a href="{{route('user.messages.create')}}" class="btn btn-success btn-icon btn-block">
                 @lang('site.compose')
                 <i class="entypo-pencil"></i>
             </a>
@@ -103,14 +103,14 @@
         <!-- menu -->
         <ul class="mail-menu">
             <li class="active">
-                <a href="{{route('messages.index')}}">
+                <a href="{{route('user.messages.index')}}">
                     <span class="badge badge-danger pull-right">{{$inbox_messages_count}}</span>
                     @lang('site.inbox')
                 </a>
             </li>
 
             <li >
-                <a href="{{route('messages.sentIndex')}}">
+                <a href="{{route('user.messages.sentIndex')}}">
                     <span class="badge badge-danger pull-right">{{$sent_messages_count}}</span>
                     @lang('site.sent')
                 </a>

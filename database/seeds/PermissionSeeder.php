@@ -32,6 +32,7 @@ class PermissionSeeder extends Seeder
            'create-transactions',  'delete-transactions',  'all-shoppermissions',
            'create-shoproles', 'update-shoproles', 'update-shoproles', 'index-shoproles',
            'index-usermessage', 'create-usermessage', 'edit-usermessage', 'delete-usermessage',
+           'index-usertransaction', 'create-usertransaction', 'update-usertransaction', 'delete-usertransaction',
         );
 
         foreach ($sellers_permissions as $permission) {

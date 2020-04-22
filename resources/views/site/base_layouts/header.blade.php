@@ -69,7 +69,7 @@
 							<ul>
 							  @foreach ($shareData['categories'] as $category)
                     <li>
-                        <a href="#">
+                        <a href="{{route('site.products.index',['category_id'=>$category->id])}}">
                             <span>{{$category->name}}</span>
                         </a>
                     </li>

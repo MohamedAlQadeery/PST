@@ -180,4 +180,15 @@ return [
 
     'logged_out' => 'تم تسجيل الخروج بنجاح !',
     'workers' => 'العاملين في المتجر',
+    'description' => 'الوصف',
+
+    'transactions' => 'المعاملات الماليه',
+    'transaction' => 'معامله',
+    'my_transactions' => 'معاملاتي الماليه',
+    'transaction_number' => 'رقم المعامله',
+    'debt' => 'دين',
+    'paid' => 'مدفوعه',
+    'provider_name' => 'اسم المزود',
+    'shop_name' => 'اسم المتجر',
+    'shop_address' => 'عنوان المتجر',
     ];

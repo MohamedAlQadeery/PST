@@ -46,7 +46,6 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
     Route::resource('invoice', 'InvoiceController');
     Route::resource('category', 'CategoryController');
     Route::get('category/{id}/status', 'CategoryController@status')->name('category.status');
-    Route::get('products/{id}/status', 'ProductController@status')->name('product.status');
 
     Route::resource('contactus', 'ContactusController')->except(['create', 'store']);
     Route::post('contactus/{id}', 'ContactusController@store')->name('contactus.store');
@@ -54,11 +53,13 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
     Route::resource('settings', 'SettingController')->only(['index']);
 });
 
-Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth', 'isUser']], function () {
-    Route::get('', 'DashboardController@index')->name('user.dashboard');
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middleware' => ['auth', 'isUser']], function () {
+    Route::get('', 'DashboardController@index')->name('dashboard');
     Route::resource('messages', 'MessageController');
     Route::get('messagessent', 'MessageController@sentIndex')->name('messages.sentIndex');
     Route::resource('shoprole', 'RoleController');
+    Route::resource('products', 'ProductController');
+    Route::resource('transaction', 'TransactionController');
 });
 
 Route::group(['prefix' => 'site', 'namespace' => 'Site', 'middleware' => 'auth', 'as' => 'site.'], function () {
@@ -68,6 +69,9 @@ Route::group(['prefix' => 'site', 'namespace' => 'Site', 'middleware' => 'auth',
 });
 
 Route::resource('user/profile', 'ProfileController')->except(['index']);
+
+//changes the status of the product
+Route::get('products/{id}/status', 'Back\ProductController@status')->name('product.status');
 
 Auth::routes(['register' => false]);
 
