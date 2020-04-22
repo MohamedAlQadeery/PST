@@ -48,10 +48,10 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         $invoice = Invoice::findOrFail($id);
-        $invoice->items()->sync([]);
         foreach ($invoice->items as $item) {
             $item->delete();
         }
+        $invoice->items()->sync([]);
         $invoice->delete();
 
         return redirect()->route('invoice.index')->with('success', __('site.deleted_successfully'));

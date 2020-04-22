@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Http\Controllers\Controller;
 use App\Transaction;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TransactionController extends Controller
 {
@@ -92,10 +92,10 @@ class TransactionController extends Controller
     public function destroy($id)
     {
         $transaction = Transaction::findOrFail($id);
-        $transaction->items()->sync([]);
         foreach ($transaction->items as $item) {
             $item->delete();
         }
+        $transaction->items()->sync([]);
         $transaction->delete();
 
         return redirect()->route('transaction.index')->with('success', __('site.deleted_successfully'));
