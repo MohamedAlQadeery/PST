@@ -60,6 +60,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middl
     Route::get('messagessent', 'MessageController@sentIndex')->name('messages.sentIndex');
     Route::resource('shoprole', 'RoleController');
     Route::resource('products', 'ProductController');
+    Route::resource('contactus', 'ContactusController');
 });
 
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middleware' => ['auth']], function () {

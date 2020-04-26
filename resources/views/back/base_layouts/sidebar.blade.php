@@ -220,6 +220,17 @@
 					</li>
             @endcan
 
+            {{-- @canany(['index-userproducts']) --}}
+            <li class="active active has-sub root-level"> <a href=""><i class="entypo-basket"></i><span class="title"  style="font-size: 17px">@lang('site.contact_us')</span></a>
+				<ul>
+					<li> <a href="{{route('user.contactus.create')}}"><span class="title"><i  class="entypo-pencil" ></i><span  style="font-size: 17px">@lang('site.create')</span></a> </li>
+					<li >
+						<a href="{{route('user.contactus.index')}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.contact_us')</span></a>
+					</li>
+				</ul>
+            </li>
+            {{-- @endcan --}}
+
             @canany(['all'])
             <li class="active active">
                     <a href="{{route('transaction.index')}}">

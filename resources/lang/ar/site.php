@@ -191,4 +191,5 @@ return [
     'provider_name' => 'اسم المزود',
     'shop_name' => 'اسم المتجر',
     'shop_address' => 'عنوان المتجر',
+    'body' => 'المحتوى',
     ];

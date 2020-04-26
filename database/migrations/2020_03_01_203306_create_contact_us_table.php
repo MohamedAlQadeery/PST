@@ -17,7 +17,6 @@ class CreateContactUsTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->string('title')->nullable();
             $table->text('body');
-            $table->string('image')->nullable();
             $table->integer('read')->default(0);
             $table->timestamps();
         });
