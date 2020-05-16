@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    protected $with = ['items', 'shop'];
+
+    protected $guarded = [];
+
     public function provider()
     {
         return $this->belongsTo('App\User', 'provider_id', 'id');

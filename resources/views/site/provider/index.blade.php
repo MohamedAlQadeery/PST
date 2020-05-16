@@ -2,6 +2,7 @@
 
 @section('content')
 
+<hr>
 <!-- Blog -->
 <section class="blog">
 
@@ -21,7 +22,7 @@
 						<div class="post-thumb">
 
 							<a href="{{route('site.providers.show',$provider->id)}}">
-								<img src="{{$provider->getImage()}}" class="img-rounded" />
+								<img  src="{{$provider->getImage()}}" class="img-rounded" />
 								<span class="hover-zoom"></span>
 							</a>
 
@@ -36,11 +37,21 @@
 							<div class="post-meta">
 
 								<div class="meta-info">
-									<i class="entypo-calendar"></i>{{$provider->address}}</div>
+									<i class="entypo-location"></i>{{$provider->address}}</div>
 
+									<br>
+									<div class="meta-info">
+										<i class="entypo-phone"></i>{{$provider->mobile_number}}</div>
+	
+										<br>
 								<div class="meta-info">
-                                    <i class="entypo-comment"></i>
-                                    <p>{{Str::limit($provider->bio,50,'...')}}</p>
+									<i class="entypo-star"></i>التقييم</div>
+
+									<br>
+								<div class="meta-info">
+                                    <i class="entypo-newspaper"> 
+										<p>{{Str::limit($provider->bio,50,'...')}}</p>
+									</i>
 								</div>
 
 							</div>

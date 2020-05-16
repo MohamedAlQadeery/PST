@@ -35,7 +35,13 @@
 
     <link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/selectboxit/jquery.selectBoxIt.css">
     <link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/droidarabickufi.css">
 
+    <style>
+        .droid-arabic-kufi {
+            font-family: 'Droid Arabic Kufi', serif;
+        }
+    </style>
 
     @if(app()->getLocale()=='en')
     <link rel="stylesheet" href="{{ url('/neon-theme/html/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css')}}" id="style-resource-1">

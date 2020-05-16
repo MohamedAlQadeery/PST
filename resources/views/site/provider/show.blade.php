@@ -29,7 +29,7 @@
 					<div class="post-details">
 
 						<h3>
-							<a href="blog-post.html">{{$provider->first_name.' '.$provider->last_name}}</a>
+							<a href="blog-post.html">{{$provider->first_name.' '.$provider->seconed_name.' '.$provider->third_name.' '.$provider->last_name}}</a>
 						</h3>
 
 						<div class="post-meta">
@@ -44,14 +44,30 @@
 
 
 							<div class="meta-info">
-								<i class="entypo-comment"></i>
+								<i class="entypo-star"></i>
 								تقييمه
 							</div>
 
+							
+							<div class="meta-info">
+								<i class="entypo-user"></i>
+								{{$provider->age}}
+							</div>
+
+							<div class="meta-info">
+								<i class="entypo-calendar"></i>
+								{{$provider->dob}}
+							</div>
+
+							<br>
+							<div class="meta-info">
+								<i class="entypo-newspaper"></i>
+								{{$provider->bio}}
+							</div>
 						</div>
 
 						<div class="callout-button">
-							<a href="index.html" class="btn btn-secondary">تواصل معه</a>
+								<a href="index.html" class="btn btn-secondary"><i class="entypo-phone"></i> تواصل معه</a>
 						</div>
 
 					</div>

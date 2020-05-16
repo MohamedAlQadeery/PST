@@ -86,6 +86,15 @@
                 <br>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">@lang('site.description')</label>
+            <div class="col-sm-5">
+                    <textarea name="description" class="form-control"></textarea><br>
+
+
+                <br>
+            </div>
+        </div>
 
 
         <div class="form-group">

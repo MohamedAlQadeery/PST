@@ -83,7 +83,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $categories = Category::all();
 
-        return view('back.product.edit')->with([
+        return view('users.product.edit')->with([
             'page_name' => 'products',
             'product' => $product,
             'categories' => $categories,

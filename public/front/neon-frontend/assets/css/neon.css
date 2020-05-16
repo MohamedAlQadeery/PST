@@ -873,13 +873,36 @@ section.breadcrumb .alt-select-field {
   margin-bottom: 10px;
   overflow: hidden;
 }
+
+/* khalid edited here  */
+.portfolio-item .index-items .image img,
+.gallery-item .image img {
+  max-width: 300px;
+  width: auto;
+  height: 220px;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
 .portfolio-item .image img,
 .gallery-item .image img {
-  width: 100%;
-  display: block;
-  max-width: 100%;
+  /* width: 100%; */
+  /* width:  220px;
+  height: 220px; */
+  /* max-width: 300px; */
+  width: auto;
   height: auto;
+  /* vertical-align: middle; */
+  display: block;
+  /* max-width: 100%; */
+  /* height: auto; */
 }
+
 .portfolio-item .image:after,
 .gallery-item .image:after {
   content: '';
@@ -1476,9 +1499,11 @@ section.blog .blog-posts .blog-post .post-thumb a:hover .hover-zoom {
 }
 section.blog .blog-posts .blog-post .post-thumb a img {
   width: 100%;
+  /* width: 100%; */
   display: block;
   max-width: 100%;
-  height: auto;
+  height: 275px;
+  /* height: auto; */
 }
 section.blog .blog-posts .blog-post .post-details {
   width: 65%;
@@ -2164,3 +2189,130 @@ section.blog .sidebar .sidebar-content .discussion-list li .details p {
   width: 36px;
   height: 36px;
 }
+
+/* products zomming  */
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.containerImage {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+/* shopping cart */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+/* progress bar truck order  */
+
+ol.progtrckr {
+  margin: 0;
+  padding: 0;
+  list-style-type:none;
+}
+
+ol.progtrckr li {
+  display: inline-block;
+  text-align: center;
+  line-height: 3.5em;
+}
+
+ol.progtrckr[data-progtrckr-steps="2"] li { width: 49%; }
+ol.progtrckr[data-progtrckr-steps="3"] li { width: 33%; }
+ol.progtrckr[data-progtrckr-steps="4"] li { width: 24%; }
+ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
+ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
+ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
+ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
+
+ol.progtrckr li.progtrckr-done {
+  color: black;
+  border-bottom: 4px solid yellowgreen;
+}
+ol.progtrckr li.progtrckr-todo {
+  color: silver; 
+  border-bottom: 4px solid silver;
+}
+
+ol.progtrckr li:after {
+  content: "\00a0\00a0";
+}
+ol.progtrckr li:before {
+  position: relative;
+  bottom: -2.5em;
+  float: left;
+  left: 50%;
+  line-height: 1em;
+}
+ol.progtrckr li.progtrckr-done:before {
+  content: "\2713";
+  color: white;
+  background-color: yellowgreen;
+  height: 2.2em;
+  width: 2.2em;
+  line-height: 2.2em;
+  border: none;
+  border-radius: 2.2em;
+}
+ol.progtrckr li.progtrckr-todo:before {
+  content: "\039F";
+  color: silver;
+  background-color: white;
+  font-size: 2.2em;
+  bottom: -1.2em;
+}
+

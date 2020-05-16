@@ -8,7 +8,7 @@
                 <div class="col-sm-6">
                     
                     <a href="#">
-                        <img src="{{asset('front/neon-frontend/assets/images/logo@2x.png')}}" width="100" />
+                        <img src="{{asset('uploads/wasla.png')}}" width="100" />
                     </a>
                     
                     <p>

@@ -32,7 +32,8 @@
 						<div class="slide-image">
 
 							<a href="#">
-								<img src="{{asset('front/neon-frontend/assets/images/slide-img-1.png')}}" class="img-responsive" />
+								<img src="{{asset('uploads/ship.webp')}}"  class="img-rounded img-responsive" />
+
 							</a>
 						</div>
 
@@ -44,7 +45,8 @@
 						<div class="slide-image">
 
 							<a href="#">
-								<img src="{{asset('front/neon-frontend/assets/images/slide-img-1.png')}}" class="img-responsive" />
+								<img src="{{asset('uploads/warehouse.jpg')}}"  width="350px" height="80px" class="img-rounded img-responsive" />
+
 							</a>
 						</div>
 
@@ -82,7 +84,7 @@
 						<div class="slide-image">
 
 							<a href="#">
-								<img src="{{asset('front/neon-frontend/assets/images/slide-img-1.png')}}" class="img-responsive" />
+								<img src="{{asset('uploads/ship2.jpg')}}"  class="img-rounded img-responsive" />
 							</a>
 						</div>
 
@@ -171,29 +173,56 @@
 
 </section> --}}
 <!-- Portfolio -->
-<section dir="rtl" class="portfolio-widget">
+<section  class="portfolio-widget">
 
-	<div dir="rtl" class="container">
+	<div  class="container">
 
-		<div dir="rtl" class="row">
+		<div  class="row">
 
-			<div  dir="rtl"class="col-sm-3">
-
-				<div dir="rtl" class="portfolio-info">
-					<h3>
-						<a href="#">أفضل البضائع</a>
-					</h3>
-
-					{{-- <p>Fifteen no inquiry cordial so resolve garrets as. Impression was estimating surrounded solicitude indulgence s...</p> --}}
+			<div class="container">
+				<div class="row vspace">
+					<div class="col-md-12">
+			
+						<div class="callout-action">
+							<h3>
+								أفضل البضائع
+							</h3>			
+							
+						</div>
+			
+					</div>
 				</div>
-
 			</div>
 
+		
+
 		@foreach ($products as $product)
-        <div class="col-sm-3">
+        <div style="float:right" class="col-sm-3">
+
+
+			<div class="portfolio-item">
+				<div class="index-items">
+				<a href="{{route('site.products.show',$product->id)}}" class="image">
+                    <img src="{{$product->getImage()}}" class="img-rounded"  style="width:100%"/>
+                    <span class="hover-zoom"></span>
+                </a>
+
+                <h4>
+                    <a href="portfolio-single.html" class="like">
+                        <i class="entypo-heart"></i>
+                    </a>
+
+                    <a href="{{route('site.products.show',$product->id)}}" class="name">{{$product->name}}</a>
+                </h4>
+
+                <div class="categories">
+                    <a href="{{route('site.products.index',['category_id'=>$product->category->id])}}">{{$product->category->name}}</a>
+                </div>
+			  </div>
+			</div>
 
             <!-- Portfolio Item in Widget -->
-            <div class="portfolio-item">
+            {{-- <div class="portfolio-item">
                 <a href="{{route('site.products.show',$product->id)}}" class="image">
                     <img src="{{$product->getImage()}}" class="img-rounded" />
                     <span class="hover-zoom"></span>
@@ -210,7 +239,7 @@
                 <div class="categories">
                     <a href="{{route('site.products.index',['category_id'=>$product->category->id])}}">{{$product->category->name}}</a>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
         @endforeach

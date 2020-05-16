@@ -2,7 +2,7 @@
 
 @include('back.base_layouts.header')
 
-<body class="page-body" data-url="https://demo.neontheme.com">
+<body class="page-body droid-arabic-kufi" data-url="https://demo.neontheme.com">
 
     @include('sweetalert::alert')
 
