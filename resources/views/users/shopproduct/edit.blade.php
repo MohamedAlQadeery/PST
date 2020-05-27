@@ -19,7 +19,7 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li>
         <a href="{{route('user.products.index')}}"><i class="fa-home"></i>@lang('site.products')</a>
@@ -30,13 +30,11 @@
         <strong>@lang('site.edit_product')</strong>
     </li>
 </ol>
-@include('partials.messages')
-
-@if($product->user_id==auth()->user()->id)
 
 
 
 <div class="row">
+    @include('partials.messages')
 
     <div class="col-md-12">
         <div class="panel panel-primary" data-collapsed="0">
@@ -160,7 +158,7 @@
             <div class="col-sm-offset-3 col-sm-4">
                 <br>
                 <button type="submit" class=" btn btn-success btn-lg">
-                    <i class="fa fa-lock fa-lg"></i> @lang('site.update')
+                    <i class="fa fa-lock fa-lg"></i> @lang('site.store')
                 </button>
             </div>
         </div>
@@ -171,82 +169,6 @@
 </div>
 </div>
 
-@endif
-
-
-@if (auth()->user()->type==1)
-
-<div class="col-md-12">
-    <div class="panel panel-primary" data-collapsed="0">
-        <div class="panel-heading">
-            <div class="panel-title">
-                <h2>@lang('site.edit_shop_product')</h2><br>
-
-            </div>
-            <div class="panel-options">
-                <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a>
-                <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                 <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-                  <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> </div>
-        </div>
-        <div class="panel-body">
-
-<form action="{{route('user.shopproducts.update',$product->id)}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
-    @csrf()
-    @method('patch')
-
-
-
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label">@lang('site.quantity')</label>
-        <div class="col-sm-5">
-            <div class="input-group minimal"> <span class="input-group-addon"><i class="entypo-bag"></i></span>
-                <input  name="quantity" type="text" class="form-control" placeholder="@lang('site.quantity')"> </div>
-            <br>
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label">@lang('site.price')</label>
-        <div class="col-sm-5">
-            <div class="input-group"> <span class="input-group-addon">₪</span>
-                <input type="text"  name="price" class="form-control"  placeholder="@lang('site.price_to_sell')"> <span class="input-group-addon">.00</span> </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label">@lang('site.status')</label>
-        <div class="col-sm-5">
-            <div class="input-group minimal"> <span class="input-group-addon"><i class="entypo-eye"></i></span>
-                <select name="status" class="form-control">
-                    <option selected disabled>@lang('site.choose_status')</option>
-                    <option value="0">@lang('site.not_available')</option>
-                     <option value="1">@lang('site.available')</option>
-
-            </select>
-            </div>
-            <br>
-
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-4">
-            <br>
-            <button type="submit" class=" btn btn-success btn-lg">
-                <i class="fa fa-lock fa-lg"></i> @lang('site.update')
-            </button>
-        </div>
-    </div>
-
-  </form>
-</div>
-</div>
-</div>
-@endif
 
 
 

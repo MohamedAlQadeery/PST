@@ -34,4 +34,5 @@ return [
     'contact_info' => 'Contact Information',
     'user_info' => 'User Information',
     'description' => 'Description',
+    'store' => 'Store',
 ];

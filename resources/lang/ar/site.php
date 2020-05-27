@@ -204,4 +204,6 @@ return [
     'delivered' => 'تم استلام البضاعة',
     'isDelivered' => 'حالة الاستلام',
     'subworkers' => 'العمال',
+    'edit_shop_product' => 'تعديل البضاعه الخاصه بالمتجر',
+    'store' => 'تخزين',
     ];

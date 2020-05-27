@@ -216,7 +216,7 @@
 
                     @canany(['all-shoppermissions','index-shopproducts'])
                     <li >
-						<a href="{{route('user.products.index')}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.all_products')</span></a>
+						<a href="{{route('user.shopproducts.index')}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.all_products')</span></a>
                     </li>
                     @endcan
 
@@ -234,7 +234,7 @@
 
                     @canany(['all-shoppermissions','index-shopinvoice'])
                     <li >
-						<a href="{{route('user.products.index')}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.invoices')</span></a>
+						<a href="{{route('shop_invoices.index',auth()->user()->shop_id)}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.invoices')</span></a>
                     </li>
                     @endcan
 
@@ -259,15 +259,18 @@
 			@endcan
 
 
-			{{-- for users  --}}
-			<li class="active active has-sub root-level"> <a href=""><i class="entypo-mail"></i><span class="title"  style="font-size: 17px">@lang('site.contact_us')</span></a>
-				<ul>
-					<li> <a href="{{route('user.contactus.create')}}"><span class="title"><i  class="entypo-pencil" ></i><span  style="font-size: 17px">@lang('site.create_message')</span></a> </li>
-					<li >
-						<a href="{{route('user.contactus.index')}}"><i  class="entypo-inbox" ></i><span style="font-size: 17px">@lang('site.messages')</span></a>
-					</li>
-				</ul>
-            </li>
+            @cannot('all')
+{{-- for users  --}}
+<li class="active active has-sub root-level"> <a href=""><i class="entypo-mail"></i><span class="title"  style="font-size: 17px">@lang('site.contact_us')</span></a>
+    <ul>
+        <li> <a href="{{route('user.contactus.create')}}"><span class="title"><i  class="entypo-pencil" ></i><span  style="font-size: 17px">@lang('site.create_message')</span></a> </li>
+        <li >
+            <a href="{{route('user.contactus.index')}}"><i  class="entypo-inbox" ></i><span style="font-size: 17px">@lang('site.messages')</span></a>
+        </li>
+    </ul>
+</li>
+            @endcannot
+
 
 
 

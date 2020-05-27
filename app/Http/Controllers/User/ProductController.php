@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Back\Product\StoreRequest;
+use App\ProductShop;
 
 class ProductController extends Controller
 {
@@ -57,6 +58,18 @@ class ProductController extends Controller
         }
 
         $product = Product::create($data);
+        //if he was a seller
+        if (auth()->user()->type == 1) {
+            ProductShop::create([
+                'product_id' => $product->id,
+                'shop_id' => auth()->user()->shop_id,
+                'quantity' => $product->quantity,
+                'status' => $product->status,
+                'price' => $product->price_to_sell,
+            ]);
+
+            return redirect()->route('user.shopproducts.index')->with('success', __('site.created_successfully'));
+        }
 
         return redirect()->route('user.products.index')->with('success', __('site.created_successfully'));
     }

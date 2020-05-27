@@ -29,8 +29,7 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
 
     Route::resource('users', 'UserController');
     Route::resource('shops', 'ShopController');
-    // get the shop invoices
-    Route::get('shop/{id?}/invoices', 'InvoiceController@index')->name('shop_invoices.index');
+
     Route::resource('role', 'RoleController')->except(['show']);
     Route::resource('products', 'ProductController');
     Route::resource('transaction', 'TransactionController');
@@ -55,6 +54,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middl
     Route::resource('contactus', 'ContactusController');
     Route::resource('transaction', 'TransactionController');
     Route::resource('subworkers', 'SubworkerController');
+    Route::resource('shopproducts', 'ShopproductController');
 
     //cashier routes
     Route::group(['prefix' => 'cashier'], function () {
@@ -68,6 +68,9 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middl
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middleware' => ['auth']], function () {
     Route::resource('transaction', 'TransactionController');
 });
+
+ // get the shop invoices
+ Route::get('shop/{id?}/invoices', 'Back\InvoiceController@index')->name('shop_invoices.index')->middleware('auth');
 
 Route::group(['prefix' => 'site', 'namespace' => 'Site', 'middleware' => 'auth', 'as' => 'site.'], function () {
     Route::get('', 'HomeController@index')->name('home');
