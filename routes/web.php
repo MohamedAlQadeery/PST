@@ -29,19 +29,11 @@ Route::group(['prefix' => 'back', 'namespace' => 'Back', 'middleware' => ['auth'
 
     Route::resource('users', 'UserController');
     Route::resource('shops', 'ShopController');
+    // get the shop invoices
     Route::get('shop/{id?}/invoices', 'InvoiceController@index')->name('shop_invoices.index');
     Route::resource('role', 'RoleController')->except(['show']);
     Route::resource('products', 'ProductController');
     Route::resource('transaction', 'TransactionController');
-
-    //cashier routes
-
-    Route::group(['prefix' => 'cashier'], function () {
-        Route::get('', 'CashierController@index')->name('cashier.index');
-        Route::get('{shop_id}/product/{product_id}', 'ProductController@getProduct');
-        Route::get('{id}', 'CashierController@show');
-        Route::post('{id}', 'CashierController@store')->name('cashier.store');
-    });
 
     //invoice
     Route::resource('invoice', 'InvoiceController');
@@ -61,6 +53,16 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middl
     Route::resource('shoprole', 'RoleController');
     Route::resource('products', 'ProductController');
     Route::resource('contactus', 'ContactusController');
+    Route::resource('transaction', 'TransactionController');
+    Route::resource('subworkers', 'SubworkerController');
+
+    //cashier routes
+    Route::group(['prefix' => 'cashier'], function () {
+        Route::get('', 'CashierController@index')->name('cashier.index');
+        Route::get('{shop_id}/product/{product_id}', 'ProductController@getProduct');
+        Route::get('{id}', 'CashierController@show')->name('cashier.show');
+        Route::post('{id}', 'CashierController@store')->name('cashier.store');
+    });
 });
 
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middleware' => ['auth']], function () {
@@ -93,6 +95,11 @@ Route::resource('user/profile', 'ProfileController')->except(['index']);
 
 //changes the status of the product
 Route::get('products/{id}/status', 'Back\ProductController@status')->name('product.status');
+
+//changes the status of the transaction
+Route::get('transactions/{id}/status', 'Back\TransactionController@status')->name('transaction.status');
+//changes the paid status of the transaction
+Route::get('transactions/{id}/paid', 'Back\TransactionController@paid')->name('transaction.paid');
 
 Auth::routes(['register' => false]);
 

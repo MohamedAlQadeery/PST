@@ -49,7 +49,13 @@
 				<tr>
                     <th>#</th>
                     <th>@lang('site.transaction_number')</th>
+                    @if(auth()->user()->type===1)
+                    <th>@lang('site.provider_name')</th>
+                    @else
                     <th>@lang('site.shop_name')</th>
+                    @endif
+                    <th>@lang('site.status')</th>
+                    <th>@lang('site.isDelivered')</th>
                     <th>@lang('site.type')</th>
                     <th>@lang('site.total')</th>
 					<th>@lang('site.action')</th>
@@ -62,15 +68,38 @@
                 <tr>
                     <td>{{++$index}}</td>
                     <td>{{$transaction->id}}</td>
+                    @if(auth()->user()->type===1)
+                    <td>{{$transaction->provider->first_name.' '.$transaction->provider->last_name}}</td>
+                    @else
                     <td>{{$transaction->shop->name}}</td>
-
+                    @endif
+                    
                     <td>
-                        @if ($transaction->type==0)
-                            @lang('site.debt')
-                            @else
-                            @lang('site.paid')
+                        @if($transaction->is_paid === 0)
+                        <a class="btn btn-danger">@lang('site.not_paid')</a>
+                        @else
+                        <a class="btn btn-success">@lang('site.paid')</a>
                         @endif
                     </td>
+
+                    <td>
+                        @if($transaction->status === 0)
+                        <a class="btn btn-orange"><i class="entypo-hourglass">@lang('site.delivering')</i></a>
+                        @else
+                        <a class="btn btn-success"><i class="entypo-home">@lang('site.delivered')</i></a>
+                        @endif
+                    </td>
+
+                    <td>
+                        @if($transaction->type === 0)
+                        <a class="btn btn-gold">@lang('site.debt')</a>
+                        @else
+                        <a class="btn btn-success">@lang('site.cash')</a>
+                        @endif
+                    </td>
+
+                    
+                    
                     <td>{{$transaction->total}}</td>
                     <td>
                         <a href="{{route('user.transaction.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>

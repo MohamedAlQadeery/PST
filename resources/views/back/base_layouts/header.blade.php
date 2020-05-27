@@ -30,7 +30,7 @@
 
 
 
-    <title>Neon | Dashboard 2</title>
+    <title>وصلة</title>
     <link rel="stylesheet" href="{{asset('neon-theme')}}/chosen/css/chosen/chosen.min.css ">
 
     <link rel="stylesheet" href="{{asset('neon-theme/html/neon-rtl')}}/assets/js/selectboxit/jquery.selectBoxIt.css">

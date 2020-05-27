@@ -26,7 +26,8 @@ class PermissionSeeder extends Seeder
         }
 
         //permissions for sellers to assign it for him and other sub workers
-        $sellers_permissions = array('create-subworkers',  'index-subworkers',  'update-subworkers',
+        $sellers_permissions = array('create-shopproducts', 'update-shopproducts', 'index-shopproducts', 'delete-shopproducts',
+        'create-subworkers',  'index-subworkers',  'update-subworkers',
           'delete-subworkers',  'shopcashier',  'index-shopinvoice',
            'delete-shopinvoice',  'index-transactions',  'update-transactions',
            'create-transactions',  'delete-transactions',  'all-shoppermissions',

@@ -9,7 +9,7 @@
         <ul class="user-info pull-left pull-right-xs pull-none-xsm">
 
             <!-- Raw Notifications -->
-            <li class="notifications dropdown">
+            {{-- <li class="notifications dropdown">
 
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                     <i class="entypo-attention"></i>
@@ -117,7 +117,7 @@
                     </li>
                 </ul>
 
-            </li>
+            </li> --}}
 
             <!-- Message Notifications -->
             <li class="notifications dropdown">
@@ -331,7 +331,7 @@
     <div class="col-md-6 col-sm-4 clearfix hidden-xs">
         <ul class="list-inline links-list pull-right">
             <li class="dropdown language-selector">
-                Language:{{app()->getLocale()}} &nbsp;
+                @lang('site.language') :{{app()->getLocale()}} &nbsp;
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true" aria-expanded="false">
 
                 <img src={{app()->getLocale()=='en'? url('/neon-theme/html/neon/assets/images/flags/flag-uk.png') :url('/neon-theme/html/neon/assets/images/flags/flag-ar.png') }} style="border-radius:15px" width="16" height="16">
@@ -347,16 +347,16 @@
 
                 </ul>
             </li>
-            <li class="sep"></li>
+            {{-- <li class="sep"></li>
             <li>
                 <a href="#" data-toggle="chat" data-collapse-sidebar="1"> <i class="entypo-chat"></i> Chat
                     <span class="badge badge-success chat-notifications-badge">3</span> </a>
-            </li>
+            </li> --}}
             <li class="sep"></li>
             <li>
-                <a href="#" onclick="event.preventDefault();
+                <a href="#" style="color: crimson" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
-Log Out <i class="entypo-logout right"></i> </a>
+                    @lang('site.log_out') <i class="entypo-logout right"></i> </a>
 
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     @csrf

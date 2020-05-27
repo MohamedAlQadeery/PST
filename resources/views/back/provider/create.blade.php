@@ -9,7 +9,7 @@
 	<meta name="author" content="" />
 
 	<link rel="icon" href="{{asset('neon-theme/html/neon')}}/assets/images/favicon.ico">
-    <title>Neon | Register</title>
+    <title>تسجيل | مزود</title>
 
     @if(app()->getLocale()=='en')
 	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
@@ -61,7 +61,7 @@ var baseurl = '';
 		<div class="login-content">
 
 			<a href="index.html" class="logo">
-				<img src="{{asset('neon-theme/html/neon')}}/assets/images/logo@2x.png" width="120" alt="" />
+				<img src="{{ url('/uploads/wasla.png')}}" width="120" alt="" />
 			</a>
 
             <p class="description">@lang('site.register_description')</p>

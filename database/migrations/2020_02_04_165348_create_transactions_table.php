@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->double('total');
             $table->integer('type'); //  1 normal , 2 debit
             $table->integer('status'); // 0 not delevired , 1 delivierd
+            $table->integer('is_paid')->default(0); // 0 not paid , 1 paid
             $table->timestamps();
         });
     }

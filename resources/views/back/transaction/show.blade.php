@@ -101,9 +101,8 @@
 
                 </ul>
 
-                <br/>
+                <br />
 
-                @if(auth()->user()->type===1)
                 <ul class="list-unstyled">
                     @if($transaction->status===0)
                     <a href="{{route('transaction.status',$transaction->id)}}" class="btn btn-primary"><i class="entypo-hourglass"> @lang('site.confirm_delivered')</i></a>
@@ -111,7 +110,7 @@
                     <a class="btn btn-success"><i class="entypo-check"> @lang('site.delivered')</i></a>
                     @endif
                 </ul>
-                @else
+
                 <ul class="list-unstyled">
                     @if($transaction->is_paid === 0 )
                     <a href="{{route('transaction.paid',$transaction->id)}}" class="btn btn-primary"><i class="entypo-hourglass"> @lang('site.confirm_paid')</i></a>
@@ -119,7 +118,6 @@
                     <a class="btn btn-success"><i class="entypo-check"> @lang('site.paid')</i></a>
                     @endif
                 </ul>
-                @endif
 
             </div>
 

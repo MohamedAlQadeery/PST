@@ -58,7 +58,9 @@
              <!-- tabs for the profile links -->
              <ul class="nav nav-tabs">
                 <li class="active"><a href="{{route('profile.show',$user->id)}}">@lang('site.profile')</a></li>
-                <li><a href="{{route('profile.edit',$user->id)}}">@lang('site.edit') @lang('site.profile')</a></li>
+                @canany(['all','all-shoppermissions'])
+            <li><a href="{{route('profile.edit',$user->id)}}">@lang('site.edit') @lang('site.profile')</a></li>
+                @endcan
              </ul>
           </div>
        </div>

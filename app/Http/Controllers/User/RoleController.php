@@ -59,7 +59,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->permissions);
         Alert::success(__('site.success'), __('site.created_successfully'));
 
-        return redirect()->route('shoprole.index');
+        return redirect()->route('user.shoprole.index');
     }
 
     /**
@@ -109,7 +109,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->permissions);
         Alert::success(__('site.success'), __('site.edit_successfully'));
 
-        return redirect()->route('shoprole.index');
+        return redirect()->route('user.shoprole.index');
     }
 
     /**
@@ -126,6 +126,6 @@ class RoleController extends Controller
         $role->delete();
         Alert::success(__('site.success'), __('site.deleted_successfully'));
 
-        return redirect()->route('shoprole.index');
+        return redirect()->route('user.shoprole.index');
     }
 }

@@ -49,6 +49,10 @@ class ProfileController extends Controller
         $user->update($data);
         $user->syncRoles($request->roles);
 
+        if (auth()->user()->type != 0) {
+            return redirect()->route('user.subworkers.index')->with('success', __('site.edit_successfully'));
+        }
+
         return redirect()->route('profile.show', $user->id)->with('success', __('site.edit_successfully'));
     }
 

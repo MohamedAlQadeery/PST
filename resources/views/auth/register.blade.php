@@ -12,7 +12,7 @@
     <link href="lib/noty.css" rel="stylesheet">
     <script src="lib/noty.js" type="text/javascript"></script>
 
-	<title>Neon | Register</title>
+	<title>وصلة | تسجيل الاشترك</title>
     @if(app()->getLocale()=='en')
 	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="{{asset('neon-theme/html/neon')}}/assets/css/font-icons/entypo/css/entypo.css">

@@ -5,21 +5,20 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
-
     <li class="active">
 
         <strong>@lang('site.'.$page_name)</strong>
     </li>
 </ol>
 
-<h2> @lang('site.'.$page_name)</h2>
+<h2>@lang('site.subworkers') {{$subworkers[0]->shop->name}}</h2>
 
 
 <div class="row">
-
     @include('partials.messages')
+
 
     <script type="text/javascript">
 		jQuery( document ).ready( function( $ ) {
@@ -47,62 +46,38 @@
 		<table class="table table-bordered datatable" id="table-1">
 			<thead>
 				<tr>
-                    <th>#</th>
-                    <th>@lang('site.transaction_number')</th>
-                    <th>@lang('site.provider_name')</th>
-                    <th>@lang('site.shop_name')</th>
-                    <th>@lang('site.status')</th>
-                    <th>@lang('site.isDelivered')</th>
-                    <th>@lang('site.type')</th>
-                    <th>@lang('site.total')</th>
+					<th>#</th>
+                    <th>@lang('site.name')</th>
+                    <th>@lang('site.role')</th>
 					<th>@lang('site.action')</th>
 
 
 				</tr>
 			</thead>
 			<tbody>
-                @foreach ($transactions as $index =>$transaction)
+                @foreach ($subworkers as $index =>$subworker)
+
                 <tr>
                     <td>{{++$index}}</td>
-                    <td>{{$transaction->id}}</td>
-                    <td>{{$transaction->provider->first_name.' '.$transaction->provider->last_name}}</td>
-                    <td>{{$transaction->shop->name}}</td>
-
+                    <td><img src="{{$subworker->getImage()}}" width="54px" height="54px" alt="image" class="img-rounded"></td>
+                    <td>{{$subworker->first_name.' '.$subworker->last_name}}</td>
                     <td>
-                        @if($transaction->is_paid === 0)
-                        <a class="btn btn-danger">@lang('site.not_paid')</a>
-                        @else
-                        <a class="btn btn-success">@lang('site.paid')</a>
+                        @if(count($subworker->roles()->get()) >0)
+                        <ul style="margin-left: 20px">
+                           @foreach ($subworker->roles()->get() as $role )
+                            <li>{{$role->name}}</li>
+                           @endforeach
+                        </ul>
                         @endif
                     </td>
-
                     <td>
-                        @if($transaction->status === 0)
-                        <a class="btn btn-orange"><i class="entypo-hourglass">@lang('site.delivering')</i></a>
-                        @else
-                        <a class="btn btn-success"><i class="entypo-home">@lang('site.delivered')</i></a>
-                        @endif
-                    </td>
+                        <a href="{{route('profile.show',$subworker->id)}}" class="btn btn-info">@lang('site.show')</a>
+                        @canany(['all','all-shoppermissions'])
+                        <a href="{{route('profile.edit',$subworker->id)}}" class="btn btn-success">@lang('site.edit')</a>
+                        @endcan
 
 
-                    <td>
-                        @if($transaction->type === 0)
-                        <a class="btn btn-gold">@lang('site.debt')</a>
-                        @else
-                        <a class="btn btn-success">@lang('site.cash')</a>
-                        @endif
-                    </td>
-                    
-                    <td>{{$transaction->total}}</td>
-                    <td>
-                        <a href="{{route('transaction.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
 
-                        <form action="{{route('transaction.destroy',$transaction->id)}}" method="post" style="display:inline"
-                              onsubmit="return confirm('Are you sure you want to delete this transaction?');">
-                            @csrf()
-                            @method('DELETE')
-                        <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
-                        </form>
 
                     </td>
                 </tr>
