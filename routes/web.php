@@ -19,9 +19,7 @@ Route::post('sregister', 'Back\SellerController@store')->name('seller.store');
 Route::get('pregister', 'Back\ProviderController@create')->name('provider.create');
 Route::post('pregister', 'Back\ProviderController@store')->name('provider.store');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Site\HomeController@index');
 Route::get('lang/{lang?}', ['as' => 'local.change', 'uses' => 'Back\LangController@change'], );
 
 Route::resource('profile', 'ProfileController')->except(['index']);

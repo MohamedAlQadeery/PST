@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}"> 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Neon Admin Panel" />
@@ -109,13 +109,25 @@
                                 </li>
                             </ul>
 
+                            @if (auth()->check())
                             <div style="float:left">
 
-                                <a href="{{route('profile.show',auth()->user()->id)}}"><img src="{{auth()->user()->getImage()}}" alt="Avatar" class="avatar"></a>
+                              @php
+                                  if(auth()->user()->type==0){
+                                    $user = "admin.";
+                                  }else{
+                                    $user = "user.";
+
+                                  }
+                              @endphp
+                                <a href="{{route($user.'dashboard')}}"><img src="{{auth()->user()->getImage()}}" alt="Avatar" class="avatar"></a>
                                  @if(auth()->user()->type ===1)
-                                <h4 style="display: inline-block;"> المحل:{{auth()->user()->shop->name}} </h4> 
-                                @else
+                                <h4 style="display: inline-block;"> المحل:{{auth()->user()->shop->name}} </h4>
+                                @elseif(auth()->user()->type ===2)
                                 <h4 style="display: inline-block;"> المزود:{{auth()->user()->first_name}} </h4>
+                                @else
+                                <h4 style="display: inline-block;"> الأدمن:{{auth()->user()->first_name}} </h4>
+
                                  @endif &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 
                                 <a href="#" onclick="event.preventDefault();
@@ -126,7 +138,7 @@
                                     @csrf
                                 </form>
 
-									<a href="{{route('site.cart.index')}}" class="btn btn-secondary">                                
+									<a href="{{route('site.cart.index')}}" class="btn btn-secondary">
 										<i class="entypo-basket">
                                             @if(Cart::getContent()->count())
                                             <span style="background-color: red" class="badge">{{Cart::getContent()->count()}}<span>
@@ -135,6 +147,13 @@
                                     </a>
 
                             </div>
+
+                            @else
+                            <div style="float:left">
+                                <a href="{{route('login')}}"> <i class="entypo-login right btn btn-primary">تسجيل دخول	</i></a>
+
+                            </div>
+                            @endif
 
                             <div class="visible-xs">
 
