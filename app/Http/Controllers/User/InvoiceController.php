@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Site;
+namespace App\Http\Controllers\User;
 
-use App\Product;
+use App\Shop;
+use App\Invoice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class InvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +17,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::whereHas('user', function ($q) {
-            $q->where('type', 2);
-        })->where('quantity', '>', 0)->orderBy('view_count', 'DESC')->limit(3)->get();
+        $shop = Shop::findOrFail(auth()->user()->shop_id);
 
-        return view('site.homepage')->with([
-            'products' => $products,
+        $invoices = Invoice::where('shop_id', $shop->id)->get();
+
+        return view('back.invoice.index')->with([
+            'page_name' => 'invoices',
+            'invoices' => $invoices,
+            'shop_name' => $shop->name,
         ]);
     }
 
@@ -44,15 +48,17 @@ class HomeController extends Controller
     {
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
+        $invoice = Invoice::findOrFail($id);
+        $carbon = new Carbon($invoice->date);
+        $invoice_date = $carbon->toFormattedDateString();
+
+        return view('back.invoice.show')->with([
+            'page_name' => parent::getPluralModelName(),
+            'invoice' => $invoice,
+            'invoice_date' => $invoice_date,
+        ]);
     }
 
     /**
@@ -78,14 +84,16 @@ class HomeController extends Controller
     {
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
+        $invoice = Invoice::findOrFail($id);
+        $shop = Shop::findOrFail($invoice->shop_id);
+        foreach ($invoice->items as $item) {
+            $item->delete();
+        }
+        $invoice->items()->sync([]);
+        $invoice->delete();
+
+        return redirect()->route('user.invoice.index', $shop->id)->with('success', __('site.deleted_successfully'));
     }
 }

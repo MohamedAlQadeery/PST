@@ -5,7 +5,7 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
 
     <li class="active">
@@ -92,12 +92,12 @@
                         <a class="btn btn-success">@lang('site.cash')</a>
                         @endif
                     </td>
-                    
+
                     <td>{{$transaction->total}}</td>
                     <td>
-                        <a href="{{route('transaction.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
+                        <a href="{{route('admin.transaction.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
 
-                        <form action="{{route('transaction.destroy',$transaction->id)}}" method="post" style="display:inline"
+                        <form action="{{route('admin.transaction.destroy',$transaction->id)}}" method="post" style="display:inline"
                               onsubmit="return confirm('Are you sure you want to delete this transaction?');">
                             @csrf()
                             @method('DELETE')

@@ -5,7 +5,7 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li class="active">
 
@@ -87,15 +87,15 @@
                       </td>
                     <td class="center">{{$user->address}}</td>
                     <td class="center">
-                        <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary">@lang('site.edit')</a>
+                        <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-primary">@lang('site.edit')</a>
 
-                        <form action="{{route('users.destroy',$user->id)}}" method="post" style="display:inline"
+                        <form action="{{route('admin.users.destroy',$user->id)}}" method="post" style="display:inline"
                             onsubmit="return confirm('Are you sure you want to delete this user?');">
                           @csrf()
                           @method('DELETE')
                       <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                       </form>
-                        <a href="{{route('users.show',$user->id)}}" class="btn btn-info">@lang('site.show')</a>
+                        <a href="{{route('admin.users.show',$user->id)}}" class="btn btn-info">@lang('site.show')</a>
 
                     </td>
 

@@ -4,11 +4,11 @@
 
 <ol class="breadcrumb bc-3  noPrint" >
     <li>
-    <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
 
     <li>
-        <a href="{{route('user.transaction.index')}}"><i class="fa-home"></i>@lang('site.transactions')</a>
+        <a href="{{route('admin.transaction.index')}}"><i class="fa-home"></i>@lang('site.transactions')</a>
         </li>
 
     <li class="active">

@@ -5,7 +5,7 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li class="active">
 
@@ -96,13 +96,13 @@
                   <td class="center">
                     @if ($product->status==1)
 
-                    <a href="{{route('product.status',$product->id)}}" class="btn btn-danger">@lang('site.un_publish')</a>
+                    <a href="{{route('admin.product.status',$product->id)}}" class="btn btn-danger">@lang('site.un_publish')</a>
                     @else
-                    <a href="{{route('product.status',$product->id)}}" class="btn btn-success">@lang('site.publish')</a>
+                    <a href="{{route('admin.product.status',$product->id)}}" class="btn btn-success">@lang('site.publish')</a>
                     @endif
                   </td>
                     {{-- @if($product->user) --}}
-                    <td><a href="{{route('users.show',$product->user->id)}}">{{$product->user->first_name.' '.$product->user->last_name}}</a></td>
+                    <td><a href="{{route('admin.users.show',$product->user->id)}}">{{$product->user->first_name.' '.$product->user->last_name}}</a></td>
                     @if($product->user->type === 1)
                         <td class="center">@lang('site.a_seller')</td>
                         @elseif($product->user->type === 2)
@@ -121,15 +121,15 @@
 
 
                     <td class="center">
-                        <a href="{{route('products.edit',$product->id)}}" class="btn btn-gold">@lang('site.edit')</a>
+                        <a href="{{route('admin.products.edit',$product->id)}}" class="btn btn-gold">@lang('site.edit')</a>
 
-                        <form action="{{route('products.destroy',$product->id)}}" method="post" style="display:inline"
+                        <form action="{{route('admin.products.destroy',$product->id)}}" method="post" style="display:inline"
                             onsubmit="return confirm('Are you sure you want to delete this user?');">
                           @csrf()
                           @method('DELETE')
                       <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                       </form>
-                         <a href="{{route('products.show',$product->id)}}" class="btn btn-info">@lang('site.show')</a>
+                         <a href="{{route('admin.products.show',$product->id)}}" class="btn btn-info">@lang('site.show')</a>
                     </td>
 
 
@@ -180,7 +180,7 @@
                     <td class="center">{{$shop_product->product->quantity}}</td>
                     <td class="center">{{$shop_product->shop->name}}</td>
 
-                    <td><a href="{{route('users.show',$shop_product->product->user->id)}}">{{$shop_product->product->user->first_name.' '.$shop_product->product->user->last_name}}</a></td>
+                    <td><a href="{{route('admin.users.show',$shop_product->product->user->id)}}">{{$shop_product->product->user->first_name.' '.$shop_product->product->user->last_name}}</a></td>
 
 
                     @if($shop_product->product->status === 1)
@@ -193,15 +193,15 @@
 
 
                     <td class="center">
-                        <a href="{{route('products.edit',$shop_product->id)}}" class="btn btn-gold">@lang('site.edit')</a>
+                        <a href="{{route('admin.products.edit',$shop_product->id)}}" class="btn btn-gold">@lang('site.edit')</a>
 
-                        <form action="{{route('products.destroy',$shop_product->id)}}" method="post" style="display:inline"
+                        <form action="{{route('admin.products.destroy',$shop_product->id)}}" method="post" style="display:inline"
                             onsubmit="return confirm('Are you sure you want to delete this user?');">
                           @csrf()
                           @method('DELETE')
                       <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                       </form>
-                         <a href="{{route('products.show',$shop_product->id)}}" class="btn btn-info">@lang('site.show')</a>
+                         <a href="{{route('admin.products.show',$shop_product->id)}}" class="btn btn-info">@lang('site.show')</a>
                     </td>
 
 

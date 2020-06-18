@@ -28,7 +28,7 @@ class ProductController extends Controller
             $products = $products->where('category_id', request()->input('category_id'));
         }
 
-        $products = $products->where('status', 1)->orderBy('id', 'DESC')->paginate(12);
+        $products = $products->where('quantity', '>', 0)->where('status', 1)->orderBy('id', 'DESC')->paginate(12);
 
         return view('site.product.index')->with([
             'products' => $products,

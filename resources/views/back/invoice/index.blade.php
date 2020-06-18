@@ -5,11 +5,16 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+        @if (auth()->user()->type !=0)
+        <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+        @else
+        <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+
+        @endif
     </li>
     @if($shop_name != '')
     <li>
-        <a href="{{route('shops.index')}}"><i class="fa-home"></i>@lang('site.shops')</a>
+        <a href="{{route('admin.shops.index')}}"><i class="fa-home"></i>@lang('site.shops')</a>
         </li>
     @endif
     <li class="active">
@@ -68,9 +73,18 @@
                     <td>{{$invoice->shop->name}}</td>
                     <td>{{$invoice->total}}</td>
                     <td>
-                        <a href="{{route('invoice.show',$invoice->id)}}" class="btn btn-info">@lang('site.show')</a>
+                        @php
+                        if(auth()->user()->type ==0){
+                            $user = "admin.";
+                        }else{
+                            $user = "user.";
 
-                        <form action="{{route('invoice.destroy',$invoice->id)}}" method="post" style="display:inline"
+                        }
+                        @endphp
+
+                        <a href="{{route($user.'invoices.show',$invoice->id)}}" class="btn btn-info">@lang('site.show')</a>
+
+                        <form action="{{route($user.'invoices.destroy',$invoice->id)}}" method="post" style="display:inline"
                               onsubmit="return confirm('Are you sure you want to delete this invoice?');">
                             @csrf()
                             @method('DELETE')

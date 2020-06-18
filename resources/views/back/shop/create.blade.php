@@ -19,15 +19,12 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
-    <li>
-        <a href="{{route('users.index')}}"><i class="fa-home"></i>@lang('site.users')</a>
 
-    </li>
     <li class="active">
 
-        <strong>@lang('site.create_user')</strong>
+        <strong>@lang('site.shops')</strong>
     </li>
 </ol>
 

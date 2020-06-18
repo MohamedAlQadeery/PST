@@ -1,10 +1,10 @@
-@extends('back.base_layouts.app') 
+@extends('back.base_layouts.app')
 
 @section('content')
 
 <ol class="breadcrumb bc-3">
     <li>
-        <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+        <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li class="active">
 
@@ -29,8 +29,8 @@
                             <input type="text" class="form-control" id="field-1" value="Neon" aria-invalid="false"> </div>
                     </div>
 
-                    
-                  
+
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Select Skin</label>
                         <div class="col-sm-5">
@@ -59,15 +59,15 @@
                 </div>
                 <div class="panel-body">
                     <label class="col-sm-5 control-label">Select Language</label>
-    
+
                     <div class="col-md-6 col-sm-4 ">
                         <ul class="list-inline links-list pull-right">
                             <li class="dropdown language-selector">
                                 Language:{{app()->getLocale()}} &nbsp;
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true" aria-expanded="false">
-    
+
                                     <img src={{app()->getLocale()=='en'? url('/neon-theme/html/neon/assets/images/flags/flag-uk.png') :url('/neon-theme/html/neon/assets/images/flags/flag-ar.png') }} style="border-radius:15px" width="16" height="16">
-    
+
                                 </a>
                                 <ul class="dropdown-menu pull-right">
                                     <li>
@@ -76,24 +76,24 @@
                                     <li class="active">
                                         <a href="{{route('local.change',['lang'=>'en'])}}"> <img src="{{url('/neon-theme/html/neon/assets/images/flags/flag-uk.png')}}" width="16" height="16"> <span>English</span> </a>
                                     </li>
-    
+
                                 </ul>
                             </li>
                         </ul>
                     </div>
-    
+
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="form-group default-padding">
         <button type="submit" class="btn btn-success">Save Changes</button>
         <button type="reset" class="btn">Reset Previous</button>
     </div>
 </form>
 
-@endsection 
+@endsection
 
-@section('script') 
+@section('script')
 @endsection

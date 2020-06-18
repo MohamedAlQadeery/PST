@@ -5,7 +5,7 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li class="active">
 
@@ -59,18 +59,18 @@
 					<td>{{++$index}}</td>
                     <td>{{$shop->name}}</td>
                     <td class="center">{{$shop->address}}</td>
-					<td><a href="{{route('users.show',$shop->user->id)}}">{{$shop->user->first_name.' '.$shop->user->last_name}}</a></td>
+					<td><a href="{{route('admin.users.show',$shop->user->id)}}">{{$shop->user->first_name.' '.$shop->user->last_name}}</a></td>
                     <td class="center">
-                        <a href="{{route('shops.edit',$shop->id)}}" class="btn btn-primary">@lang('site.edit')</a>
+                        <a href="{{route('admin.shops.edit',$shop->id)}}" class="btn btn-primary">@lang('site.edit')</a>
 
-                        <form action="{{route('shops.destroy',$shop->id)}}" method="post" style="display:inline"
+                        <form action="{{route('admin.shops.destroy',$shop->id)}}" method="post" style="display:inline"
                             onsubmit="return confirm('Are you sure you want to delete this user?');">
                           @csrf()
                           @method('DELETE')
                       <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                       </form>
-                        <a href="{{route('shops.show',$shop->id)}}" class="btn btn-info">@lang('site.show')</a>
-                        <a href="{{route('shop_invoices.index',$shop->id)}}" class="btn btn-green">@lang('site.show_invoices')</a>
+                        <a href="{{route('admin.shops.show',$shop->id)}}" class="btn btn-info">@lang('site.show')</a>
+                        <a href="{{route('admin.shop_invoices.index',$shop->id)}}" class="btn btn-green">@lang('site.show_invoices')</a>
 
                     </td>
 

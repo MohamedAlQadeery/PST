@@ -4,12 +4,12 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
 
     <li class="active">
 
-        <a href="{{route('cashier.index')}}">@lang('site.cashier')</a>
+        <a href="{{route('admin.cashier.index')}}">@lang('site.cashier')</a>
     </li>
 
     <li class="active">

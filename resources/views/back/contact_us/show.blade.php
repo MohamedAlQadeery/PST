@@ -6,11 +6,11 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
 
     <li>
-        <a href="{{route('contactus.index')}}"><i class="fa-home"></i>@lang('site.contact_us')</a>
+        <a href="{{route('admin.contactus.index')}}"><i class="fa-home"></i>@lang('site.contact_us')</a>
         </li>
 
     <li class="active">
@@ -53,7 +53,7 @@
 
 
 
-                <form action="{{route('contactus.destroy',$message->id)}}" method="post" style="display: inline-block"
+                <form action="{{route('admin.contactus.destroy',$message->id)}}" method="post" style="display: inline-block"
                     onsubmit="return confirm('Are you sure you want to delete this message?');">
                   @csrf()
                   @method('DELETE')
@@ -179,7 +179,7 @@
 
 
 
-                    <form action="{{route('contactus.destroy',$replay->id)}}" method="post" style="display: inline-block"
+                    <form action="{{route('admin.contactus.destroy',$replay->id)}}" method="post" style="display: inline-block"
                         onsubmit="return confirm('Are you sure you want to delete this message?');">
                       @csrf()
                       @method('DELETE')
@@ -231,7 +231,7 @@
 
         <div class="mail-compose">
 
-            <form id="form" method="post" role="form" action="{{route('contactus.store',$message->id)}}">
+            <form id="form" method="post" role="form" action="{{route('admin.contactus.store',$message->id)}}">
                 @csrf
 
                 <div class="compose-message-editor">
@@ -262,7 +262,7 @@
         <!-- menu -->
         <ul class="mail-menu">
             <li class="active">
-                <a href="{{route('contactus.index')}}">
+                <a href="{{route('admin.contactus.index')}}">
                     <span class="badge badge-danger pull-right">{{$count_messages}}</span>
                     @lang('site.inbox')
                 </a>

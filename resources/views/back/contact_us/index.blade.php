@@ -5,7 +5,7 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li class="active">
 
@@ -38,7 +38,7 @@
             </h3>
 
             <!-- search -->
-            <form method="get" role="form" action="{{route('contactus.index')}}" class="mail-search">
+            <form method="get" role="form" action="{{route('admin.contactus.index')}}" class="mail-search">
                 <div class="form-group">
                     <input type="text" class="form-control col-md-10" name="title" placeholder="@lang('site.search_message')" />
 
@@ -83,16 +83,16 @@
                         <a href="#" class="star stared">
                             <i class="entypo-star"></i>
                         </a>
-                        <a href="{{route('contactus.show',$message->id)}}" class="col-name">{{$message->user->first_name.' '.$message->user->last_name}}</a>
+                        <a href="{{route('admin.contactus.show',$message->id)}}" class="col-name">{{$message->user->first_name.' '.$message->user->last_name}}</a>
                     </td>
                     <td class="col-subject">
-                        <a href="{{route('contactus.show',$message->id)}}">
+                        <a href="{{route('admin.contactus.show',$message->id)}}">
                             {{$message->title}}
                         </a>
                     </td>
                     <td class="col-options">
                       @if (!is_null($message->image))
-                      <a href="{{route('contactus.show',$message->id)}}"><i class="entypo-attach"></i></a>
+                      <a href="{{route('admin.contactus.show',$message->id)}}"><i class="entypo-attach"></i></a>
                       @endif
                     </td>
                     <td class="col-time">{{$message->created_at}}</td>
@@ -146,7 +146,7 @@
         <!-- menu -->
         <ul class="mail-menu">
             <li class="active">
-                <a href="{{route('contactus.index')}}">
+                <a href="{{route('admin.contactus.index')}}">
                     <span class="badge badge-danger pull-right">{{count($messages)}}</span>
                     @lang('site.inbox')
                 </a>

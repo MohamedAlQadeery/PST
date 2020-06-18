@@ -39,7 +39,7 @@
 				</a>
                 @if(auth()->user()->type==0)
 
-				<a href="{{route('contactus.index')}}">
+				<a href="{{route('admin.contactus.index')}}">
 					<i class="entypo-mail"></i>
 					@lang('site.inbox')
 
@@ -89,8 +89,8 @@
             @canany(['all','index-user'])
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-users"></i><span class="title"  style="font-size: 17px">@lang('site.users')</span></a>
 				<ul class="">
-					<li> <a href="{{route('users.create')}}"><span class="title"><i  class="entypo-user-add" ></i><span  style="font-size: 17px">@lang('site.create_user')</span></a> </li>
-                    <a href="{{route('users.index')}}"><i  class="entypo-users" ></i><span style="font-size: 17px">@lang('site.users')</span></a>
+					<li> <a href="{{route('admin.users.create')}}"><span class="title"><i  class="entypo-user-add" ></i><span  style="font-size: 17px">@lang('site.create_user')</span></a> </li>
+                    <a href="{{route('admin.users.index')}}"><i  class="entypo-users" ></i><span style="font-size: 17px">@lang('site.users')</span></a>
 
 				</ul>
             </li>
@@ -101,8 +101,8 @@
 
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-tag"></i><span class="title"  style="font-size: 17px">@lang('site.categories')</span></a>
 				<ul class="">
-					<li> <a href="{{route('category.create')}}"><span class="title"><i  class="entypo-pencil" ></i><span  style="font-size: 17px">@lang('site.create_category')</span></a> </li>
-                    <a href="{{route('category.index')}}"><i  class="entypo-tag" ></i><span style="font-size: 17px">@lang('site.categories')</span></a>
+					<li> <a href="{{route('admin.category.create')}}"><span class="title"><i  class="entypo-pencil" ></i><span  style="font-size: 17px">@lang('site.create_category')</span></a> </li>
+                    <a href="{{route('admin.category.index')}}"><i  class="entypo-tag" ></i><span style="font-size: 17px">@lang('site.categories')</span></a>
 
 				</ul>
             </li>
@@ -113,8 +113,8 @@
             @canany(['all','index-role'])
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-list"></i><span class="title"  style="font-size: 17px">@lang('site.roles')</span></a>
 				<ul class="">
-					<li> <a href="{{route('role.create')}}"><span class="title"><i  class="entypo-list-add" ></i><span  style="font-size: 17px">@lang('site.create_role')</span></a> </li>
-                    <a href="{{route('role.index')}}"><i  class="entypo-list" ></i><span style="font-size: 17px">@lang('site.roles')</span></a>
+					<li> <a href="{{route('admin.role.create')}}"><span class="title"><i  class="entypo-list-add" ></i><span  style="font-size: 17px">@lang('site.create_role')</span></a> </li>
+                    <a href="{{route('admin.role.index')}}"><i  class="entypo-list" ></i><span style="font-size: 17px">@lang('site.roles')</span></a>
 
 				</ul>
             </li>
@@ -123,7 +123,7 @@
             @canany(['all','index-shop'])
 
             <li class="active">
-                <a href="{{route('shops.index')}}"><i  class="entypo-box" ></i><span style="font-size: 17px">@lang('site.shops')</span></a>
+                <a href="{{route('admin.shops.index')}}"><i  class="entypo-box" ></i><span style="font-size: 17px">@lang('site.shops')</span></a>
 
             </li>
 
@@ -133,9 +133,9 @@
 
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-basket"></i><span class="title"  style="font-size: 17px">@lang('site.products')</span></a>
 				<ul>
-					<li> <a href="{{route('products.create')}}"><span class="title"><i  class="entypo-pencil" ></i><span  style="font-size: 17px">@lang('site.create_product')</span></a> </li>
+					<li> <a href="{{route('admin.products.create')}}"><span class="title"><i  class="entypo-pencil" ></i><span  style="font-size: 17px">@lang('site.create_product')</span></a> </li>
 					<li >
-						<a href="{{route('products.index')}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.all_products')</span></a>
+						<a href="{{route('admin.products.index')}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.all_products')</span></a>
 					</li>
 				</ul>
             </li>
@@ -148,7 +148,7 @@
             @canany(['all','index-invoice'])
 
             <li class="active">
-                <a href="{{route('invoice.index')}}"><i  class="entypo-doc-text" ></i><span style="font-size: 17px">@lang('site.invoices')</span></a>
+                <a href="{{route('admin.invoices.index')}}"><i  class="entypo-doc-text" ></i><span style="font-size: 17px">@lang('site.invoices')</span></a>
 
             </li>
 
@@ -201,7 +201,7 @@
 
             @canany(['all'])
             <li class="active active">
-                    <a href="{{route('transaction.index')}}">
+                    <a href="{{route('admin.transaction.index')}}">
                             <i  class="entypo-doc-text" ></i><span style="font-size: 17px">@lang('site.transactions')</span></a>
 					</li>
 			@endcan
@@ -234,7 +234,7 @@
 
                     @canany(['all-shoppermissions','index-shopinvoice'])
                     <li >
-						<a href="{{route('shop_invoices.index',auth()->user()->shop_id)}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.invoices')</span></a>
+						<a href="{{route('user.invoices.index')}}"><i  class="entypo-basket" ></i><span style="font-size: 17px">@lang('site.invoices')</span></a>
                     </li>
                     @endcan
 
@@ -252,7 +252,7 @@
 			{{-- for admin  --}}
 			@canany(['all','index-contactus'])
             <li class="active">
-                <a href="{{route('contactus.index')}}"><i  class="entypo-mail" ></i><span style="font-size: 17px">@lang('site.contact_us')</span></a>
+                <a href="{{route('admin.contactus.index')}}"><i  class="entypo-mail" ></i><span style="font-size: 17px">@lang('site.contact_us')</span></a>
 
             </li>
 
@@ -276,7 +276,7 @@
 
             @canany(['all','index-settings'])
             <li class="active">
-                <a href="{{route('settings.index')}}"><i  class="entypo-cog" ></i><span style="font-size: 17px">@lang('site.settings')</span></a>
+                <a href="{{route('admin.settings.index')}}"><i  class="entypo-cog" ></i><span style="font-size: 17px">@lang('site.settings')</span></a>
 
             </li>
 

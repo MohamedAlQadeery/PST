@@ -17,10 +17,10 @@
 
 <ol class="breadcrumb bc-3">
     <li>
-        <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+        <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li>
-        <a href="{{route('category.index')}}"><i class="fa-home"></i>@lang('site.category')</a>
+        <a href="{{route('admin.category.index')}}"><i class="fa-home"></i>@lang('site.category')</a>
 
     </li>
     <li class="active">

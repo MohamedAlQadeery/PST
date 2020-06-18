@@ -33,7 +33,7 @@
               {{-- <a href="#" class="btn btn-default"> <i class="entypo-user-add"></i>
              Follow
              </a> --}}
-              <a href="{{route('contactus.index')}}" class="btn btn-default"> <i class="entypo-mail"></i> @lang('site.inbox')</a>
+              <a href="{{route('admin.contactus.index')}}" class="btn btn-default"> <i class="entypo-mail"></i> @lang('site.inbox')</a>
           </div>
        </div>
     </header>

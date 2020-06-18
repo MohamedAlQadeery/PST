@@ -156,16 +156,13 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', __('site.deleted_successfully'));
     }
 
-    //change the status of the category to publish or not
-    public function status($id)
-    {
-        $product = Product::findOrFail($id);
-        $product->status == 1 ? $product->status = 0 : $product->status = 1;
-        $product->save();
-        if (auth()->user()->type == 0) {
-            return redirect()->route('products.index')->with('success', __('site.change_status_successfully'));
-        }
+    // //change the status of the category to publish or not
+    // public function status($id)
+    // {
+    //     $product = Product::findOrFail($id);
+    //     $product->status == 1 ? $product->status = 0 : $product->status = 1;
+    //     $product->save();
 
-        return redirect()->route('user.products.index')->with('success', __('site.change_status_successfully'));
-    }
+    //     return redirect()->route('admin.products.index')->with('success', __('site.change_status_successfully'));
+    // }
 }

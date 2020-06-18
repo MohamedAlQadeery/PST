@@ -19,10 +19,10 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li>
-        <a href="{{route('users.index')}}"><i class="fa-home"></i>@lang('site.products')</a>
+        <a href="{{route('admin.products.index')}}"><i class="fa-home"></i>@lang('site.products')</a>
 
     </li>
     <li class="active">
@@ -46,7 +46,7 @@
             </div>
             <div class="panel-body">
 
-    <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+    <form action="{{route('admin.products.store')}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
         @csrf()
         @method('post')
 

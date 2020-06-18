@@ -19,12 +19,9 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
-    <li>
-        <a href="{{route('users.index')}}"><i class="fa-home"></i>@lang('site.shops')</a>
 
-    </li>
     <li class="active">
 
         <strong>@lang('site.edit_shop')</strong>
@@ -46,7 +43,7 @@
             <div class="panel-body">
 
                 <form action="{{route('shops.update',$shop->id)}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
-                    @csrf() 
+                    @csrf()
                     @method('patch')
 
                     <div class="form-group">
@@ -74,7 +71,7 @@
 
                     </div>
 
-                    
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@lang('site.name')</label>
                         <div class="col-sm-5">
@@ -83,7 +80,7 @@
                             <br>
                         </div>
                     </div>
- 
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@lang('site.address')</label>
                         <div class="col-sm-5">
@@ -92,7 +89,7 @@
                             <br>
                         </div>
                     </div>
-            
+
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@lang('site.email')</label>
@@ -103,7 +100,7 @@
                         </div>
                     </div>
 
-          
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@lang('site.telephone_number')</label>
                         <div class="col-sm-5">
@@ -152,7 +149,7 @@
                             <br>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@lang('site.website')</label>
                         <div class="col-sm-5">
@@ -162,7 +159,7 @@
                             <br>
                         </div>
                     </div>
-              
+
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-4">
                             <br>
@@ -171,7 +168,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
 
                 </form>
             </div>

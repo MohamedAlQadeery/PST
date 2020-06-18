@@ -4,7 +4,12 @@
 
 <ol class="breadcrumb bc-3  noPrint" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+        @if (auth()->user()->type !=0)
+        <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+        @else
+        <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+
+        @endif
     </li>
     <li class="active">
 

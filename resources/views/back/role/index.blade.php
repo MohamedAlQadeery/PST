@@ -5,7 +5,7 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li class="active">
 
@@ -67,8 +67,8 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('role.edit',$role->id)}}" class="btn btn-info">@lang('site.edit')</a>
-                        <form action="{{route('role.destroy',$role->id)}}" method="post" style="display:inline"
+                        <a href="{{route('admin.role.edit',$role->id)}}" class="btn btn-info">@lang('site.edit')</a>
+                        <form action="{{route('admin.role.destroy',$role->id)}}" method="post" style="display:inline"
                               onsubmit="return confirm('Are you sure you want to delete this role?');">
                             @csrf()
                             @method('DELETE')

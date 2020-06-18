@@ -61,7 +61,7 @@ class LoginController extends Controller
             return redirect()->route('user.dashboard');
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
     //after logging out

@@ -19,10 +19,10 @@
 
 <ol class="breadcrumb bc-3" >
     <li>
-    <a href="{{route('dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
+    <a href="{{route('admin.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li>
-        <a href="{{route('users.index')}}"><i class="fa-home"></i>@lang('site.users')</a>
+        <a href="{{route('admin.users.index')}}"><i class="fa-home"></i>@lang('site.users')</a>
 
     </li>
     <li class="active">
@@ -46,8 +46,8 @@
             </div>
             <div class="panel-body">
 
-                <form action="{{route('users.update',$user->id)}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
-                    @csrf() 
+                <form action="{{route('admin.users.update',$user->id)}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+                    @csrf()
                     @method('patch')
 
                     <div class="form-group">
@@ -173,7 +173,7 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label">@lang('site.roles')</label>
                         <div class="col-sm-5">
@@ -190,7 +190,7 @@
                     <br>
 
                     <div class="col-md-6">
-                        <div class="form-group">                      
+                        <div class="form-group">
                         <label class="col-sm-3 control-label">@lang('site.gender')</label>
                         <div class="col-sm-8">
 
@@ -219,7 +219,7 @@
                         </div>
                     </div>
                 </div>
-              
+
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-4">
                             <br>
@@ -228,7 +228,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
 
                 </form>
             </div>

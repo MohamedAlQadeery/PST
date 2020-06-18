@@ -143,4 +143,14 @@ class ProductController extends Controller
 
         return redirect()->route('user.products.index')->with('success', __('site.deleted_successfully'));
     }
+
+    //change the status of the category to publish or not
+    public function status($id)
+    {
+        $product = ProductShop::where(['product_id' => $id, 'shop_id' => auth()->user()->shop_id]);
+        $product->status == 1 ? $product->status = 0 : $product->status = 1;
+        $product->save();
+
+        return redirect()->route('user.products.index')->with('success', __('site.change_status_successfully'));
+    }
 }
