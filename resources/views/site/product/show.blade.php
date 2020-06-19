@@ -191,7 +191,7 @@
 
 		<div class="row">
 
-          @if(count($related_products) > 1)
+          @if(count($related_products) >= 1)
           @foreach ($related_products as $item)
           <div class="col-sm-4 col-xs-6">
 
