@@ -74,7 +74,7 @@
                                     </li>
 
                                     <li style="font-size:15px" class="list-group-item">
-                                        <div style="font-size:15px" class="label label-default"> @lang('site.description'): </div> {{$product->description}}
+                                        <div style="font-size:15px" class="label label-default"> @lang('site.description'): </div> {!!$product->description!!}
                                     </li>
 
                                     <li style="font-size:15px" class="list-group-item"><div style="font-size:15px" class="label label-default"> @lang('site.barcode'): </div>{{$product->barcode}}
