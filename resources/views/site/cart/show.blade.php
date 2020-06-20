@@ -91,7 +91,7 @@
 
                             @if($product->quantity !==0)
                                 <button type="button" id="{{$product->id}}decrease" onclick="decreaseValue({{$product->id}})" class="btn btn-secondary btn btn-info btn-sm">-</button>
-                                <input class="productQuantity" {{-- for the JS loop --}} type="number" value="1" disabled class="size-1 input-sm"  min="1"  id="{{$product->id}}quantity">
+                                <input class="productQuantity" {{-- for the JS loop --}} type="number" value="1" disabled class="size-1 input-sm"  min="1" max="{{$product->quantity}}" id="{{$product->id}}quantity">
                                 <button  type="button" id="{{$product->id}}increase" onclick="increaseValue({{$product->id}})" class="btn btn-success btn btn-info btn-sm">+</button>
 
                               @else
