@@ -8,8 +8,12 @@
     <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
     </li>
     <li>
-        <a href="{{route('user.products.index')}}"><i class="fa-home"></i>@lang('site.products')</a>
+        @if(auth()->user()->type==1)
+        <a href="{{route('user.shopproducts.index')}}"><i class="fa-home"></i>@lang('site.products')</a>
 
+        @else
+        <a href="{{route('user.products.index')}}"><i class="fa-home"></i>@lang('site.products')</a>
+        @endif
     </li>
     <li class="active">
 
