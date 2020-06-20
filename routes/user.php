@@ -33,4 +33,4 @@ Route::group(['prefix' => 'cashier'], function () {
 Route::resource('transaction', 'TransactionController');
 
 //changes the status of the product
-Route::get('products/{id}/status', 'ProductController@status')->name('product.status');
+Route::get('products/{id}/status', 'ProductController@providerProductStatus')->name('product.status');

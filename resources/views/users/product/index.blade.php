@@ -100,9 +100,9 @@
                   <td class="center">
                     @if ($product->status==1)
 
-                    <a href="{{route('product.status',$product->id)}}" class="btn btn-danger">@lang('site.un_publish')</a>
+                    <a href="{{route('user.product.status',$product->id)}}" class="btn btn-danger">@lang('site.un_publish')</a>
                     @else
-                    <a href="{{route('product.status',$product->id)}}" class="btn btn-success">@lang('site.publish')</a>
+                    <a href="{{route('user.product.status',$product->id)}}" class="btn btn-success">@lang('site.publish')</a>
                     @endif
                   </td>
                     {{-- @if($product->user) --}}
