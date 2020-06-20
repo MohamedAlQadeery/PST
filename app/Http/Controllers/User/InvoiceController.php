@@ -19,7 +19,7 @@ class InvoiceController extends Controller
     {
         $shop = Shop::findOrFail(auth()->user()->shop_id);
 
-        $invoices = Invoice::where('shop_id', $shop->id)->get();
+        $invoices = Invoice::where('shop_id', $shop->id)->orderBy('id', 'desc')->get();
 
         return view('back.invoice.index')->with([
             'page_name' => 'invoices',

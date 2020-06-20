@@ -41,26 +41,7 @@
 			});
 		} );
 
-        // second table id =2
-        jQuery( document ).ready( function( $ ) {
-			var $table1 = jQuery( '#table-2' );
 
-			// Initialize DataTable
-			$table1.DataTable( {
-                "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "language": {
-                    @if(app()->getLocale()=='ar')
-                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Arabic.json"
-                    @endif
-                },
-				"bStateSave": true
-			});
-
-			// Initalize Select Dropdown after DataTables is created
-			$table1.closest( '.dataTables_wrapper' ).find( 'select' ).select2( {
-				minimumResultsForSearch: -1
-			});
-		} );
 		</script>
 
 		<table class="table table-bordered datatable" id="table-1">

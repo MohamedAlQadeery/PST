@@ -17,36 +17,16 @@
 
 
 <div class="row">
+
+
     @include('partials.messages')
 
-
-    <script type="text/javascript">
-		jQuery( document ).ready( function( $ ) {
-			var $table1 = jQuery( '#table-1' );
-
-			// Initialize DataTable
-			$table1.DataTable( {
-                "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "language": {
-                    @if(app()->getLocale()=='ar')
-                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Arabic.json",
-                    @endif
-                },
-                "bStateSave": true
-
-			});
-
-			// Initalize Select Dropdown after DataTables is created
-			$table1.closest( '.dataTables_wrapper' ).find( 'select' ).select2( {
-				minimumResultsForSearch: -1
-			});
-		} );
-		</script>
 
 		<table class="table table-bordered datatable" id="table-1">
 			<thead>
 				<tr>
-					<th>#</th>
+                    <th>#</th>
+                    <th>@lang('site.image')</th>
                     <th>@lang('site.name')</th>
                     <th>@lang('site.role')</th>
 					<th>@lang('site.action')</th>
@@ -59,7 +39,10 @@
 
                 <tr>
                     <td>{{++$index}}</td>
-                    <td><img src="{{$subworker->getImage()}}" width="54px" height="54px" alt="image" class="img-rounded"></td>
+
+                    <td style="width: 10%">
+                        <img src="{{$subworker->getImage()}}"   class="img img-responsive">
+                    </td>
                     <td>{{$subworker->first_name.' '.$subworker->last_name}}</td>
                     <td>
                         @if(count($subworker->roles()->get()) >0)
@@ -98,10 +81,38 @@
 
 
 
+
 @endsection
 
 
 @section('script')
+
+
+
+
+<script type="text/javascript">
+    jQuery( document ).ready( function( $ ) {
+        var $table1 = jQuery( '#table-1' );
+
+        // Initialize DataTable
+        $table1.DataTable( {
+            "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                @if(app()->getLocale()=='ar')
+                "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Arabic.json",
+                @endif
+            },
+            "bStateSave": true
+
+        });
+
+        // Initalize Select Dropdown after DataTables is created
+        $table1.closest( '.dataTables_wrapper' ).find( 'select' ).select2( {
+            minimumResultsForSearch: -1
+        });
+    } );
+    </script>
+
 
 @if(app()->getLocale()=='en')
 

@@ -25,7 +25,7 @@ Route::resource('invoices', 'InvoiceController');
 //cashier routes
 Route::group(['prefix' => 'cashier'], function () {
     Route::get('', 'CashierController@index')->name('cashier.index');
-    Route::get('{shop_id}/product/{product_id}', 'ProductController@getProduct');
+    Route::get('{shop_id}/product/{product_id}', 'CashierController@getProduct');
     Route::get('{id}', 'CashierController@show')->name('cashier.show');
     Route::post('{id}', 'CashierController@store')->name('cashier.store');
 });

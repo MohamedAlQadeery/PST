@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
 <ol class="breadcrumb bc-3" >
     <li>
     <a href="{{route('user.dashboard')}}"><i class="fa-home"></i>@lang('site.dashboard')</a>
@@ -76,16 +78,23 @@
 			</thead>
 			<tbody>
         @foreach ($products as $product)
+
         <tr class="odd gradeX">
 					<td>{{$product->product->name}}</td>
-					<td><div class="input-spinner">
-                        <button type="button" class="btn btn-info btn-sm">-</button>
-                        <input id="{{$product->product_id}}quantity" type="text" class="form-control size-1 input-sm" value="1">
-                        <button type="button" class="btn btn-info btn-sm">+</button>
-                    </div></td>
-					<td class="center"><img src="{{$product->product->getImage()}}" width="54px" height="54px" alt="image" class="img-rounded"></td>
+					<td>
+            <input hidden id="{{$product->product_id}}maxQuantity" value="{{$product->quantity}}">
+
+             <div class="input-spinner">
+                <button type="button" id="{{$product->product_id}}decrease" onclick="decreaseValue({{$product->product_id}})" class="btn btn-info btn-sm">-</button>
+                <input id="{{$product->product_id}}quantity" disabled type="number" class="form-control size-1 input-sm" min="1" value="1">
+                <button type="button" id="{{$product->product_id}}increase" onclick="increaseValue({{$product->product_id}})" class="btn btn-info btn-sm">+</button>
+              </div>
+          </td>
+				        	  <td class="center">
+                    <img src="{{$product->product->getImage()}}" width="54px" height="54px" alt="image" class="img-rounded"></td>
                         <td><button onclick="itemChoose({{$product->product_id}})" class="btn btn-success"> @lang('site.add') </button></td>
 				</tr>
+
         @endforeach
 
 
@@ -143,14 +152,67 @@
 var total = 0;
 
 
+// increment btn
+function increaseValue(id) {
+
+document.getElementById(id+'decrease').disabled = false; //default enabling the buttoun
+
+var maxQuantity = parseInt(document.getElementById(id+'maxQuantity').value, 10); //get the max quantity of the product
+var value = parseInt(document.getElementById(id+'quantity').value, 10); // the value of the quantity input
+value = isNaN(value) ? 1 : value; //check if its a number ot not
+
+
+
+// check first if the quantity is more than the given to disable the buttuon
+if(value >= maxQuantity){
+  document.getElementById(id+'quantity').value = value-1;
+  document.getElementById(id+'increase').disabled = true;
+  return;
+}else
+  document.getElementById(id+'increase').disabled = false;
+
+
+  document.getElementById(id+'quantity').value = value;
+
+}
+
+
+
+// decrement btn
+function decreaseValue(id) {
+
+document.getElementById(id+'increase').disabled = false; //default enabling the buttoun
+
+var value = parseInt(document.getElementById(id+'quantity').value, 10);
+
+value = isNaN(value) ? 1 : value;
+value < 1 ? value = 1 : '';
+
+ // check first if the quantity is more than the given to disable the buttuon
+ if(value <= 1){
+  document.getElementById(id+'quantity').value = value+1;
+  document.getElementById(id+'decrease').disabled = true;
+  return;
+}else
+  document.getElementById(id+'decrease').disabled = false;
+
+
+  document.getElementById(id+'quantity').value = value;
+
+}
+
+
+
 // get the choosen item from the table
 function itemChoose(product_id) {
+
 // ajax request here to get all the product info
 url = window.location.href;
-// url = url.replace('/cashier', '');
+
 $.ajax({
     url: url + '/product/' + product_id
 }).done(function(data) {
+
     product_name = data.product.product.name;
     single_product_price = data.product.product.price_to_sell;
     product_quantity = document.getElementById(product_id + 'quantity').value; // get the selected quantity from the user
@@ -234,7 +296,7 @@ document.querySelector("#save").addEventListener("click", e => {
         data:{data:tableContent},
         success:function(data){
            if(data.error==0){
-            window.open('http://localhost:8000/back/invoice/'+data.id,'_blank');
+            window.open('http://localhost:8000/user/invoices/'+data.id,'_blank');
            }else{
                console.log(data.error);
                alert('Error in quantity/مشكله في الكميه');
@@ -244,6 +306,8 @@ document.querySelector("#save").addEventListener("click", e => {
          }
      });
     }
+
+
 //function to empty the bill records
 function empty(){
  //reset the var total to zero
