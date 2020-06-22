@@ -63,7 +63,7 @@
                 <div class="panel-heading">
                     <div class="panel-title">
                         <h3>@lang('site.topSolledProducts')</h3>
-                        <span>@lang('site.topSolledProducts_desc')</span>
+                        <span>@lang('site.sellerTopSolledProducts_desc')</span>
                     </div>
 
                     <div class="panel-options">

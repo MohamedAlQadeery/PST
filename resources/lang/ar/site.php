@@ -214,5 +214,6 @@ return [
     'world_map' => 'خريطة الزوار',
     'topSolledProducts' => 'اكثر البضائع مبيعا',
     'topSolledProducts_desc' => 'اكثر البضائع طلبا بين اصحاب المحلات',
+    'sellerTopSolledProducts_desc' => 'أكثر البضائع مبيعا في المتجر',
     'buyers_count' => 'عدد المشترين',
     ];
