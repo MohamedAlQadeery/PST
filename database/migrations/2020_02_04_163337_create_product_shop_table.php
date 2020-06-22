@@ -8,8 +8,6 @@ class CreateProductShopTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -18,6 +16,7 @@ class CreateProductShopTable extends Migration
             $table->integer('product_id');
             $table->integer('shop_id');
             $table->integer('quantity')->nullable();
+            $table->integer('sell_count');
             $table->integer('status');
             $table->timestamps();
         });
@@ -25,8 +24,6 @@ class CreateProductShopTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

@@ -73,7 +73,7 @@ class MessageController extends Controller
 
             Message::create($data);
 
-            return redirect()->route('messages.show', $request->parent_id)->with('success', __('site.message_created'));
+            return redirect()->route('user.messages.show', $request->parent_id)->with('success', __('site.message_created'));
         } else {
             $request->validate([
                 'to' => 'required|email',
@@ -91,7 +91,7 @@ class MessageController extends Controller
 
         Message::create($data);
 
-        return redirect()->route('messages.index')->with('success', __('site.message_created'));
+        return redirect()->route('user.messages.index')->with('success', __('site.message_created'));
     }
 
     public function show($id)
@@ -123,11 +123,11 @@ class MessageController extends Controller
 
             $message->delete();
 
-            return redirect()->route('messages.index')->with('success', __('site.deleted_successfully'));
+            return redirect()->route('user.messages.index')->with('success', __('site.deleted_successfully'));
         }
         //deletes a replay only
         $message->delete();
 
-        return redirect()->route('messages.show', $message->parent_id)->with('success', __('site.deleted_successfully'));
+        return redirect()->route('user.messages.show', $message->parent_id)->with('success', __('site.deleted_successfully'));
     }
 }
