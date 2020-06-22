@@ -216,4 +216,19 @@ return [
     'topSolledProducts_desc' => 'اكثر البضائع طلبا بين اصحاب المحلات',
     'sellerTopSolledProducts_desc' => 'أكثر البضائع مبيعا في المتجر',
     'buyers_count' => 'عدد المشترين',
+
+    //admin dashboard
+    'users_count_desc' => 'عدد الاعضاء المسجلين في الموقع',
+    'products_count_desc' => 'عدد البضائع الموجودة في الموقع',
+    'shopproducts_count_desc' => 'عدد البضائع الخاصة في المتاجرة في الموقع',
+    'shopproducts_count' => 'عدد البضائع في المتاجر',
+    'transaction_count_desc' => 'عدد جميع المعاملات المالية في الموقع',
+    'providertopSolledProducts' => 'اكثر البضائع مبيعا للمزودين ',
+    'providertopSolledProducts_desc' => 'افضل بضائع مبيعا خاصه للمزودين في الموقع',
+    'sellerTopSolledProducts_panel' => 'اكثر البضائع مبيعا لأصحاب المحلات',
+    'sellerTopSolledProducts_desc' => 'افضل البضائع مبيعا خاصه لأصحاب المتاجر في الموقع',
+    'contactus' => 'رسائل التواصل معنا ',
+    'contactus_desc' => 'اخر رسائل التواصل معنا من الاعضاء',
+    'isRead' => 'مقروءة',
+    'unread' => 'غير مقروءة',
     ];

@@ -86,6 +86,26 @@
             </li> --}}
 
 
+            @canany(['all'])
+
+            <li class="active">
+                <a href="{{route('admin.dashboard')}}"><i  class="entypo-box" ></i><span style="font-size: 17px">@lang('site.dashboard')</span></a>
+
+            </li>
+
+            @endcan
+
+
+            @cannot('all')
+
+            <li class="active">
+                <a href="{{route('user.dashboard')}}"><i  class="entypo-box" ></i><span style="font-size: 17px">@lang('site.dashboard')</span></a>
+
+            </li>
+
+            @endcan
+
+
             @canany(['all','index-user'])
             <li class="active active has-sub root-level"> <a href=""><i class="entypo-users"></i><span class="title"  style="font-size: 17px">@lang('site.users')</span></a>
 				<ul class="">

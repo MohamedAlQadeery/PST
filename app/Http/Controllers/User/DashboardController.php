@@ -22,14 +22,17 @@ class DashboardController extends Controller
             $card3 = Message::where('to_id', auth()->user()->id)->count();
             $card4 = Product::where('sell_count', '>', 0)->where('user_id', auth()->user()->id)->count();
 
-            $topSolledProducts = Product::where('status', 1)->orderBy('sell_count', 'desc')->limit(5)->get();
+            $topSolledProducts = Product::where('status', 1)->where('user_id', auth()->user()->id)->orderBy('sell_count', 'desc')->limit(5)->get();
         } else {
             $card1 = ProductShop::where('shop_id', auth()->user()->shop_id)->count();
             $card2 = Transaction::where('shop_id', auth()->user()->shop_id)->count();
             $card3 = Message::where('to_id', auth()->user()->id)->count();
             $card4 = ProductShop::where('sell_count', '>', 0)->where('shop_id', auth()->user()->shop_id)->count();
 
-            $topSolledProducts = ProductShop::with(['product'])->where('status', 1)->orderBy('sell_count', 'desc')->limit(5)->get();
+            $topSolledProducts = ProductShop::with(['product'])->where([
+                'status' => 1,
+                'shop_id' => auth()->user()->shop_id,
+            ])->orderBy('sell_count', 'desc')->limit(5)->get();
         }
 
         return view('users.dashboard')->with(compact(
