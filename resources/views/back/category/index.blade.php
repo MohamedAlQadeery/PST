@@ -62,14 +62,14 @@
                     <td>
                         @if ($category->status==1)
 
-                        <a href="{{route('category.status',$category->id)}}" class="btn btn-danger">@lang('site.un_publish')</a>
+                        <a href="{{route('admin.category.status',$category->id)}}" class="btn btn-danger">@lang('site.un_publish')</a>
                         @else
-                        <a href="{{route('category.status',$category->id)}}" class="btn btn-success">@lang('site.publish')</a>
+                        <a href="{{route('admin.category.status',$category->id)}}" class="btn btn-success">@lang('site.publish')</a>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('category.edit',$category->id)}}" class="btn btn-info">@lang('site.edit')</a>
-                        <form action="{{route('category.destroy',$category->id)}}" method="post" style="display:inline"
+                        <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-info">@lang('site.edit')</a>
+                        <form action="{{route('admin.category.destroy',$category->id)}}" method="post" style="display:inline"
                               onsubmit="return confirm('Are you sure you want to delete this category?');">
                             @csrf()
                             @method('DELETE')

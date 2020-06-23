@@ -9,7 +9,7 @@
         <div class="col-sm-3 col-xs-6">
 
             <div class="tile-stats tile-aqua">
-                <div class="icon"><i class="entypo-mail"></i></div>
+                <div class="icon"><i class="entypo-user"></i></div>
                 <div class="num" data-start="0" data-end="{{$card1}}" data-postfix="" data-duration="1500" data-delay="1200">0</div>
 
                 <h3>@lang('site.users')</h3>

@@ -20,12 +20,11 @@
 
 						<div class="slide-content">
 							<h2>
-								<small>Neon - Bootstrap 3</small>
-								Dashboard &amp; Front-end
+									مشروع وصلة 
 							</h2>
 
 							<p>
-								Neon &ndash; is flat admin template for multi-purpose usage built<br /> with the latest version of Bootstrap &ndash; 3.
+								مشروع و صلة جاء ليسهل حميع العمليات التجارية بين أصحاب المحلات و المزودين باستخدام الأساليب الحديثة و توفير الوقت و الجهد و حساب الفواتير بشكل دقيق
 							</p>
 						</div>
 
@@ -52,14 +51,17 @@
 
 						<div class="slide-content text-right">
 							<h2>
-								<small>Neon - Bootstrap 3</small>
-								Powerful Admin Template
-							</h2>
+								{{-- <small>Neon - Bootstrap 3</small> --}}
+									خدماتنا
+ 							</h2>
 
 							<p>
-								Designed for Bootstrap Framework, the theme works <br />
-								perfectly on any device, you can use it on<br />
-								 your smartphone, tablet or your laptop.
+								-	توفير آلية تواصل سهلة بين المزودين و أصحاب المحلات 
+								<br> -	توفير آلية من خلالها يتستطيع المزودين عرض منتجاتهم على الموقع 
+								<br> -	توفير تطبيق و موقع سهل الاستخدام 
+								<br> -	تخزين جميع المعاملات و الفواتير بين الطرفين 
+								<br> -	توفير آلية دفع إلكتروني على الموقع و التطبيق	 
+
 							</p>
 
 						</div>
@@ -71,13 +73,15 @@
 
 						<div class="slide-content">
 							<h2>
-								<small>Neon - Bootstrap 3</small>
-								Responsive &amp; Retina
+								{{-- <small>Neon - Bootstrap 3</small> --}}
+									ما هو المميز ؟
 							</h2>
 
 							<p>
-								Device type is not a problem if you use Neon theme for your application UI.<br />
-								It's packed with latest Bootstrap framework and it's compatible for Large Screens, Tablets and Smartphones.
+								الفكرة جديدة و تبعتر ميزة تنافسية حيث لا أحد من قبل قد طرحها في القطاع.
+								ما يميزنا هو توفير تطبيق و موقع إلكتروني من خلاله يتعامل المزودين مع أصحاب المحلات بأسهل الطرق السلسة
+								 موفرين بذلك الوقت و الجهد و ضمان تخزين الفواتير بينهم على الموقع و التطبيق
+
 							</p>
 						</div>
 

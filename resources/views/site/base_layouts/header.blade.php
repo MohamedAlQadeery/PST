@@ -52,7 +52,7 @@
 
                         <section class="site-logo">
 
-                            <a href="{{route('site.providers.index')}}">
+                            <a href="{{route('site.home')}}">
                                 <img src="{{asset('uploads/wasla.png')}}" width="120" />
                             </a>
 
@@ -120,14 +120,14 @@
 
                                   }
                               @endphp
-                                <a href="{{route($user.'dashboard')}}"><img src="{{auth()->user()->getImage()}}" alt="Avatar" class="avatar"></a>
+                                <a href="{{route($user.'dashboard')}}"><img src="{{auth()->user()->getImage()}}" alt="Avatar" class="avatar">
                                  @if(auth()->user()->type ===1)
                                 <h4 style="display: inline-block;"> المحل:{{auth()->user()->shop->name}} </h4>
                                 @elseif(auth()->user()->type ===2)
                                 <h4 style="display: inline-block;"> المزود:{{auth()->user()->first_name}} </h4>
                                 @else
                                 <h4 style="display: inline-block;"> الأدمن:{{auth()->user()->first_name}} </h4>
-
+                                </a>
                                  @endif &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 
                                 <a href="#" onclick="event.preventDefault();

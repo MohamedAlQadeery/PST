@@ -22,6 +22,7 @@
 						<div class="post-thumb">
 
 							<a href="{{route('site.providers.show',$provider->id)}}">
+								
 								<img  src="{{$provider->getImage()}}" class="img-rounded" />
 								<span class="hover-zoom"></span>
 							</a>
