@@ -15,6 +15,8 @@ Route::group(['prefix' => 'site', 'middleware' => 'auth', 'as' => 'site.'], func
     Route::get('', 'HomeController@index')->name('home');
     Route::resource('products', 'ProductController');
     Route::resource('providers', 'ProviderController');
+    Route::post('providers/{id}', 'ReviewController@providerReview')->name('providerReview.store');
+    Route::post('products/{id}', 'ReviewController@productReview')->name('productReview.store');
 
     //cart functions
     Route::group(['prefix' => 'cart'], function () {

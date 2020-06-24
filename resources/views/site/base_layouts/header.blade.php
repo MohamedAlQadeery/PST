@@ -24,17 +24,6 @@
     <link rel="stylesheet" href="{{asset('front/neon-frontend/assets/css/neon.css')}}">
     <script src="{{asset('front/neon-frontend/assets/js/jquery-1.11.3.min.js')}}"></script>
 
-    {{-- shopping cart --}}
-    {{-- product zooming --}} {{-- End product zooming --}}
-
-    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
 </head>
 
 <body class="droid-arabic-kufi">
@@ -66,22 +55,24 @@
                                         <span>الرئيسية</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a>
+
+{{--
+                                <li class="has-sub is-root">
+                                    <a href="#">
                                         <span>الأصناف</span>
                                     </a>
 
                                     <ul>
                                         @foreach ($shareData['categories'] as $category)
                                         <li>
-                                            <a href="#">
+                                            <a href="{{route('site.products.index',['category_id'=>$category->id])}}">
                                                 <span>{{$category->name}}</span>
                                             </a>
                                         </li>
                                         @endforeach
 
                                     </ul>
-                                </li>
+                                </li>  --}}
                                 <li>
                                     <a href="{{route('site.products.index')}}">
                                         <span>تصفح البضائع</span>

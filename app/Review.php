@@ -8,11 +8,7 @@ class Review extends Model
 {
     protected $guarded = [];
 
-    public function provider()
-    {
-        return $this->belongsTo('App\User', 'provider_id', 'id');
-    }
-
+    //the seller who wrote the review
     public function seller()
     {
         return $this->belongsTo('App\User', 'seller_id', 'id');

@@ -57,10 +57,10 @@ class ProviderController extends Controller
      */
     public function show($id)
     {
-        $provider = User::with(['products', 'providerReviews'])->where(['id' => $id, 'type' => 2])->first();
+        $provider = User::with(['products', 'reviews'])->where(['id' => $id, 'type' => 2])->first();
 
         //gets the providers with at least 5 reviews with 3 stars or more
-        $reviewd_providers = User::where('type', 2)->whereHas('providerReviews', function ($query) {
+        $reviewd_providers = User::where('type', 2)->whereHas('reviews', function ($query) {
             $query->where('stars', '>=', '3');
         }, '>=', 5)->get();
 

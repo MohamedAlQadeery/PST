@@ -11,6 +11,7 @@
 		<!-- Title and Item Details -->
 		<div class="row item-title">
 
+            @include('partials.messages')
 			<div  style="float:right"  class="col-sm-9">
 				<h1>
 					<a href="#">{{$product->name}}</a>
@@ -29,11 +30,11 @@
 			<div  style="float:left"  class="col-sm-3">
 
 				<div class="text-right">
-				
+
 
 					<div class="item-detail">
 						{{-- <form action="{{route('site.cart.addItem',['id'=>$product->id])}}" method="post"> --}}
-							@if(auth()->user()->type === 1)								
+							@if(auth()->user()->type === 1)
 
 						<i class="entypo-basket">
 								<a href="{{route('site.cart.addItem',['id'=>$product->id])}}" type="submit" class="btn btn-secondary" >
@@ -45,11 +46,11 @@
 						<br>
 						<br>
 							{{-- <div class="callout-button">
-								<i class="entypo-tag ">	
+								<i class="entypo-tag ">
 									<a href="index.html" class="btn btn-secondary"> طلب البضاعة</a>
 
 								</i>
-		
+
 							</div> --}}
 					</div>
 				</div>
@@ -74,7 +75,7 @@
 			  <img src="{{$product->getImage()}}" alt="Lights" style="width:100%" onclick="myFunction(this);">
 			</div>
 		  </div>
-		  
+
 		  <div class="containerImage">
 			<span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
 			<img id="expandedImg" style="width:100%">
@@ -85,7 +86,7 @@
 		  <br>
 		  <hr>
 
-{{-- 		  
+{{--
 		<div class="row">
 			<div class="text-center">
 
@@ -93,7 +94,7 @@
 		</div>
 		</div> --}}
 
-	
+
 
 		{{-- <div class="row">
 			<div class="col-md-12">
@@ -195,32 +196,31 @@
 		<br>
 		<div class="row">
 
-	<form action="" method="post"  role="form" class="form-horizontal form-groups-bordered">
-			@csrf()
-			@method('post')		
-		<span class="star-rating star-5">
-			<input type="radio" name="rating" value="1"><i></i>
-			<input type="radio" name="rating" value="2"><i></i>
-			<input type="radio" name="rating" value="3"><i></i>
-			<input type="radio" name="rating" value="4"><i></i>
-			<input type="radio" name="rating" value="5"><i></i>
-		</span>
+            <form action="{{route('site.productReview.store',$product->id)}}" method="post"
+                role="form" class="form-horizontal form-groups-bordered">
+                        @csrf()
+                    <span class="star-rating star-5">
+                        <input type="radio" name="stars" value="1"><i></i>
+                        <input type="radio" name="stars" value="2"><i></i>
+                        <input type="radio" name="stars" value="3"><i></i>
+                        <input type="radio" name="stars" value="4"><i></i>
+                        <input type="radio" name="stars" value="5"><i></i>
+                    </span>
 
-		<div class="row">
-			<div class="col-md-12">
-				<h3>أضف مراجعتك</h3>
-			</div>
-		</div>
-		<br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>أضف مراجعتك</h3>
+                        </div>
+                    </div>
+                    <br>
+                    <textarea name="body" cols="30" rows="10">
 
-		<textarea name="" id="" cols="30" rows="10">
+                    </textarea>
+                    <div class="callout-button">
+                        <button type="submit" class="btn btn-success"><i class="entypo-star"></i>تأكيد</button>
 
-		</textarea>
-		<div class="callout-button">
-			<a href="" class="btn btn-success"><i class="entypo-star"></i> تأكيد</a>
-		</div>
-	</form>
-
+                    </div>
+                </form>
 	</div>
 </div>
 <br>
@@ -230,7 +230,7 @@
 
 <h3>
 	<i class="entypo-chat"></i>
-		مراجعات التجار	
+		مراجعات التجار
 </h3>
 
 <div class="sidebar-content">
@@ -239,50 +239,29 @@
 		<i class="entypo-star"> عدد النجوم من 5 هنا </i>
 	</div>
 	<ul class="discussion-list">
-		{{-- @foreach ($reviewd_providers as $item) --}}
-			
-				
-			<hr>
-			<br>
-			<li>
-				<p>	
-					<img src="" width="43" class="img-circle')}}" />
-					<a href=""></a>
-					<p style="margin-right: 60px">	مراجعة مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-					</p>
-				</p>
+        @foreach ($product->reviews as $review)
 
-			</li>
-			<li>
-				<p>	
-					<img src="" width="43" class="img-circle')}}" />
-					<a href=""></a>
-					<p style="margin-right: 60px">	مراجعة مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-					</p>
-				</p>
+        {{-- <a href="{{route('site.providers.show',$item->id)}}" class="thumb">
+            <img src="{{$item->getImage()}}" width="43" class="img-circle')}}" />
+        </a> --}}
 
-			</li>
+        {{-- <div class="details">
+            <a href="{{route('site.providers.show',$item->id)}}">{{$item->first_name.' '.$item->last_name}}</a>
+        </div> --}}
+        <hr>
+        <br>
+        <li>
+            <p>
+                <img src="{{$review->seller->getImage()}}" width="43" class="img-circle')}}" />
+                <a href="#">{{$review->seller->first_name.' '.$review->last_name}}</a>
+                <p style="margin-right: 60px">
+                    {{$review->body}}
+                </p>
+            </p>
 
-			<li>
-				<p>	
-					<img src="" width="43" class="img-circle')}}" />
-					<a href=""></a>
-					<p style="margin-right: 60px">	مراجعة مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-					</p>
-				</p>
+        </li>
 
-			</li>
-
-		{{-- @endforeach --}}
+    @endforeach
 	</ul>
 
 

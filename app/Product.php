@@ -33,4 +33,9 @@ class Product extends Model
 
         return asset('uploads/'.$this->image);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
 }

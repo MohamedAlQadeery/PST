@@ -145,8 +145,12 @@
 
 </section>
 
-<hr>
+
+
+{{-- 
 <script type="text/javascript">
+
+
 jQuery(document).ready(function($)
 {
 	var $portfolio_items = $("#portfolio-items"),
@@ -173,6 +177,11 @@ jQuery(document).ready(function($)
 
 	$portfolio_items.isotope('reLayout');
 });
-</script>
+
+
+
+</script> --}}
+
+
 
 @endsection()

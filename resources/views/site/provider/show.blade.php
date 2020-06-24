@@ -21,6 +21,7 @@
 			<div class="col-sm-8">
 
 				<div class="blog-post-single">
+                    @include('partials.messages')
 
 					<a href="#" class="image">
 						<img src="{{$provider->getImage()}}" class="img-responsive img-rounded" width="120px" height="120px"/>
@@ -48,7 +49,7 @@
 								تقييمه
 							</div>
 
-							
+
 							<div class="meta-info">
 								<i class="entypo-user"></i>
 								{{$provider->age}}
@@ -111,15 +112,15 @@
 		<br>
 		<div class="row">
 
-	<form action="" method="post"  role="form" class="form-horizontal form-groups-bordered">
+    <form action="{{route('site.providerReview.store',$provider->id)}}" method="post"
+    role="form" class="form-horizontal form-groups-bordered">
 			@csrf()
-			@method('post')		
 		<span class="star-rating star-5">
-			<input type="radio" name="rating" value="1"><i></i>
-			<input type="radio" name="rating" value="2"><i></i>
-			<input type="radio" name="rating" value="3"><i></i>
-			<input type="radio" name="rating" value="4"><i></i>
-			<input type="radio" name="rating" value="5"><i></i>
+			<input type="radio" name="stars" value="1"><i></i>
+			<input type="radio" name="stars" value="2"><i></i>
+			<input type="radio" name="stars" value="3"><i></i>
+			<input type="radio" name="stars" value="4"><i></i>
+			<input type="radio" name="stars" value="5"><i></i>
 		</span>
 
 		<div class="row">
@@ -128,12 +129,12 @@
 			</div>
 		</div>
 		<br>
-
-		<textarea name="" id="" cols="30" rows="10">
+		<textarea name="body" cols="30" rows="10">
 
 		</textarea>
 		<div class="callout-button">
-			<a href="" class="btn btn-success"><i class="entypo-star"></i> تأكيد</a>
+            <button type="submit" class="btn btn-success"><i class="entypo-star"></i>تأكيد</button>
+
 		</div>
 	</form>
 
@@ -146,7 +147,7 @@
 
 <h3>
 	<i class="entypo-chat"></i>
-		مراجعات التجار	
+		مراجعات التجار
 </h3>
 
 <div class="sidebar-content">
@@ -155,50 +156,23 @@
 		<i class="entypo-star"> عدد النجوم من 5 هنا </i>
 	</div>
 	<ul class="discussion-list">
-		@foreach ($reviewd_providers as $item)
-			
+		@foreach ($provider->reviews as $review)
+
 			{{-- <a href="{{route('site.providers.show',$item->id)}}" class="thumb">
 				<img src="{{$item->getImage()}}" width="43" class="img-circle')}}" />
 			</a> --}}
 
 			{{-- <div class="details">
 				<a href="{{route('site.providers.show',$item->id)}}">{{$item->first_name.' '.$item->last_name}}</a>
-			</div> --}}			
+			</div> --}}
 			<hr>
 			<br>
 			<li>
-				<p>	
-					<img src="{{$item->getImage()}}" width="43" class="img-circle')}}" />
-					<a href="{{route('site.providers.show',$item->id)}}">{{$item->first_name.' '.$item->last_name}}</a>
-					<p style="margin-right: 60px">	مراجعة مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-					</p>
-				</p>
-
-			</li>
-			<li>
-				<p>	
-					<img src="{{$item->getImage()}}" width="43" class="img-circle')}}" />
-					<a href="{{route('site.providers.show',$item->id)}}">{{$item->first_name.' '.$item->last_name}}</a>
-					<p style="margin-right: 60px">	مراجعة مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-					</p>
-				</p>
-
-			</li>
-
-			<li>
-				<p>	
-					<img src="{{$item->getImage()}}" width="43" class="img-circle')}}" />
-					<a href="{{route('site.providers.show',$item->id)}}">{{$item->first_name.' '.$item->last_name}}</a>
-					<p style="margin-right: 60px">	مراجعة مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
-						مراجعةمراجعةمراجعةمراجعةمراجعةمراجعةمراجعة	
+				<p>
+					<img src="{{$review->seller->getImage()}}" width="43" class="img-circle')}}" />
+					<a href="#">{{$review->seller->first_name.' '.$review->last_name}}</a>
+					<p style="margin-right: 60px">
+                        {{$review->body}}
 					</p>
 				</p>
 
@@ -259,7 +233,7 @@
           @else
           <h3 class="text-center">لا يوجد بضائع مشابهة</h3>
 		  @endif
-		  
+
 
 		</div>
 
