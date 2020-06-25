@@ -18,7 +18,7 @@ class ProviderController extends Controller
         $providers = User::where('type', 2)->orderBy('id', 'DESC')->paginate(3);
 
         //gets the providers with at least 5 reviews with 3 stars or more
-        $reviewd_providers = User::where('type', 2)->whereHas('providerReviews', function ($query) {
+        $reviewd_providers = User::where('type', 2)->whereHas('reviews', function ($query) {
             $query->where('stars', '>=', '3');
         }, '>=', 5)->get();
 
