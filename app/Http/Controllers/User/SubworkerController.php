@@ -3,11 +3,23 @@
 namespace App\Http\Controllers\User;
 
 use App\Shop;
+use App\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\User\Subworker\StoreRequest;
 
 class SubworkerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create-subworker|all-shoppermissions')->only('create');
+        $this->middleware('permission:update-subworker|all-shoppermissions')->only('edit');
+        $this->middleware('permission:delete-subworker|all-shoppermissions')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +43,12 @@ class SubworkerController extends Controller
      */
     public function create()
     {
+        $roles = Role::where('name', '!=', 'admin')->get();
+
+        return view('users.subworkers.create')->with([
+            'page_name' => parent::getPluralModelName(),
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -40,8 +58,25 @@ class SubworkerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
+        $data = $request->except(['password', 'image', 'dob', 'password_confirmation', 'roles']);
+
+        $data['password'] = Hash::make($request->password);
+        $date = strtotime($request->dob);
+        $data['dob'] = date('Y-m-d', $date);
+        $data['type'] = 3; //subworker
+        $data['shop_id'] = auth()->user()->shop_id;
+        $user = User::create($data);
+        $user->syncRoles($request->roles);
+
+        if ($request->image) {
+            $image = parent::uploadImage($request->image);
+
+            User::where('id', $user->id)->update(['image' => $image]);
+        }
+
+        return redirect()->route('user.subworkers.index')->with('success', __('site.created_successfully'));
     }
 
     /**
@@ -64,6 +99,16 @@ class SubworkerController extends Controller
      */
     public function edit($id)
     {
+        $user = User::findOrFail($id);
+        $selectedRoles = $user->roles()->get()->pluck('id')->toArray();
+        $roles = Role::where('creator_id', auth()->user()->id)->get();
+
+        return view('users.subworkers.edit')->with([
+            'page_name' => 'subwokers',
+            'user' => $user,
+            'selectedRoles' => $selectedRoles,
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -74,8 +119,27 @@ class SubworkerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
+        $user = User::findOrFail($id);
+        $data = $request->except(['password', 'image', 'dob', 'password_confirmation', 'roles']);
+
+        if ($request->password) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $date = strtotime($request->dob);
+        $data['dob'] = date('Y-m-d', $date);
+
+        if ($request->image) {
+            Storage::disk('public_uploads')->delete($user->image);
+
+            $data['image'] = parent::uploadImage($request->image);
+        }
+        $user->update($data);
+        $user->syncRoles($request->roles);
+
+        return redirect()->route('user.subworkers.index')->with('success', __('site.edit_successfully'));
     }
 
     /**
@@ -87,5 +151,13 @@ class SubworkerController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::findOrFail($id);
+        $user->syncRoles([]);
+        if (isset($user->image)) {
+            Storage::disk('public_uploads')->delete($user->image);
+        }
+        $user->delete();
+
+        return redirect()->route('user.subworkers.index')->with('success', __('site.deleted_successfully'));
     }
 }

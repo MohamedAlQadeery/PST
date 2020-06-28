@@ -18,12 +18,16 @@ class RoleController extends Controller
      */
     public function __construct(Role $model)
     {
+        $this->middleware('permission:create-shoproles|all-shoppermissions')->only('create');
+        $this->middleware('permission:update-shoproles|all-shoppermissions')->only('edit');
+        $this->middleware('permission:delete-shoproles|all-shoppermissions')->only('destroy');
+
         parent::__construct($model);
     }
 
     public function index()
     {
-        $roles = Role::where('name', '!=', 'admin')->get();
+        $roles = Role::where('creator_id', auth()->user()->id)->get();
 
         return view('users.role.index')->with([
             'page_name' => parent::getPluralModelName(),
@@ -55,7 +59,7 @@ class RoleController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $role = Role::create(['name' => $request->name]);
+        $role = Role::create(['name' => $request->name, 'creator_id' => auth()->user()->id]);
         $role->syncPermissions($request->permissions);
         Alert::success(__('site.success'), __('site.created_successfully'));
 

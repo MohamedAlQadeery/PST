@@ -142,6 +142,7 @@
             <h2>@lang('site.replay')</h2>
 
             <div class="mail-compose">
+                @canany(['all-shoppermissions','create-usercontactus'])
 
                 <form id="form" method="post" role="form" action="{{route('user.contactus.store')}}">
                     @csrf
@@ -156,7 +157,10 @@
                     </button>
 
                 </form>
+                @else
+                <h2> <span class="label label-danger">@lang('site.no_permission')</span></h2>
 
+                @endcan
             </div>
 
         </div>

@@ -8,6 +8,12 @@ use App\Http\Controllers\Controller;
 
 class ContactusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create-usercontactus|all-shoppermissions')->only('create');
+        $this->middleware('permission:delete-usercontactus|all-shoppermissions')->only('destroy');
+    }
+
     public function index()
     {
         $messages = ContactUs::where(['user_id' => auth()->user()->id, 'parent_id' => null])->orderBy('read', 'desc')->get();

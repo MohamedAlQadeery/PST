@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 
 class InvoiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:delete-shopinvoice|all-shoppermissions')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -94,6 +99,6 @@ class InvoiceController extends Controller
         $invoice->items()->sync([]);
         $invoice->delete();
 
-        return redirect()->route('user.invoice.index', $shop->id)->with('success', __('site.deleted_successfully'));
+        return redirect()->route('user.invoices.index', $shop->id)->with('success', __('site.deleted_successfully'));
     }
 }

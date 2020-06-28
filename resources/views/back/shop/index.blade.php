@@ -61,7 +61,14 @@
                     <td class="center">{{$shop->address}}</td>
 					<td><a href="{{route('admin.users.show',$shop->user->id)}}">{{$shop->user->first_name.' '.$shop->user->last_name}}</a></td>
                     <td class="center">
+                        @canany(['all','update-shop'])
+
                         <a href="{{route('admin.shops.edit',$shop->id)}}" class="btn btn-primary">@lang('site.edit')</a>
+                        @else
+                        <button  class="btn btn-primary" disabled>@lang('site.edit')</button>
+
+                        @endcan
+                        @canany(['all','delete-shop'])
 
                         <form action="{{route('admin.shops.destroy',$shop->id)}}" method="post" style="display:inline"
                             onsubmit="return confirm('Are you sure you want to delete this user?');">
@@ -69,7 +76,11 @@
                           @method('DELETE')
                       <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                       </form>
-                        <a href="{{route('admin.shops.show',$shop->id)}}" class="btn btn-info">@lang('site.show')</a>
+                      @else
+                      <button  class="btn btn-danger" disabled><i class="fa fa-trash"></i>@lang('site.delete')</button>
+
+                      @endcan
+                      <a href="{{route('admin.shops.show',$shop->id)}}" class="btn btn-info">@lang('site.show')</a>
                         <a href="{{route('admin.shop_invoices.index',$shop->id)}}" class="btn btn-green">@lang('site.show_invoices')</a>
 
                     </td>

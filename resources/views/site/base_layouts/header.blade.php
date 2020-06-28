@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{asset('front/neon-frontend/assets/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('front/neon-frontend/assets/css/font-icons/entypo/css/entypo.css')}}">
     <link rel="stylesheet" href="{{asset('front/neon-frontend/assets/css/neon.css')}}">
+    {{-- font awosome link --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="{{asset('front/neon-frontend/assets/js/jquery-1.11.3.min.js')}}"></script>
 
 </head>

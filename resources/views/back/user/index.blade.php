@@ -48,7 +48,6 @@
                     <th>@lang('site.full_name')</th>
                     <th>@lang('site.email')</th>
                     <th>@lang('site.type')</th>
-                    <th>@lang('site.role')</th>
 					<th>@lang('site.gender')</th>
                     <th>@lang('site.address')</th>
 					<th>@lang('site.action')</th>
@@ -65,19 +64,15 @@
 					<td class="center">
                       @if($user->type==1)
                       @lang('site.seller')
-                      @else
+                      @elseif($user->type==2)
                         @lang('site.provider')
+                        @elseif($user->type==3)
+                        @lang('site.subworker')
+                        @else
+                        @lang('site.admin')
                       @endif
                     </td>
-                    <td class="center">
-                        @if(count($user->roles()->get()) >0)
-                        <ul style="margin-left: 20px">
-                           @foreach ($user->roles()->get() as $role )
-                            <li>{{$role->name}}</li>
-                           @endforeach
-                        </ul>
-                        @endif
-                    </td>
+
                     <td class="center">
                         @if($user->gender==1)
                         @lang('site.male')
@@ -87,7 +82,13 @@
                       </td>
                     <td class="center">{{$user->address}}</td>
                     <td class="center">
+                     @canany(['all','create-user'])
                         <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-primary">@lang('site.edit')</a>
+                    @else
+                    <button class="btn btn-primary" disabled>@lang('site.edit')</button>
+
+                        @endcan
+                        @canany(['all','destroy-user'])
 
                         <form action="{{route('admin.users.destroy',$user->id)}}" method="post" style="display:inline"
                             onsubmit="return confirm('Are you sure you want to delete this user?');">
@@ -95,6 +96,10 @@
                           @method('DELETE')
                       <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                       </form>
+                        @else
+                        <button  class="btn btn-danger" disabled><i class="fa fa-trash"></i>@lang('site.delete')</button>
+
+                      @endcan
                         <a href="{{route('admin.users.show',$user->id)}}" class="btn btn-info">@lang('site.show')</a>
 
                     </td>

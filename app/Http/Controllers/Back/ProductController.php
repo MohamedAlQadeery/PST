@@ -13,10 +13,10 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:create-product|all|create-userproducts')->only('create');
-        $this->middleware('permission:index-product|all')->only('index');
-        $this->middleware('permission:update-product|all|update-userproducts')->only('edit');
-        $this->middleware('permission:delete-product|all|delete-userproducts')->only('destroy');
+        $this->middleware('permission:create-product|all')->only('create');
+        $this->middleware('permission:update-product|all')->only('edit');
+        $this->middleware('permission:delete-product|all')->only('destroy');
+        $this->middleware('permission:status-product|all')->only('status');
         $this->middleware('permission:cashier|all')->only('getProduct');
     }
 
@@ -42,20 +42,20 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $categories = Category::all();
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create()
+    // {
+    //     $categories = Category::all();
 
-        return view('back.product.create')->with([
-            'page_name' => parent::getPluralModelName(),
-            'categories' => $categories,
-        ]);
-    }
+    //     return view('back.product.create')->with([
+    //         'page_name' => parent::getPluralModelName(),
+    //         'categories' => $categories,
+    //     ]);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -74,7 +74,7 @@ class ProductController extends Controller
 
         $product = Product::create($data);
 
-        return redirect()->route('products.index')->with('success', __('site.created_successfully'));
+        return redirect()->route('admin.products.index')->with('success', __('site.created_successfully'));
     }
 
     /**
@@ -135,7 +135,7 @@ class ProductController extends Controller
         }
         $product->update($data);
 
-        return redirect()->route('products.index')->with('success', __('site.edit_successfully'));
+        return redirect()->route('admin.products.index')->with('success', __('site.edit_successfully'));
     }
 
     /**
@@ -153,7 +153,7 @@ class ProductController extends Controller
         }
         $shop->delete();
 
-        return redirect()->route('products.index')->with('success', __('site.deleted_successfully'));
+        return redirect()->route('admin.products.index')->with('success', __('site.deleted_successfully'));
     }
 
     // //change the status of the category to publish or not

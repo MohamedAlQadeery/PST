@@ -8,12 +8,12 @@
     </li>
 
     <li>
-        <a href="{{route('user.transaction.index')}}"><i class="fa-home"></i>@lang('site.transactions')</a>
+        <a href="{{route('user.transactions.index')}}"><i class="fa-home"></i>@lang('site.transactions')</a>
         </li>
 
     <li class="active">
 
-        <strong>@lang('site.transaction')</strong>
+        <strong>@lang('site.transaction') {{$transaction->id}}</strong>
     </li>
 </ol>
 
@@ -23,9 +23,7 @@
 
         <div class="col-sm-6 invoice-left">
 
-            <a href="#">
-                <img src="{{asset('neon-theme/html/neon-rtl')}}/assets/images/laborator@2x.png" width="185" alt="" />
-            </a>
+
 
             <h4>@lang('site.provider_name') : {{$transaction->provider->first_name.' '.$transaction->provider->last_name}}</h4>
 
@@ -35,14 +33,14 @@
 
         </div>
 
-        <div class="col-sm-6 invoice-right">
-                <h3> @lang('site.transaction_number') : {{$transaction->id}}</h3>
+        <div  class="col-sm-6 invoice-right">
+                <h3 class="bold"> @lang('site.transaction_number') : {{$transaction->id}}</h3>
                 @if ($transaction->type==0)
-                <h3 class="bold"> @lang('site.debt') </h3>
+                <h3 style="margin-left:37px" class="bold">@lang('site.type'): @lang('site.debt') </h3>
                 @else
-                <h3 class="bold"> @lang('site.paid') </h3>
+                <h3 style="margin-left:37px" class="bold">@lang('site.type'): @lang('site.cash') </h3>
             @endif
-            <h5>{{$transaction_date}}</h5>
+            <h5 style="margin-left:40px;color:red">{{$transaction_date}}</h5>
 
         </div>
 
@@ -105,19 +103,32 @@
 
                 @if(auth()->user()->type===1)
                 <ul class="list-unstyled">
+                    @canany(['all-shoppermissions','status-usertransaction'])
                     @if($transaction->status===0)
-                    <a href="{{route('transaction.status',$transaction->id)}}" class="btn btn-primary"><i class="entypo-hourglass"> @lang('site.confirm_delivered')</i></a>
+                    <a href="{{route('user.transaction.status',$transaction->id)}}" class="btn btn-primary">
+                        <i class="entypo-hourglass"> @lang('site.confirm_delivered')</i></a>
                     @else
                     <a class="btn btn-success"><i class="entypo-check"> @lang('site.delivered')</i></a>
                     @endif
+                    @else
+
+                    <a class="btn btn-primary disabled">
+                        <i class="entypo-hourglass"> @lang('site.confirm_delivered')</i></a>
+                    @endcan
                 </ul>
                 @else
                 <ul class="list-unstyled">
+                    @can('pay-usertransaction')
                     @if($transaction->is_paid === 0 )
-                    <a href="{{route('transaction.paid',$transaction->id)}}" class="btn btn-primary"><i class="entypo-hourglass"> @lang('site.confirm_paid')</i></a>
+                    <a href="{{route('user.transaction.paid',$transaction->id)}}" class="btn btn-primary"><i class="entypo-hourglass"> @lang('site.confirm_paid')</i></a>
                     @else
                     <a class="btn btn-success"><i class="entypo-check"> @lang('site.paid')</i></a>
                     @endif
+
+                    @else
+                    <a class="btn btn-primary disabled"><i class="entypo-hourglass"> @lang('site.confirm_paid')</i></a>
+
+                    @endcan
                 </ul>
                 @endif
 

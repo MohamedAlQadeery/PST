@@ -101,7 +101,7 @@ class MessageController extends Controller
 
         $message = Message::where(['parent_id' => null, 'id' => $id])->first();
         if (is_null($message)) {
-            return redirect()->route('messages.index');
+            return redirect()->route('user.messages.index');
         }
         $message->read = 1;
         $message->save();

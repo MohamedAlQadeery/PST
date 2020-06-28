@@ -94,12 +94,18 @@
 
 
                   <td class="center">
+                  @canany(['all','status-product'])
                     @if ($product->status==1)
 
                     <a href="{{route('admin.product.status',$product->id)}}" class="btn btn-danger">@lang('site.un_publish')</a>
                     @else
                     <a href="{{route('admin.product.status',$product->id)}}" class="btn btn-success">@lang('site.publish')</a>
                     @endif
+                    @else
+                    <a href="#" class="btn btn-danger disabled">@lang('site.no_permission_button')</a>
+
+                    @endcan
+
                   </td>
                     {{-- @if($product->user) --}}
                     <td><a href="{{route('admin.users.show',$product->user->id)}}">{{$product->user->first_name.' '.$product->user->last_name}}</a></td>
@@ -121,14 +127,23 @@
 
 
                     <td class="center">
+                        @canany(['all','update-product'])
                         <a href="{{route('admin.products.edit',$product->id)}}" class="btn btn-gold">@lang('site.edit')</a>
+                        @else
+                        <a href="#" class="btn btn-gold disabled">@lang('site.edit')</a>
 
+                        @endcan
+                        @canany(['all','delete-product'])
                         <form action="{{route('admin.products.destroy',$product->id)}}" method="post" style="display:inline"
                             onsubmit="return confirm('Are you sure you want to delete this user?');">
                           @csrf()
                           @method('DELETE')
                       <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                       </form>
+                      @else
+                      <button  class="btn btn-danger" disabled><i class="fa fa-trash"></i>@lang('site.delete')</button>
+
+                      @endcan
                          <a href="{{route('admin.products.show',$product->id)}}" class="btn btn-info">@lang('site.show')</a>
                     </td>
 
@@ -183,25 +198,21 @@
                     <td><a href="{{route('admin.users.show',$shop_product->product->user->id)}}">{{$shop_product->product->user->first_name.' '.$shop_product->product->user->last_name}}</a></td>
 
 
+                    {{--  @canany(['all',''])  --}}
                     @if($shop_product->product->status === 1)
                         <td class="center">@lang('site.available')</td>
                     @else
                         <td class="center">@lang('site.not_available')</td>
                     @endif
 
+                    {{--  @endcan  --}}
+
 
 
 
                     <td class="center">
-                        <a href="{{route('admin.products.edit',$shop_product->id)}}" class="btn btn-gold">@lang('site.edit')</a>
 
-                        <form action="{{route('admin.products.destroy',$shop_product->id)}}" method="post" style="display:inline"
-                            onsubmit="return confirm('Are you sure you want to delete this user?');">
-                          @csrf()
-                          @method('DELETE')
-                      <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
-                      </form>
-                         <a href="{{route('admin.products.show',$shop_product->id)}}" class="btn btn-info">@lang('site.show')</a>
+                         <a href="{{route('admin.products.show',$shop_product->product->id)}}" class="btn btn-info">@lang('site.show')</a>
                     </td>
 
 

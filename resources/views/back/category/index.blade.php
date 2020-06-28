@@ -60,21 +60,37 @@
                     <td>{{++$index}}</td>
                     <td>{{$category->name}}</td>
                     <td>
+                     @canany(['all','status-category'])
                         @if ($category->status==1)
 
                         <a href="{{route('admin.category.status',$category->id)}}" class="btn btn-danger">@lang('site.un_publish')</a>
                         @else
                         <a href="{{route('admin.category.status',$category->id)}}" class="btn btn-success">@lang('site.publish')</a>
                         @endif
+
+                        @else
+                        <a href="#" class="btn btn-danger disabled">@lang('site.un_publish')</a>
+
+                        @endcan
                     </td>
                     <td>
+                        @canany(['all','update-category'])
                         <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-info">@lang('site.edit')</a>
+                        @else
+                        <a href="#" class="btn btn-info disabled">@lang('site.edit')</a>
+                        @endcan
+                        @canany(['all','delete-category'])
                         <form action="{{route('admin.category.destroy',$category->id)}}" method="post" style="display:inline"
                               onsubmit="return confirm('Are you sure you want to delete this category?');">
                             @csrf()
                             @method('DELETE')
                         <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                         </form>
+
+                        @else
+                        <button  class="btn btn-danger" disabled><i class="fa fa-trash"></i>@lang('site.delete')</button>
+
+                        @endcan
 
                     </td>
                 </tr>

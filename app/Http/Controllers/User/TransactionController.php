@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
+use App\ProductShop;
 
 class TransactionController extends Controller
 {
@@ -14,6 +16,13 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:all-shoppermissions|index-usertransaction')->only('index');
+        $this->middleware('permission:all-shoppermissions|pay-usertransaction')->only('paid');
+        $this->middleware('permission:all-shoppermissions|status-usertransaction')->only('status');
+    }
+
     public function index()
     {
         $transactions = Transaction::where([]);
@@ -71,37 +80,63 @@ class TransactionController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    //change the status of the transaction to delevired or not
+    public function status($id)
     {
+        $transaction = Transaction::findOrFail($id);
+
+        //first update the user shop Product and the product sell count
+        foreach ($transaction->items as $item) {
+            $product = Product::where('id', $item->product_id)->get()->first();
+            ++$product->sell_count;
+            $product->update();
+            ProductShop::create([
+                'product_id' => $item->product_id,
+                'quantity' => $item->quantity,
+                'shop_id' => auth()->user()->shop_id,
+                'status' => 1,
+                'sell_count' => 0,
+                'price' => $item->price / $item->quantity,
+            ]);
+        }
+
+        $transaction->status == 0 ? $transaction->status = 1 : $transaction->status = 0;
+
+        //  $transaction->status == 0 ? $transaction->type = 1 : $transaction->status = 0 ; //change tje type of the bill
+
+        $transaction->save();
+        if (auth()->user()->type == 0) {
+            return redirect()->route('transactions.index')->with('success', __('site.change_status_successfully'));
+        }
+
+        return redirect()->route('user.transactions.index')->with('success', __('site.change_status_successfully'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    //change the paid status of the transaction to paid or not
+    public function paid($id)
     {
+        $transaction = Transaction::findOrFail($id);
+
+        $transaction->is_paid == 0 ? $transaction->is_paid = 1 : $transaction->is_paid = 0;
+        // $transaction->status == 0 ? $transaction->type = 1 : $transaction->status = 0 ; //change tje type of the bill
+
+        $transaction->save();
+        if (auth()->user()->type == 0) {
+            return redirect()->route('transactions.index')->with('success', __('site.change_status_successfully'));
+        }
+
+        return redirect()->route('user.transactions.index')->with('success', __('site.change_status_successfully'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
+        $transaction = Transaction::findOrFail($id);
+        foreach ($transaction->items as $item) {
+            $item->delete();
+        }
+        $transaction->items()->sync([]);
+        $transaction->delete();
+
+        return redirect()->route('user.transactions.index')->with('success', __('site.deleted_successfully'));
     }
 }

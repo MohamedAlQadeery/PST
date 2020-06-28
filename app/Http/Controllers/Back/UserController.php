@@ -19,12 +19,15 @@ class UserController extends Controller
      */
     public function __construct(User $model)
     {
+        $this->middleware('permission:create-user|all')->only('create');
+        $this->middleware('permission:update-user|all')->only('edit');
+        $this->middleware('permission:delete-delete|all')->only('destroy');
         parent::__construct($model);
     }
 
     public function index()
     {
-        $users = User::where('type', '!=', 0)->get();
+        $users = User::orderBy('id', 'desc')->get();
 
         return view('back.user.index')->with([
             'users' => $users,
@@ -39,7 +42,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::where('creator_id', auth()->user()->id)->get();
 
         return view('back.user.create')->with([
             'page_name' => parent::getPluralModelName(),
@@ -70,7 +73,7 @@ class UserController extends Controller
             User::where('id', $user->id)->update(['image' => $image]);
         }
 
-        return redirect()->route('users.index')->with('success', __('site.created_successfully'));
+        return redirect()->route('admin.users.index')->with('success', __('site.created_successfully'));
     }
 
     /**
@@ -101,7 +104,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $selectedRoles = $user->roles()->get()->pluck('id')->toArray();
-        $roles = Role::all();
+        $roles = Role::where('creator_id', auth()->user()->id)->get();
 
         return view('back.user.edit')->with([
             'page_name' => parent::getPluralModelName(),
@@ -139,7 +142,7 @@ class UserController extends Controller
         $user->update($data);
         $user->syncRoles($request->roles);
 
-        return redirect()->route('users.index')->with('success', __('site.edit_successfully'));
+        return redirect()->route('admin.users.index')->with('success', __('site.edit_successfully'));
     }
 
     /**
@@ -158,6 +161,6 @@ class UserController extends Controller
         }
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', __('site.deleted_successfully'));
+        return redirect()->route('admin.users.index')->with('success', __('site.deleted_successfully'));
     }
 }

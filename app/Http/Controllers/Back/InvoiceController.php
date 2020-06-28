@@ -11,6 +11,8 @@ class InvoiceController extends Controller
 {
     public function __construct(Invoice $model)
     {
+        $this->middleware('permission:index-invoice|all')->only('index');
+        $this->middleware('permission:delete-invoice|all')->only('destroy');
         parent::__construct($model);
     }
 
@@ -54,6 +56,6 @@ class InvoiceController extends Controller
         $invoice->items()->sync([]);
         $invoice->delete();
 
-        return redirect()->route('invoice.index')->with('success', __('site.deleted_successfully'));
+        return redirect()->route('admin.invoice.index')->with('success', __('site.deleted_successfully'));
     }
 }

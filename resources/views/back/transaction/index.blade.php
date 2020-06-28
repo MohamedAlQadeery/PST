@@ -95,14 +95,19 @@
 
                     <td>{{$transaction->total}}</td>
                     <td>
-                        <a href="{{route('admin.transaction.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
+                        <a href="{{route('admin.transactions.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
 
-                        <form action="{{route('admin.transaction.destroy',$transaction->id)}}" method="post" style="display:inline"
+                        @canany(['all','delete-transaction'])
+                        <form action="{{route('admin.transactions.destroy',$transaction->id)}}" method="post" style="display:inline"
                               onsubmit="return confirm('Are you sure you want to delete this transaction?');">
                             @csrf()
                             @method('DELETE')
                         <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                         </form>
+                        @else
+                        <button  class="btn btn-danger" disabled><i class="fa fa-trash"></i>@lang('site.delete')</button>
+
+                        @endcan
 
                     </td>
                 </tr>

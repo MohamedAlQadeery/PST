@@ -8,7 +8,7 @@
     </li>
 
     <li>
-        <a href="{{route('admin.transaction.index')}}"><i class="fa-home"></i>@lang('site.transactions')</a>
+        <a href="{{route('admin.transactions.index')}}"><i class="fa-home"></i>@lang('site.transactions')</a>
         </li>
 
     <li class="active">
@@ -105,7 +105,7 @@
 
                 <ul class="list-unstyled">
                     @if($transaction->status===0)
-                    <a href="{{route('transaction.status',$transaction->id)}}" class="btn btn-primary"><i class="entypo-hourglass"> @lang('site.confirm_delivered')</i></a>
+                    <a  class="btn btn-primary disabled"><i class="entypo-hourglass"> @lang('site.confirm_delivered')</i></a>
                     @else
                     <a class="btn btn-success"><i class="entypo-check"> @lang('site.delivered')</i></a>
                     @endif
@@ -113,7 +113,7 @@
 
                 <ul class="list-unstyled">
                     @if($transaction->is_paid === 0 )
-                    <a href="{{route('transaction.paid',$transaction->id)}}" class="btn btn-primary"><i class="entypo-hourglass"> @lang('site.confirm_paid')</i></a>
+                    <a  class="btn btn-primary disabled"><i class="entypo-hourglass"> @lang('site.confirm_paid')</i></a>
                     @else
                     <a class="btn btn-success"><i class="entypo-check"> @lang('site.paid')</i></a>
                     @endif

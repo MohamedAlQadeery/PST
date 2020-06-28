@@ -16,6 +16,10 @@ class CategoryController extends Controller
      */
     public function __construct(Category $model)
     {
+        $this->middleware('permission:create-category|all')->only('create');
+        $this->middleware('permission:update-category|all')->only('edit');
+        $this->middleware('permission:delete-category|all')->only('destroy');
+        $this->middleware('permission:status-category|all')->only('status');
         parent::__construct($model);
     }
 
@@ -52,7 +56,7 @@ class CategoryController extends Controller
     {
         Category::create(['name' => $request->name]);
 
-        return redirect()->route('category.index')->with('success', __('site.created_successfully'));
+        return redirect()->route('admin.category.index')->with('success', __('site.created_successfully'));
     }
 
     /**
@@ -96,7 +100,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->update($request->all());
 
-        return redirect()->route('category.index')->with('success', __('site.edit_successfully'));
+        return redirect()->route('admin.category.index')->with('success', __('site.edit_successfully'));
     }
 
     /**
@@ -111,7 +115,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('category.index')->with('success', __('site.deleted_successfully'));
+        return redirect()->route('admin.category.index')->with('success', __('site.deleted_successfully'));
     }
 
     //change the status of the category to publish or not
@@ -121,6 +125,6 @@ class CategoryController extends Controller
         $category->status == 1 ? $category->status = 0 : $category->status = 1;
         $category->save();
 
-        return redirect()->route('category.index')->with('success', __('site.change_status_successfully'));
+        return redirect()->route('admin.category.index')->with('success', __('site.change_status_successfully'));
     }
 }

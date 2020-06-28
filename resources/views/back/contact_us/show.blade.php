@@ -52,13 +52,17 @@
                 </a>
 
 
-
+                @canany(['all','delete-contactus'])
                 <form action="{{route('admin.contactus.destroy',$message->id)}}" method="post" style="display: inline-block"
                     onsubmit="return confirm('Are you sure you want to delete this message?');">
                   @csrf()
                   @method('DELETE')
-              <button class="btn btn-default" ><i class="entypo-trash"></i></button>
+              <button class="btn btn-danger" ><i class="entypo-trash"></i></button>
               </form>
+              @else
+              <button class="btn btn-default" disabled ><i class="entypo-trash"></i></button>
+
+              @endcan
 
 
                 <a href="#form" class="btn btn-primary btn-icon">
@@ -228,7 +232,7 @@
 
         <br><hr>
         <h2>@lang('site.replay')</h2>
-
+        @canany(['all','create-contactus'])
         <div class="mail-compose">
 
             <form id="form" method="post" role="form" action="{{route('admin.contactus.store',$message->id)}}">
@@ -246,7 +250,9 @@
             </form>
 
         </div>
-
+        @else
+        <h2> <span class="label label-danger">@lang('site.no_permission')</span></h2>
+@endcan
     </div>
 
     <div class="mail-sidebar">

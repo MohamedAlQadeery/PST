@@ -84,13 +84,19 @@
 
                         <a href="{{route($user.'invoices.show',$invoice->id)}}" class="btn btn-info">@lang('site.show')</a>
 
+
+
+                    @canany(['all','delete-invoice','delete-shopinvoice','all-shoppermissions'])
                         <form action="{{route($user.'invoices.destroy',$invoice->id)}}" method="post" style="display:inline"
                               onsubmit="return confirm('Are you sure you want to delete this invoice?');">
                             @csrf()
                             @method('DELETE')
                         <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                         </form>
+                        @else
+                        <button  class="btn btn-danger" disabled >@lang('site.delete')</button>
 
+                        @endcan
                     </td>
                 </tr>
                 @endforeach

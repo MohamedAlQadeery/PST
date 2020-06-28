@@ -296,6 +296,7 @@ document.querySelector("#save").addEventListener("click", e => {
         data:{data:tableContent},
         success:function(data){
            if(data.error==0){
+            location.reload(); 
             window.open('http://localhost:8000/user/invoices/'+data.id,'_blank');
            }else{
                console.log(data.error);

@@ -73,7 +73,7 @@
                     @else
                     <td>{{$transaction->shop->name}}</td>
                     @endif
-                    
+
                     <td>
                         @if($transaction->is_paid === 0)
                         <a class="btn btn-danger">@lang('site.not_paid')</a>
@@ -98,11 +98,11 @@
                         @endif
                     </td>
 
-                    
-                    
+
+
                     <td>{{$transaction->total}}</td>
                     <td>
-                        <a href="{{route('user.transaction.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
+                        <a href="{{route('user.transactions.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
 
 
 

@@ -17,7 +17,7 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         if (auth()->check() && auth()->user()->type != 0) {
-            return redirect()->route('home');
+            abort(403);
         }
 
         return $next($request);

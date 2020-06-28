@@ -18,7 +18,7 @@ Route::resource('shops', 'ShopController');
 
 Route::resource('role', 'RoleController')->except(['show']);
 Route::resource('products', 'ProductController');
-Route::resource('transaction', 'TransactionController');
+Route::resource('transactions', 'TransactionController');
 
 //invoice
 Route::resource('invoices', 'InvoiceController');

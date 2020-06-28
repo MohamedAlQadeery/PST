@@ -13,6 +13,11 @@ use Carbon\Carbon;
 
 class CashierController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:cashier|all-shoppermissions')->only(['getProduct', 'store', 'show']);
+    }
+
     public function getProduct($shop_id, $product_id)
     {
         $product = ProductShop::with(['product', 'shop'])->where(['product_id' => $product_id, 'shop_id' => $shop_id])->first();
@@ -62,6 +67,7 @@ class CashierController extends Controller
                 //product not in invoice decerment the product qunaintity
                 $product = ProductShop::where('product_id', $row['product_id'])->first();
                 $product->quantity -= $row['quantity'];
+                ++$product->sell_count; //increment the sell count
                 $product->save();
 
                 //create first row (item) in transaction

@@ -11,8 +11,9 @@ use App\Http\Requests\Back\User\StoreRequest;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function __construct()
     {
+        $this->middleware('permission:all|edit-user')->only('edit');
     }
 
     public function edit($id)
@@ -66,8 +67,10 @@ class ProfileController extends Controller
             $type = Lang::get('site.admin');
         } elseif ($user->type === 1) {
             $type = Lang::get('site.seller');
-        } else {
+        } elseif ($user->type === 2) {
             $type = Lang::get('site.provider');
+        } else {
+            $type = Lang::get('site.subworker');
         }
 
         return view('back.profile.index')->with([

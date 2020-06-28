@@ -16,12 +16,12 @@ class TransactionController extends Controller
      */
     public function __construct(Transaction $model)
     {
+        $this->middleware('permission:delete-transaction|all')->only('destroy');
         parent::__construct($model);
     }
 
     public function index()
     {
-
         $transactions = Transaction::with(['provider', 'shop'])->get();
 
         return view('back.transaction.index')->with([
@@ -70,38 +70,37 @@ class TransactionController extends Controller
         ]);
     }
 
+    // //change the status of the transaction to delevired or not
+    // public function status($id)
+    // {
+    //     $transaction = Transaction::findOrFail($id);
 
-    //change the status of the transaction to delevired or not
-    public function status($id)
-    {
-        $transaction = Transaction::findOrFail($id);
+    //     $transaction->status == 0 ? $transaction->status = 1 : $transaction->status = 0;
+    //     //  $transaction->status == 0 ? $transaction->type = 1 : $transaction->status = 0 ; //change tje type of the bill
 
-        $transaction->status == 0 ? $transaction->status = 1 : $transaction->status = 0;
-        //  $transaction->status == 0 ? $transaction->type = 1 : $transaction->status = 0 ; //change tje type of the bill
+    //     $transaction->save();
+    //     if (auth()->user()->type == 0) {
+    //         return redirect()->route('admin.transaction.index')->with('success', __('site.change_status_successfully'));
+    //     }
 
-        $transaction->save();
-        if (auth()->user()->type == 0) {
-            return redirect()->route('transaction.index')->with('success', __('site.change_status_successfully'));
-        }
+    //     return redirect()->route('user.transaction.index')->with('success', __('site.change_status_successfully'));
+    // }
 
-        return redirect()->route('user.transaction.index')->with('success', __('site.change_status_successfully'));
-    }
+    // //change the paid status of the transaction to paid or not
+    // public function paid($id)
+    // {
+    //     $transaction = Transaction::findOrFail($id);
 
-    //change the paid status of the transaction to paid or not
-    public function paid($id)
-    {
-        $transaction = Transaction::findOrFail($id);
+    //     $transaction->is_paid == 0 ? $transaction->is_paid = 1 : $transaction->is_paid = 0;
+    //     // $transaction->status == 0 ? $transaction->type = 1 : $transaction->status = 0 ; //change tje type of the bill
 
-        $transaction->is_paid == 0 ? $transaction->is_paid = 1 : $transaction->is_paid = 0;
-        // $transaction->status == 0 ? $transaction->type = 1 : $transaction->status = 0 ; //change tje type of the bill
+    //     $transaction->save();
+    //     if (auth()->user()->type == 0) {
+    //         return redirect()->route('admin.transaction.index')->with('success', __('site.change_status_successfully'));
+    //     }
 
-        $transaction->save();
-        if (auth()->user()->type == 0) {
-            return redirect()->route('transaction.index')->with('success', __('site.change_status_successfully'));
-        }
-
-        return redirect()->route('user.transaction.index')->with('success', __('site.change_status_successfully'));
-    }
+    //     return redirect()->route('user.transaction.index')->with('success', __('site.change_status_successfully'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -142,6 +141,6 @@ class TransactionController extends Controller
         $transaction->items()->sync([]);
         $transaction->delete();
 
-        return redirect()->route('transaction.index')->with('success', __('site.deleted_successfully'));
+        return redirect()->route('admin.transaction.index')->with('success', __('site.deleted_successfully'));
     }
 }

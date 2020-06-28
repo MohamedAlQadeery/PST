@@ -67,13 +67,25 @@
                         @endif
                     </td>
                     <td>
+                        @canany(['all','update-role'])
                         <a href="{{route('admin.role.edit',$role->id)}}" class="btn btn-info">@lang('site.edit')</a>
+                        @else
+                        <button  class="btn btn-info" disabled>@lang('site.edit')</button>
+
+                        @endcan
+                        @canany(['all','delete-role'])
+
                         <form action="{{route('admin.role.destroy',$role->id)}}" method="post" style="display:inline"
                               onsubmit="return confirm('Are you sure you want to delete this role?');">
                             @csrf()
                             @method('DELETE')
                         <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
+
                         </form>
+                        @else
+                        <button  class="btn btn-danger" disabled><i class="fa fa-trash"></i>@lang('site.delete')</button>
+
+                        @endcan
 
                     </td>
                 </tr>

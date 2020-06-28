@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('age');
             $table->string('address');
             $table->integer('gender');
-            $table->integer('type');
+            $table->integer('type'); //0 admin , 1 seller , 2 provider , 3 subworker
             $table->integer('status')->nullable();
             $table->integer('shop_id')->nullable();
             $table->string('email')->unique();

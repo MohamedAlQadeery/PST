@@ -17,14 +17,21 @@
 					<a href="#">{{$product->name}}</a>
 				</h1>
 
-				<div class="categories">
-					<span> الصنف:</span>
-					<a href="#">{{$product->category->name}}</a>
-				</div>
 				<div class="item-detail">
+					<span> الصنف:</span>
+					{{$product->category->name}}
+				</div>
+				<div class="item-detail">	
 					<span> التاريخ :</span>
 					{{$product_date}}
 				</div>
+				<div class="item-detail">	
+					<span> التقييم :</span>
+					<div  class="stars-outer">
+						<div  class="stars-inner"></div>
+					</div>
+				</div>
+				
 			</div>
 
 			<div  style="float:left"  class="col-sm-3">
@@ -186,92 +193,76 @@
 <section class="portfolio-container">
 
 	<div class="container">
-
-		<div class="row">
-			<div class="col-md-12">
-				<h3>أضف تقييمك</h3>
-			</div>
-		</div>
-
-		<br>
-		<div class="row">
-
-            <form action="{{route('site.productReview.store',$product->id)}}" method="post"
-                role="form" class="form-horizontal form-groups-bordered">
-                        @csrf()
-                    <span class="star-rating star-5">
-                        <input type="radio" name="stars" value="1"><i></i>
-                        <input type="radio" name="stars" value="2"><i></i>
-                        <input type="radio" name="stars" value="3"><i></i>
-                        <input type="radio" name="stars" value="4"><i></i>
-                        <input type="radio" name="stars" value="5"><i></i>
-                    </span>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>أضف مراجعتك</h3>
-                        </div>
-                    </div>
-                    <br>
-                    <textarea name="body" cols="30" rows="10">
-
-                    </textarea>
-                    <div class="callout-button">
-                        <button type="submit" class="btn btn-success"><i class="entypo-star"></i>تأكيد</button>
-
-                    </div>
-                </form>
-	</div>
-</div>
-<br>
-<br>
-
-<div class="container">
-
 <h3>
 	<i class="entypo-chat"></i>
 		مراجعات التجار
 </h3>
 
-<div class="sidebar-content">
-
-	<div style="color:gold;font-size:20px" class="details">
-		<i class="entypo-star"> عدد النجوم من 5 هنا </i>
-	</div>
-	<ul class="discussion-list">
-        @foreach ($product->reviews as $review)
-
-        {{-- <a href="{{route('site.providers.show',$item->id)}}" class="thumb">
-            <img src="{{$item->getImage()}}" width="43" class="img-circle')}}" />
-        </a> --}}
-
-        {{-- <div class="details">
-            <a href="{{route('site.providers.show',$item->id)}}">{{$item->first_name.' '.$item->last_name}}</a>
-        </div> --}}
-        <hr>
-        <br>
-        <li>
-            <p>
-                <img src="{{$review->seller->getImage()}}" width="43" class="img-circle')}}" />
-                <a href="#">{{$review->seller->first_name.' '.$review->last_name}}</a>
-                <p style="margin-right: 60px">
-                    {{$review->body}}
-                </p>
-            </p>
-
-        </li>
-
-    @endforeach
-	</ul>
-
-
-	</div>
-
+@foreach ($product->reviews as $review)
+<div class="reviews-container">
+	{{-- <img src="/w3images/bandmember.jpg" alt="Avatar" style="width:90px"> --}}
+	<img src="{{$review->seller->getImage()}}" style="width:90px" class="img-circle')}}" />
+	{{-- <a href="#"> </a>	 --}}
+	<p><span>{{$review->seller->first_name.' '.$review->seller->last_name}}</span> 
+		<div class="stars-outer" style="font-size:20px; margin-right:19px">
+			<div style="width:{{$review->stars*20}}%" class="stars-inner"></div>
+		</div> 
+		<br>
+		<br>
+		<span style="font-size:15px;margin-right:19px;font-weight:bold">{{$review->body}}</span>
+	</p>
+</div>
+	@endforeach
+	
 </div>
 
 </section>
 
-<hr>
+
+<section class="portfolio-container">
+
+		<div class="container">
+
+			<div class="row">
+					<h3>أضف تقييمك</h3>
+			</div>
+	
+			<br>
+	<div class="row">
+	
+		<form action="{{route('site.productReview.store',$product->id)}}" method="post"
+			role="form" class="form-horizontal form-groups-bordered">
+				@csrf()
+			<span class="star-rating star-5">
+				<input type="radio" name="stars" value="1"><i></i>
+				<input type="radio" name="stars" value="2"><i></i>
+				<input type="radio" name="stars" value="3"><i></i>
+				<input type="radio" name="stars" value="4"><i></i>
+				<input type="radio" name="stars" value="5"><i></i>
+			</span>
+	
+			<div class="row">
+				<div class="col-md-12">
+					<h3>أضف مراجعتك</h3>
+				</div>
+			</div>
+			<br>
+			<textarea name="body" cols="30" rows="10">
+	
+			</textarea>
+			<div class="callout-button">
+				<button type="submit" class="btn btn-success"><i class="entypo-star"></i>تأكيد</button>
+	
+			</div>
+		</form>
+	
+		</div>
+	</div>
+	
+</section>
+
+
+<hr>	
 
 <section class="portfolio-container">
 
@@ -330,9 +321,12 @@
 
 @endif
 
-{{-- @section('script')
 
+<script>
+	var rate = "<?php echo $rate ?>";
 
-@endsection --}}
+	document.querySelector(`.stars-inner`).style.width = `${rate*10}%`; 
+
+</script>
 
 @endsection()

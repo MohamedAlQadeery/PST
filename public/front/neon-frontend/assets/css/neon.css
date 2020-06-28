@@ -2319,7 +2319,7 @@ ol.progtrckr li.progtrckr-todo:before {
 /* ratting style */
 
 .star-rating {
-  font-size: 0;
+  font-size:0;
   white-space: nowrap;
   display: inline-block;
   /* width: 250px; remove this */
@@ -2392,3 +2392,70 @@ ol.progtrckr li.progtrckr-todo:before {
 .star-rating.star-3 i ~ i {width: 66.66%;}
 .star-rating.star-3 i ~ i ~ i {width: 100%;}
 
+
+/*another style for Star ratting  */
+
+
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+  font-size: 20px;
+  /* margin-right: 220px; */
+}
+
+.stars-outer::before {
+  content: "\f006 \f006 \f006 \f006 \f006";
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #f8ce0b;
+}
+
+/* reviews section */
+
+.reviews-container {
+  border: 2px solid #ccc;
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.reviews-container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.reviews-container img {
+  float: right;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.reviews-container span {
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+@media (max-width: 500px) {
+  .reviews-container {
+      text-align: center;
+  }
+  .reviews-container img {
+      margin: auto;
+      float: none;
+      display: block;
+  }
+}

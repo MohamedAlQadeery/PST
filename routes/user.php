@@ -17,7 +17,7 @@ Route::get('messagessent', 'MessageController@sentIndex')->name('messages.sentIn
 Route::resource('shoprole', 'RoleController');
 Route::resource('products', 'ProductController');
 Route::resource('contactus', 'ContactusController');
-Route::resource('transaction', 'TransactionController');
+Route::resource('transactions', 'TransactionController');
 Route::resource('subworkers', 'SubworkerController');
 Route::resource('shopproducts', 'ShopproductController');
 Route::resource('invoices', 'InvoiceController');
@@ -30,7 +30,12 @@ Route::group(['prefix' => 'cashier'], function () {
     Route::post('{id}', 'CashierController@store')->name('cashier.store');
 });
 
-Route::resource('transaction', 'TransactionController');
+// Route::resource('transaction', 'TransactionController');
 
 //changes the status of the product
 Route::get('products/{id}/status', 'ProductController@providerProductStatus')->name('product.status');
+
+//changes the status of the transaction
+Route::get('transactions/{id}/status', 'TransactionController@status')->name('transaction.status');
+//changes the paid status of the transaction
+Route::get('transactions/{id}/paid', 'TransactionController@paid')->name('transaction.paid');

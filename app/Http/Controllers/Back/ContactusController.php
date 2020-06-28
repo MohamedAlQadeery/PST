@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class ContactusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create-contactus|all')->only('store');
+        $this->middleware('permission:index-contactus|all')->only('index');
+        $this->middleware('permission:delete-contactus|all')->only('destroy');
+        $this->middleware('permission:show-contactus|all')->only('show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,15 +37,15 @@ class ContactusController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($id)
-    {
-        return view('back.contact_us.create');
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create($id)
+    // {
+    //     return view('back.contact_us.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -54,7 +62,7 @@ class ContactusController extends Controller
         $data['parent_id'] = $id;
         ContactUs::create($data);
 
-        return redirect()->route('contactus.show', $id)->with('success', __('site.created_successfully'));
+        return redirect()->route('admin.contactus.show', $id)->with('success', __('site.created_successfully'));
     }
 
     /**
@@ -69,7 +77,7 @@ class ContactusController extends Controller
         $count_messages = ContactUs::where('parent_id', null)->count();
         $message = ContactUs::where(['parent_id' => null, 'id' => $id])->first();
         if (is_null($message)) {
-            return redirect()->route('contactus.index');
+            return redirect()->route('admin.contactus.index');
         }
         $message->read = 1;
         $message->save();
@@ -121,11 +129,11 @@ class ContactusController extends Controller
 
             $message->delete();
 
-            return redirect()->route('contactus.index')->with('success', __('site.deleted_successfully'));
+            return redirect()->route('admin.contactus.index')->with('success', __('site.deleted_successfully'));
         }
         //deletes a replay only
         $message->delete();
 
-        return redirect()->route('contactus.show', $message->parent_id)->with('success', __('site.deleted_successfully'));
+        return redirect()->route('admin.contactus.show', $message->parent_id)->with('success', __('site.deleted_successfully'));
     }
 }

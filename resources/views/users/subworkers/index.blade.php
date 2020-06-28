@@ -14,7 +14,15 @@
 </ol>
 
 <h2>@lang('site.subworkers') {{$subworkers[0]->shop->name}}</h2>
+@canany(['all-shoppermissions','create-subworker'])
+<a href="{{route('user.subworkers.create')}}" class="btn btn-default btn-icon pull-right">
+    @else
+    <a class="btn btn-default btn-icon pull-right disabled" >
 
+@endcan
+    @lang('site.create')
+    <i class="entypo-user-add"></i>
+</a>
 
 <div class="row">
 
@@ -55,10 +63,27 @@
                     </td>
                     <td>
                         <a href="{{route('profile.show',$subworker->id)}}" class="btn btn-info">@lang('site.show')</a>
-                        @canany(['all','all-shoppermissions'])
-                        <a href="{{route('profile.edit',$subworker->id)}}" class="btn btn-success">@lang('site.edit')</a>
+                       @canany(['all-shoppermissions','update-subworker'])
+                        <a href="{{route('user.subworkers.edit',$subworker->id)}}" class="btn btn-primary">@lang('site.edit')</a>
+
+                        @else
+                        <button class="btn btn-primary" disabled>@lang('site.edit')</button>
+
                         @endcan
 
+                        @canany(['all-shoppermissions','delete-subworker'])
+                        <form action="{{route('user.subworkers.destroy',$subworker->id)}}" method="post" style="display:inline"
+                            onsubmit="return confirm('Are you sure you want to delete this subworker?');">
+                          @csrf()
+                          @method('DELETE')
+                      <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
+                      </form>
+                      @else
+                      <button  class="btn btn-danger" disabled><i class="fa fa-trash"></i>@lang('site.delete')</button>
+
+                      @endcan
+
+                    </td>
 
 
 

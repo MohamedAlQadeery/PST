@@ -58,13 +58,19 @@
                     <td>{{$message->title}}</td>
                     <td>
                         <a href="{{route('user.contactus.show',$message->id)}}" class="btn btn-info">@lang('site.show')</a>
+
+                        @canany(['all-shoppermissions','delete-usercontactus'])
+
                         <form action="{{route('user.contactus.destroy',$message->id)}}" method="post" style="display:inline"
                               onsubmit="return confirm('Are you sure you want to delete this message?');">
                             @csrf()
                             @method('DELETE')
                         <button  class="btn btn-danger"><i class="fa fa-trash"></i>@lang('site.delete')</button>
                         </form>
+                        @else
+                        <button  class="btn btn-danger" disabled><i class="fa fa-trash"></i>@lang('site.delete')</button>
 
+                        @endcan
                     </td>
                 </tr>
                 @endforeach

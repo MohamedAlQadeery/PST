@@ -18,6 +18,8 @@ class ShopController extends Controller
      */
     public function __construct(Shop $shop)
     {
+        $this->middleware('permission:update-shop|all')->only('edit');
+        $this->middleware('permission:delete-shop|all')->only('destroy');
         parent::__construct($shop);
     }
 
@@ -107,7 +109,7 @@ class ShopController extends Controller
         }
         $shop->update($data);
 
-        return redirect()->route('shops.index')->with('success', __('site.edit_successfully'));
+        return redirect()->route('admin.shops.index')->with('success', __('site.edit_successfully'));
     }
 
     /**
@@ -125,6 +127,6 @@ class ShopController extends Controller
         }
         $shop->delete();
 
-        return redirect()->route('shops.index')->with('success', __('site.deleted_successfully'));
+        return redirect()->route('admin.shops.index')->with('success', __('site.deleted_successfully'));
     }
 }

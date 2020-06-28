@@ -18,12 +18,15 @@ class RoleController extends Controller
      */
     public function __construct(Role $model)
     {
+        $this->middleware('permission:create-role|all')->only('create');
+        $this->middleware('permission:update-role|all')->only('edit');
+        $this->middleware('permission:delete-role|all')->only('destroy');
         parent::__construct($model);
     }
 
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::where('creator_id', auth()->user()->id)->get();
 
         return view('back.role.index')->with([
             'page_name' => parent::getPluralModelName(),
@@ -55,11 +58,11 @@ class RoleController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $role = Role::create(['name' => $request->name]);
+        $role = Role::create(['name' => $request->name, 'creator_id' => auth()->user()->id]);
         $role->syncPermissions($request->permissions);
         Alert::success(__('site.success'), __('site.created_successfully'));
 
-        return redirect()->route('role.index');
+        return redirect()->route('admin.role.index');
     }
 
     /**
@@ -109,7 +112,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->permissions);
         Alert::success(__('site.success'), __('site.edit_successfully'));
 
-        return redirect()->route('role.index');
+        return redirect()->route('admin.role.index');
     }
 
     /**
@@ -126,6 +129,6 @@ class RoleController extends Controller
         $role->delete();
         Alert::success(__('site.success'), __('site.deleted_successfully'));
 
-        return redirect()->route('role.index');
+        return redirect()->route('admin.role.index');
     }
 }
