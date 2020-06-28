@@ -84,26 +84,30 @@ class TransactionController extends Controller
     public function status($id)
     {
         $transaction = Transaction::findOrFail($id);
-
         //first update the user shop Product and the product sell count
         foreach ($transaction->items as $item) {
             $product = Product::where('id', $item->product_id)->get()->first();
             ++$product->sell_count;
             $product->update();
-            ProductShop::create([
-                'product_id' => $item->product_id,
-                'quantity' => $item->quantity,
-                'shop_id' => auth()->user()->shop_id,
-                'status' => 1,
-                'sell_count' => 0,
-                'price' => $item->price / $item->quantity,
-            ]);
+            $productExist = ProductShop::where('product_id', $item->product_id)->get()->first();
+            if ($productExist) {
+                $productShop = ProductShop::where('product_id', $item->product_id)->get()->first();
+                $productShop->quantity += $item->quantity; //just increment quantity
+               $productShop->price = $item->price / $item->quantity; //update price if changed
+               $productShop->update();
+            } else {
+                ProductShop::create([
+                   'product_id' => $item->product_id,
+                   'quantity' => $item->quantity,
+                   'shop_id' => auth()->user()->shop_id,
+                   'status' => 1,
+                   'sell_count' => 0,
+                   'price' => $item->price / $item->quantity,
+               ]);
+            }
         }
-
         $transaction->status == 0 ? $transaction->status = 1 : $transaction->status = 0;
-
         //  $transaction->status == 0 ? $transaction->type = 1 : $transaction->status = 0 ; //change tje type of the bill
-
         $transaction->save();
         if (auth()->user()->type == 0) {
             return redirect()->route('transactions.index')->with('success', __('site.change_status_successfully'));
