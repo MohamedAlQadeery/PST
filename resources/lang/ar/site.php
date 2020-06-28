@@ -234,4 +234,5 @@ return [
     'subworker' => 'عامل في متجر',
     'no_permission' => 'لا يوجد لديك صلاحيه لهذه العمليه',
     'no_permission_button' => 'ليس لديك الصلاحيه',
+    'site_vist' => 'زيارة الموقع',
     ];

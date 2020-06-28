@@ -86,6 +86,11 @@
             </li> --}}
 
 
+            <li class="active">
+                <a href="{{route('site.home')}}"><i  class="entypo-globe" ></i><span style="font-size: 17px">@lang('site.site_vist')</span></a>
+
+            </li>
+
 
             @if(auth()->user()->type==0)
             <li class="active">
