@@ -29,7 +29,7 @@ class ContactusController extends Controller
             $messages = $messages->where('title', 'like', '%'.$request->input('title').'%');
         }
 
-        $messages = $messages->orderBy('read', 'asc')->get();
+        $messages = $messages->orderBy('id', 'desc')->get();
 
         return view('back.contact_us.index')->with([
             'messages' => $messages,

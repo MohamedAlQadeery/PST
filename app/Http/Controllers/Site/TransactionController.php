@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Item;
 use App\Product;
-use App\Transaction;
 use Carbon\Carbon;
+use App\Transaction;
 use Darryldecode\Cart\Cart;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Notifications\TransactionNotification;
 
 class TransactionController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::where('shop_id', auth()->user()->shop_id)->get();
+        $transactions = Transaction::where('shop_id', auth()->user()->shop_id)->orderBy('id', 'desc')->get();
 
         return view('site.transaction.index')->with('transactions', $transactions);
     }
@@ -52,6 +53,12 @@ class TransactionController extends Controller
         } else {
             return response()->json(['error' => 1]);
         }
+
+        //data for transaction notification
+        $data = ['shop_name' => $transaction->shop->name,
+                    'transaction_id' => $transaction->id, ];
+
+        $transaction->provider->notify(new TransactionNotification($data));
 
         $transaction->items()->attach($items_id);
         $transaction->update(['total' => $sum]);

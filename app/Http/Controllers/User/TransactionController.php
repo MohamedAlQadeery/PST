@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\DeliveredProductNotification;
+use App\Notifications\PaidNotification;
 use App\Product;
 use App\ProductShop;
 
@@ -109,9 +111,12 @@ class TransactionController extends Controller
         $transaction->status == 0 ? $transaction->status = 1 : $transaction->status = 0;
         //  $transaction->status == 0 ? $transaction->type = 1 : $transaction->status = 0 ; //change tje type of the bill
         $transaction->save();
-        if (auth()->user()->type == 0) {
-            return redirect()->route('transactions.index')->with('success', __('site.change_status_successfully'));
-        }
+
+        //data for transaction notification
+        $data = ['shop_name' => $transaction->shop->name,
+          'transaction_id' => $transaction->id, ];
+
+        $transaction->provider->notify(new DeliveredProductNotification($data));
 
         return redirect()->route('user.transactions.index')->with('success', __('site.change_status_successfully'));
     }
@@ -125,9 +130,10 @@ class TransactionController extends Controller
         // $transaction->status == 0 ? $transaction->type = 1 : $transaction->status = 0 ; //change tje type of the bill
 
         $transaction->save();
-        if (auth()->user()->type == 0) {
-            return redirect()->route('transactions.index')->with('success', __('site.change_status_successfully'));
-        }
+
+        //data for notification
+        $data = ['transaction_id' => $transaction->id, 'provider_name' => $transaction->provider->first_name.' '.$transaction->provider->last_name];
+        $transaction->shop->user->notify(new PaidNotification($data));
 
         return redirect()->route('user.transactions.index')->with('success', __('site.change_status_successfully'));
     }

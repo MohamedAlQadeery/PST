@@ -71,4 +71,7 @@
       filebrowserUploadUrl: base_url+route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
     });
   </script>
+
+
+
 @endsection

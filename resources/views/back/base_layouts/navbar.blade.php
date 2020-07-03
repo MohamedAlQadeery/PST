@@ -3,329 +3,144 @@
     <!-- Profile Info and Notifications -->
     <div class="col-md-6 col-sm-8 clearfix">
 
-        <ul class="user-info pull-left pull-none-xsm">
-
-
         <ul class="user-info pull-left pull-right-xs pull-none-xsm">
 
-            <!-- Raw Notifications -->
-            {{-- <li class="notifications dropdown">
 
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <i class="entypo-attention"></i>
-                    <span class="badge badge-info">6</span>
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li class="top">
-                        <p class="small">
-                            <a href="#" class="pull-right">Mark all Read</a>
-                            You have <strong>3</strong> new notifications.
-                        </p>
-                    </li>
-
-                    <li>
-                        <ul class="dropdown-menu-list scroller">
-                            <li class="unread notification-success">
-                                <a href="#">
-                                    <i class="entypo-user-add pull-right"></i>
-
-                                    <span class="line">
-                                        <strong>New user registered</strong>
-                                    </span>
-
-                                    <span class="line small">
-                                        30 seconds ago
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="unread notification-secondary">
-                                <a href="#">
-                                    <i class="entypo-heart pull-right"></i>
-
-                                    <span class="line">
-                                        <strong>Someone special liked this</strong>
-                                    </span>
-
-                                    <span class="line small">
-                                        2 minutes ago
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="notification-primary">
-                                <a href="#">
-                                    <i class="entypo-user pull-right"></i>
-
-                                    <span class="line">
-                                        <strong>Privacy settings have been changed</strong>
-                                    </span>
-
-                                    <span class="line small">
-                                        3 hours ago
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="notification-danger">
-                                <a href="#">
-                                    <i class="entypo-cancel-circled pull-right"></i>
-
-                                    <span class="line">
-                                        John cancelled the event
-                                    </span>
-
-                                    <span class="line small">
-                                        9 hours ago
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="notification-info">
-                                <a href="#">
-                                    <i class="entypo-info pull-right"></i>
-
-                                    <span class="line">
-                                        The server is status is stable
-                                    </span>
-
-                                    <span class="line small">
-                                        yesterday at 10:30am
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="notification-warning">
-                                <a href="#">
-                                    <i class="entypo-rss pull-right"></i>
-
-                                    <span class="line">
-                                        New comments waiting approval
-                                    </span>
-
-                                    <span class="line small">
-                                        last week
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="external">
-                        <a href="#">View all notifications</a>
-                    </li>
-                </ul>
-
-            </li> --}}
-
-            <!-- Message Notifications -->
             <li class="notifications dropdown">
 
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <i class="entypo-mail"></i>
-                    <span class="badge badge-secondary">10</span>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
+                    <i class="entypo-bell"></i>
+                    <span class="badge badge-info">{{count(auth()->user()->unreadNotifications()->get() )}}</span>
                 </a>
 
                 <ul class="dropdown-menu">
+
                     <li>
-                        <form class="top-dropdown-search">
+                        <ul class="dropdown-menu-list scroller" style="overflow: hidden; outline: currentcolor none medium;" tabindex="5001">
 
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search anything..." name="s" />
-                            </div>
+                          @foreach(auth()->user()->notifications()->get() as $notification)
+                            <li class="notification">
 
-                        </form>
+                                {{--  contact message notification  --}}
+                              @if($notification->type=="App\Notifications\ContactMessage")
+                              <a href="{{route('admin.contactus.show',$notification->data['contact_message_id'])}}"
+                                   class="mark-as-read" data-id="{{ $notification->id }}">
+                                <i class="entypo-comment pull-right"></i>
 
-                        <ul class="dropdown-menu-list scroller">
-                            <li class="active">
-                                <a href="#">
-                                    <span class="image pull-right">
-                                        <img src="assets/images/thumb-1@2x.png" width="44" alt="" class="img-circle" />
-                                    </span>
+                                <span class="line">
+                                    @if(is_null($notification->read_at))
+                                    <strong>{{$notification->data['user_fullname']}} @lang('site.sent_you_message')</strong>
+                                    @else
+                                    {{$notification->data['user_fullname']}} @lang('site.sent_you_message')
 
-                                    <span class="line">
-                                        <strong>Luc Chartier</strong>
-                                        - yesterday
-                                    </span>
+                                     @endif
+                                </span>
 
-                                    <span class="line desc small">
-                                        This ain’t our first item, it is the best of the rest.
-                                    </span>
-                                </a>
+                                <span class="line small">
+                                    {{$notification->created_at->diffForHumans()}}
+                                </span>
+                            </a>
+
+                              @elseif($notification->type=="App\Notifications\TransactionNotification")
+                              <a href="{{route('user.transactions.show',$notification->data['transaction_id'])}}"
+                                   class="mark-as-read" data-id="{{ $notification->id }}">
+                                <i class="entypo-basket pull-right"></i>
+
+                                <span class="line">
+                                    @if(is_null($notification->read_at))
+                                    <strong>{{$notification->data['shop_name']}} @lang('site.request_transaction')</strong>
+                                    @else
+                                    {{$notification->data['shop_name']}} @lang('site.request_transaction')
+
+                                     @endif
+                                </span>
+
+                                <span class="line small">
+                                    {{$notification->created_at->diffForHumans()}}
+                                </span>
+                            </a>
+
+                            @elseif($notification->type=="App\Notifications\PaidNotification")
+                            <a href="{{route('user.transactions.show',$notification->data['transaction_id'])}}"
+                                 class="mark-as-read" data-id="{{ $notification->id }}">
+                              <i class="entypo-tag pull-right"></i>
+
+                              <span class="line">
+                                  @if(is_null($notification->read_at))
+                                  <strong>{{$notification->data['provider_name']}} @lang('site.paid_confirm') {{$notification->data['transaction_id']}}</strong>
+                                  @else
+                                  {{$notification->data['provider_name']}} @lang('site.paid_confirm')
+
+                                   @endif
+                              </span>
+
+                              <span class="line small">
+                                  {{$notification->created_at->diffForHumans()}}
+                              </span>
+                          </a>
+                          @elseif($notification->type=="App\Notifications\DeliveredProductNotification")
+                          <a href="{{route('user.transactions.show',$notification->data['transaction_id'])}}"
+                               class="mark-as-read" data-id="{{ $notification->id }}">
+                            <i class="entypo-location pull-right"></i>
+
+                            <span class="line">
+                                @if(is_null($notification->read_at))
+                                <strong>{{$notification->data['shop_name']}} @lang('site.product_received') {{$notification->data['transaction_id']}}</strong>
+                                @else
+                                {{$notification->data['shop_name']}} @lang('site.product_received')
+
+                                 @endif
+                            </span>
+
+                            <span class="line small">
+                                {{$notification->created_at->diffForHumans()}}
+                            </span>
+                        </a>
+                        @elseif($notification->type=="App\Notifications\MessageNotification")
+                        <a href="{{route('user.messages.show',$notification->data['message_id'])}}"
+                             class="mark-as-read" data-id="{{ $notification->id }}">
+                          <i class="entypo-mail pull-right"></i>
+
+                          <span class="line">
+                              @if(is_null($notification->read_at))
+
+                              {{-- if its a replay or new message --}}
+                                @if ($notification->data['replay'] ==0 )
+                                <strong>{{$notification->data['username']}} @lang('site.sent_you_message')</strong>
+                                @else
+                                <strong>{{$notification->data['username']}} @lang('site.replied_to_message')</strong>
+                                @endif
+
+                              @else
+                              @if ($notification->data['replay'] ==0 )
+                              {{$notification->data['username']}} @lang('site.sent_you_message')
+                              @else
+                              {{$notification->data['username']}} @lang('site.replied_to_message')
+                              @endif
+
+                               @endif
+                          </span>
+
+                          <span class="line small">
+                              {{$notification->created_at->diffForHumans()}}
+                          </span>
+                      </a>
+                              @endif
+
                             </li>
+                            @endforeach
 
-                            <li class="active">
-                                <a href="#">
-                                    <span class="image pull-right">
-                                        <img src="assets/images/thumb-2@2x.png" width="44" alt="" class="img-circle" />
-                                    </span>
 
-                                    <span class="line">
-                                        <strong>Salma Nyberg</strong>
-                                        - 2 days ago
-                                    </span>
 
-                                    <span class="line desc small">
-                                        Oh he decisively impression attachment friendship so if everything.
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <span class="image pull-right">
-                                        <img src="assets/images/thumb-3@2x.png" width="44" alt="" class="img-circle" />
-                                    </span>
-
-                                    <span class="line">
-                                        Hayden Cartwright
-                                        - a week ago
-                                    </span>
-
-                                    <span class="line desc small">
-                                        Whose her enjoy chief new young. Felicity if ye required likewise so doubtful.
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <span class="image pull-right">
-                                        <img src="assets/images/thumb-4@2x.png" width="44" alt="" class="img-circle" />
-                                    </span>
-
-                                    <span class="line">
-                                        Sandra Eberhardt
-                                        - 16 days ago
-                                    </span>
-
-                                    <span class="line desc small">
-                                        On so attention necessary at by provision otherwise existence direction.
-                                    </span>
-                                </a>
-                            </li>
                         </ul>
                     </li>
 
-                    <li class="external">
-                        <a href="mailbox.html">All Messages</a>
-                    </li>
-                </ul>
 
-            </li>
-
-            <!-- Task Notifications -->
-            <li class="notifications dropdown">
-
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <i class="entypo-list"></i>
-                    <span class="badge badge-warning">1</span>
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li class="top">
-                        <p>You have 6 pending tasks</p>
-                    </li>
-
-                    <li>
-                        <ul class="dropdown-menu-list scroller">
-                            <li>
-                                <a href="#">
-                                    <span class="task">
-                                        <span class="desc">Procurement</span>
-                                        <span class="percent">27%</span>
-                                    </span>
-
-                                    <span class="progress">
-                                        <span style="width: 27%;" class="progress-bar progress-bar-success">
-                                            <span class="sr-only">27% Complete</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="task">
-                                        <span class="desc">App Development</span>
-                                        <span class="percent">83%</span>
-                                    </span>
-
-                                    <span class="progress progress-striped">
-                                        <span style="width: 83%;" class="progress-bar progress-bar-danger">
-                                            <span class="sr-only">83% Complete</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="task">
-                                        <span class="desc">HTML Slicing</span>
-                                        <span class="percent">91%</span>
-                                    </span>
-
-                                    <span class="progress">
-                                        <span style="width: 91%;" class="progress-bar progress-bar-success">
-                                            <span class="sr-only">91% Complete</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="task">
-                                        <span class="desc">Database Repair</span>
-                                        <span class="percent">12%</span>
-                                    </span>
-
-                                    <span class="progress progress-striped">
-                                        <span style="width: 12%;" class="progress-bar progress-bar-warning">
-                                            <span class="sr-only">12% Complete</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="task">
-                                        <span class="desc">Backup Create Progress</span>
-                                        <span class="percent">54%</span>
-                                    </span>
-
-                                    <span class="progress progress-striped">
-                                        <span style="width: 54%;" class="progress-bar progress-bar-info">
-                                            <span class="sr-only">54% Complete</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="task">
-                                        <span class="desc">Upgrade Progress</span>
-                                        <span class="percent">17%</span>
-                                    </span>
-
-                                    <span class="progress progress-striped">
-                                        <span style="width: 17%;" class="progress-bar progress-bar-important">
-                                            <span class="sr-only">17% Complete</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="external">
-                        <a href="#">See all tasks</a>
-                    </li>
-                </ul>
+                <div id="ascrail2001" class="nicescroll-rails" style="padding-right: 3px; width: 10px; z-index: 1000; cursor: default; position: absolute; top: 41.2px; left: 358.8px; height: 290px; display: none; opacity: 0;"><div style="position: relative; top: 0px; float: right; width: 5px; height: 240px; background-color: rgb(212, 212, 212); border: 1px solid rgb(204, 204, 204); background-clip: padding-box; border-radius: 1px;"></div></div><div id="ascrail2001-hr" class="nicescroll-rails" style="height: 7px; z-index: 1000; top: 324.2px; left: 0.799988px; position: absolute; cursor: default; display: none; width: 358px; opacity: 0;"><div style="position: relative; top: 0px; height: 5px; width: 368px; background-color: rgb(212, 212, 212); border: 1px solid rgb(204, 204, 204); background-clip: padding-box; border-radius: 1px;"></div></div></ul>
 
             </li>
 
         </ul>
-
     </div>
     <!-- Raw Links -->
     <div class="col-md-6 col-sm-4 clearfix hidden-xs">

@@ -129,7 +129,7 @@
         <div class="mail-text">
 
             <p>
-                {{$message->body}}
+                {!!$message->body!!}
             </p>
         </div>
 

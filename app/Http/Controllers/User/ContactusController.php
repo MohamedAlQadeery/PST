@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\User;
 use App\ContactUs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\ContactMessage;
 
 class ContactusController extends Controller
 {
@@ -42,14 +44,24 @@ class ContactusController extends Controller
             $data['body'] = $request->body;
             $data['parent_id'] = $request->parent_id;
             $data['user_id'] = auth()->user()->id;
-            ContactUs::create($data);
+            $parent_message = ContactUs::create($data);
+            $contactMessage = ContactUs::findOrFail($parent_message->parent_id);
 
             return redirect()->route('user.contactus.show', $request->parent_id)->with('success', __('site.message_created'));
         } else {
             $request->validate(['body' => 'required', 'title' => 'required']);
             $data = $request->except(['_token']);
             $data['user_id'] = auth()->user()->id;
-            ContactUs::create($data);
+            $contactMessage = ContactUs::create($data);
+        }
+
+        $admins = User::where('type', 0)->get();
+
+        //send notifications to admins
+        foreach ($admins as $admin) {
+            if ($admin->hasAnyPermission(['all', 'index-contactus'])) {
+                $admin->notify(new ContactMessage($contactMessage));
+            }
         }
 
         return redirect()->route('user.contactus.index')->with('success', __('site.created_successfully'));

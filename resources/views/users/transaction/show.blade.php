@@ -105,7 +105,7 @@
                 <ul class="list-unstyled">
                     @canany(['all-shoppermissions','status-usertransaction'])
                     @if($transaction->status===0)
-                    <a href="{{route('user.transaction.status',$transaction->id)}}" class="btn btn-primary">
+                    <a href="{{route('user.transaction.status',$transaction->id)}}" class="btn btn-danger">
                         <i class="entypo-hourglass"> @lang('site.confirm_delivered')</i></a>
                     @else
                     <a class="btn btn-success"><i class="entypo-check"> @lang('site.delivered')</i></a>
@@ -120,7 +120,7 @@
                 <ul class="list-unstyled">
                     @can('pay-usertransaction')
                     @if($transaction->is_paid === 0 )
-                    <a href="{{route('user.transaction.paid',$transaction->id)}}" class="btn btn-primary"><i class="entypo-hourglass"> @lang('site.confirm_paid')</i></a>
+                    <a href="{{route('user.transaction.paid',$transaction->id)}}" class="btn btn-danger"><i class="entypo-hourglass"> @lang('site.confirm_paid')</i></a>
                     @else
                     <a class="btn btn-success"><i class="entypo-check"> @lang('site.paid')</i></a>
                     @endif

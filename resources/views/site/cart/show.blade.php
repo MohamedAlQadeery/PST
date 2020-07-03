@@ -265,7 +265,7 @@ document.querySelector("#saveCash").addEventListener("click", e => {
 
     $.ajax({
         type:'POST',
-        url:'{{route("site.transaction.store",[$provider->id,0])}}',
+        url:'{{route("site.transaction.store",[$provider->id,1])}}',
         data:{data:arrData},
         success:function(data){
            if(data.error==0){
@@ -295,7 +295,7 @@ document.querySelector("#saveDept").addEventListener("click", e => {
 
     $.ajax({
         type:'POST',
-        url:'{{route("site.transaction.store",[$provider->id,1])}}',
+        url:'{{route("site.transaction.store",[$provider->id,0])}}',
         data:{data:arrData},
         success:function(data){
            if(data.error==0){

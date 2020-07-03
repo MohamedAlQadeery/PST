@@ -235,4 +235,9 @@ return [
     'no_permission' => 'لا يوجد لديك صلاحيه لهذه العمليه',
     'no_permission_button' => 'ليس لديك الصلاحيه',
     'site_vist' => 'زيارة الموقع',
+    'sent_you_message' => 'ارسل لك رسالة',
+    'request_transaction' => 'متجر طلب بضائع',
+    'paid_confirm' => 'المزود أكد استلام مبلغ المعامله رقم ',
+    'product_received' => 'المتجر تم تأكيد استلام بضائع المعامله رقم',
+    'replied_to_message' => 'قام بالرد على رسالتك',
     ];

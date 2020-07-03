@@ -22,8 +22,20 @@ class Message extends Model
         return $this->belongsTo('App\User', 'from_id');
     }
 
+    //returns the user that recieved the message
+    public function to()
+    {
+        return $this->belongsTo('App\User', 'to_id');
+    }
+
     public function replies()
     {
         return $this->hasMany('App\Message', 'parent_id')->orderBy('id', 'asc');
+    }
+
+    //its a replay message and parent function gets the parent of the replay
+    public function parent()
+    {
+        return $this->belongsTo('App\Message', 'parent_id');
     }
 }

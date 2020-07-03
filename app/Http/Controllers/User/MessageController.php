@@ -6,6 +6,7 @@ use App\User;
 use App\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\MessageNotification;
 
 class MessageController extends Controller
 {
@@ -71,7 +72,21 @@ class MessageController extends Controller
             $data['parent_id'] = $request->parent_id;
             $data['from_id'] = auth()->user()->id;
 
-            Message::create($data);
+            $message = Message::create($data);
+
+            $notification_data = ['message_id' => $message->parent_id,
+            'username' => $message->from->first_name.' '.$message->from->last_name,
+            'replay' => 1,
+                 ];
+
+            //if the auth user is not the one who wrote the message he will recieve notification on replay
+            if ($message->from_id != $message->parent->from_id) {
+                //sent notiftcation to the user who sent the message
+                $message->parent->from->notify(new MessageNotification($notification_data));
+            } else {
+                //sent notiftcation to the user who recieved the message
+                $message->parent->to->notify(new MessageNotification($notification_data));
+            }
 
             return redirect()->route('user.messages.show', $request->parent_id)->with('success', __('site.message_created'));
         } else {
@@ -89,7 +104,10 @@ class MessageController extends Controller
             $data['from_id'] = auth()->user()->id;
         }
 
-        Message::create($data);
+        $message = Message::create($data);
+        $notification_data = ['message_id' => $message->id,
+        'username' => $message->from->first_name.' '.$message->from->last_name, 'replay' => 0, ];
+        $message->to->notify(new MessageNotification($notification_data));
 
         return redirect()->route('user.messages.index')->with('success', __('site.message_created'));
     }
