@@ -12,11 +12,11 @@ class ContactMessage extends Notification
     /**
      * Create a new notification instance.
      */
-    public $contactMessage;
+    public $data;
 
-    public function __construct($contactMessage)
+    public function __construct($data)
     {
-        $this->contactMessage = $contactMessage;
+        $this->data = $data;
     }
 
     /**
@@ -41,8 +41,8 @@ class ContactMessage extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'contact_message_id' => $this->contactMessage->id,
-            'user_fullname' => $this->contactMessage->user->first_name.' '.$this->contactMessage->user->last_name,
+            'contact_message_id' => $this->data['contact_message_id'],
+            'user_fullname' => $this->data['user_fullname'],
         ];
     }
 

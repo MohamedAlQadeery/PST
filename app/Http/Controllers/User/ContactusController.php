@@ -37,6 +37,7 @@ class ContactusController extends Controller
      */
     public function store(Request $request)
     {
+        $notification_data = array();
         if ($request->has('replay')) {
             $request->validate([
                 'body' => 'required',
@@ -44,8 +45,19 @@ class ContactusController extends Controller
             $data['body'] = $request->body;
             $data['parent_id'] = $request->parent_id;
             $data['user_id'] = auth()->user()->id;
-            $parent_message = ContactUs::create($data);
-            $contactMessage = ContactUs::findOrFail($parent_message->parent_id);
+            $contactMessage = ContactUs::create($data);
+
+            $notification_data = ['contact_message_id' => $contactMessage->parent_id,
+            'user_fullname' => $contactMessage->user->first_name.' '.$contactMessage->user->last_name,
+                 ];
+            //send notifications to admins
+            $admins = User::where('type', 0)->get();
+
+            foreach ($admins as $admin) {
+                if ($admin->hasAnyPermission(['all', 'index-contactus'])) {
+                    $admin->notify(new ContactMessage($notification_data));
+                }
+            }
 
             return redirect()->route('user.contactus.show', $request->parent_id)->with('success', __('site.message_created'));
         } else {
@@ -53,14 +65,17 @@ class ContactusController extends Controller
             $data = $request->except(['_token']);
             $data['user_id'] = auth()->user()->id;
             $contactMessage = ContactUs::create($data);
-        }
 
-        $admins = User::where('type', 0)->get();
-
-        //send notifications to admins
-        foreach ($admins as $admin) {
-            if ($admin->hasAnyPermission(['all', 'index-contactus'])) {
-                $admin->notify(new ContactMessage($contactMessage));
+            //sent notification to admins
+            $admins = User::where('type', 0)->get();
+            $notification_data = ['contact_message_id' => $contactMessage->id,
+            'user_fullname' => $contactMessage->user->first_name.' '.$contactMessage->user->last_name,
+                 ];
+            //send notifications to admins
+            foreach ($admins as $admin) {
+                if ($admin->hasAnyPermission(['all', 'index-contactus'])) {
+                    $admin->notify(new ContactMessage($notification_data));
+                }
             }
         }
 

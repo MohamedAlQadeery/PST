@@ -4,6 +4,7 @@ namespace App\Http\Controllers\back;
 
 use App\ContactUs;
 use App\Http\Controllers\Controller;
+use App\Notifications\ContactMessage;
 use Illuminate\Http\Request;
 
 class ContactusController extends Controller
@@ -57,10 +58,17 @@ class ContactusController extends Controller
     public function store(Request $request, $id)
     {
         $request->validate(['body' => 'required']);
+        $contact_message = ContactUs::findOrFail($id);
         $data = $request->except(['_wysihtml5_mode']);
         $data['user_id'] = auth()->user()->id;
         $data['parent_id'] = $id;
-        ContactUs::create($data);
+        $replay = ContactUs::create($data);
+
+        $notification_data = ['contact_message_id' => $replay->parent->id,
+        'user_fullname' => $replay->user->first_name.' '.$replay->user->last_name,
+             ];
+
+        $contact_message->user->notify(new ContactMessage($notification_data));
 
         return redirect()->route('admin.contactus.show', $id)->with('success', __('site.created_successfully'));
     }

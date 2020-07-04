@@ -34,7 +34,7 @@ class TransactionController extends Controller
             $transactions = $transactions->where('provider_id', auth()->user()->id);
         }
 
-        $transactions = $transactions->get();
+        $transactions = $transactions->orderBy('id', 'desc')->get();;
 
         return view('users.transaction.index')->with([
             'page_name' => 'transactions',

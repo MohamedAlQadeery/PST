@@ -1,21 +1,21 @@
 <div class="row  noPrint">
 
     <!-- Profile Info and Notifications -->
-    <div class="col-md-6 col-sm-8 clearfix">
+    <div class="col-md-6 col-sm-8 clearfix" id="thisdiv"  >
 
-        <ul class="user-info pull-left pull-right-xs pull-none-xsm">
+        <ul class="user-info pull-left pull-right-xs pull-none-xsm" >
 
 
-            <li class="notifications dropdown">
+            <li class="notifications dropdown" >
 
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
                     <i class="entypo-bell"></i>
                     <span class="badge badge-info">{{count(auth()->user()->unreadNotifications()->get() )}}</span>
                 </a>
 
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" >
 
-                    <li>
+                    <li >
                         <ul class="dropdown-menu-list scroller" style="overflow: hidden; outline: currentcolor none medium;" tabindex="5001">
 
                           @foreach(auth()->user()->notifications()->get() as $notification)
@@ -23,23 +23,44 @@
 
                                 {{--  contact message notification  --}}
                               @if($notification->type=="App\Notifications\ContactMessage")
+
+                              @if(auth()->user()->type !=0)
+                              <a href="{{route('user.contactus.show',$notification->data['contact_message_id'])}}"
+                                class="mark-as-read" data-id="{{ $notification->id }}">
+                             <i class="entypo-comment pull-right"></i>
+
+                             <span class="line">
+                                 @if(is_null($notification->read_at))
+                                 <strong>{{$notification->data['user_fullname']}} @lang('site.sent_you_message')</strong>
+                                 @else
+                                 {{$notification->data['user_fullname']}} @lang('site.sent_you_message')
+
+                                  @endif
+                             </span>
+
+                             <span class="line small">
+                                 {{$notification->created_at->diffForHumans()}}
+                             </span>
+                         </a>
+                              @else
                               <a href="{{route('admin.contactus.show',$notification->data['contact_message_id'])}}"
-                                   class="mark-as-read" data-id="{{ $notification->id }}">
-                                <i class="entypo-comment pull-right"></i>
+                                class="mark-as-read" data-id="{{ $notification->id }}">
+                             <i class="entypo-comment pull-right"></i>
 
-                                <span class="line">
-                                    @if(is_null($notification->read_at))
-                                    <strong>{{$notification->data['user_fullname']}} @lang('site.sent_you_message')</strong>
-                                    @else
-                                    {{$notification->data['user_fullname']}} @lang('site.sent_you_message')
+                             <span class="line">
+                                 @if(is_null($notification->read_at))
+                                 <strong>{{$notification->data['user_fullname']}} @lang('site.sent_you_message')</strong>
+                                 @else
+                                 {{$notification->data['user_fullname']}} @lang('site.sent_you_message')
 
-                                     @endif
-                                </span>
+                                  @endif
+                             </span>
 
-                                <span class="line small">
-                                    {{$notification->created_at->diffForHumans()}}
-                                </span>
-                            </a>
+                             <span class="line small">
+                                 {{$notification->created_at->diffForHumans()}}
+                             </span>
+                         </a>
+                              @endif
 
                               @elseif($notification->type=="App\Notifications\TransactionNotification")
                               <a href="{{route('user.transactions.show',$notification->data['transaction_id'])}}"
@@ -183,6 +204,25 @@
 </div>
 
 <hr/>
+
+<script type="text/javascript">
+
+
+
+    var getNewNotifications = function () {
+
+        $('#thisdiv').load(document.URL +  ' #thisdiv');
+        // <?php
+    //     @foreach(auth()->user()->notifications()->get() as $notification)
+    // ?>
+    // $.getJSON('/me/notifications', function (response) {
+    //     // Some something with the notification
+    // });
+};
+
+setInterval(getNewNotifications, 8000); // Ask for new notifications every 8 second
+
+</script>
 
 {{-- <script type="text/javascript">
     jQuery(document).ready(function($)
