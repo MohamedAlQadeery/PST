@@ -23,15 +23,18 @@
 					</li>
 					</ol>
 
-			</div>
+            </div>
 
 
-			<div style="float:left" class="col-sm-3">
+			<div class="col-md-12" style="margin: 3%">
 				{{-- <div class="btn-group alt-select-field" id="category-filter"> --}}
 
                 <!-- Category Filter -->
                 <form action="{{route('site.products.index')}}" method="GET">
-                  <div class="form-group">
+
+
+
+                    <div class="form-group col-md-6">
                     <select name="category_id" class="form-control">
 
                         <ul  class="dropdown-menu" role="menu">
@@ -47,15 +50,23 @@
                         </ul>
 					</select>
 
-                	</div>
-					<input type="submit" style="width:80px" value="اختر" class="btn btn-secondary pull-right ">
-	
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <input type="text" name="search" placeholder="ابحث هنا عن اسم البضاعة ..." class="form-control">
+                    </div>
+
+					<input type="submit" style="width:80px;margin-left: 2%" value="اختر" class="btn btn-secondary pull-left ">
+
+
+
 				</form>
 
 				  {{-- </div> --}}
-				
-			</div> 
-		
+
+			</div>
+
 
 
 
@@ -96,26 +107,26 @@
 						<strong style="font-size:20px">₪ {{$product->price_to_sell }}</strong>
 						<div style="float:left">
 {{--
-							<i class="entypo-basket ">	
+							<i class="entypo-basket ">
 								<a href="index.html" class="btn btn-secondary"> طلب البضاعة</a>
 							</i>
 							<br>
 							<br> --}}
 								<a href="{{route('site.products.show',$product->id)}}" class="btn btn-secondary" >
-									<i class="entypo-direction">	
-											عرض 
+									<i class="entypo-direction">
+											عرض
 									</i>
 								</a>
 						</div>
 					</h4>
-				
-					
+
+
 					{{-- <div style="float:left" >
-						
+
 					</div> --}}
 					{{-- <br> --}}
 
-				
+
 
 				</div>
 
@@ -147,7 +158,7 @@
 
 
 
-{{-- 
+{{--
 <script type="text/javascript">
 
 

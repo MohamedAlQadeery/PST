@@ -16,7 +16,14 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = User::where('type', 2)->orderBy('id', 'DESC')->paginate(3);
+        $providers = User::where([]);
+
+        if (request()->has('search')) {
+            $providers = $providers->where('first_name', 'like', '%'.request()->input('search').'%')
+            ;
+        }
+
+        $providers = $providers->where(['type' => 2])->paginate(3);
 
         //gets the providers with at least 5 reviews with 3 stars or more
         $reviewd_providers = User::where('type', 2)->whereHas('reviews', function ($query) {

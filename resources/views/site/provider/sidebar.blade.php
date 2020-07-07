@@ -6,20 +6,19 @@
 
 	<h3>
 		<i class="entypo-list"></i>
-		الأصناف
+		البحث عن مزود
 	</h3>
 
 
 	<div class="sidebar-content">
 
-		<ul>
-			@foreach ($shareData['categories'] as $category)
-            <li>
-				<a href="#">{{$category->name}} </a>
-			</li>
+      <form action="{{route('site.providers.index')}}" class="get">
+        <div class="form-group">
+            <input type="text" name="search" placeholder="ابحث هنا عن اسم المزود ..." class="form-control">
+        </div>
+        <input type="submit" value="ابحث" class="btn btn-secondary">
 
-            @endforeach
-		</ul>
+      </form>
 
 	</div>
 

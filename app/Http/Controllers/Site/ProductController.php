@@ -24,6 +24,9 @@ class ProductController extends Controller
             $q->where('type', 2);
         });
 
+        if (request()->has('search')) {
+            $products = $products->where('name', 'like', '%'.request()->input('search').'%');
+        }
         //products for specific category that belongs to providers only
         if (request()->has('category_id')) {
             $products = $products->where('category_id', request()->input('category_id'));

@@ -91,15 +91,7 @@
                                         <span>Contact</span>
                                     </a>
                                 </li> --}}
-                                <li class="search">
-                                    <a href="#">
-                                        <i class="entypo-search"></i>
-                                    </a>
 
-                                    <form method="get" class="search-form" action="" enctype="application/x-www-form-urlencoded">
-                                        <input type="text" class="form-control" name="q" placeholder="ابحث هنا..." />
-                                    </form>
-                                </li>
                             </ul>
 
                             @if (auth()->check())

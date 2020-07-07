@@ -3,7 +3,7 @@
         <header class="logo-env">
             <!-- logo -->
             <div class="logo" >
-				<a href="dashboard/main/" >
+				<a href="#" >
 					 <img src="{{ url('/uploads/wasla.png')}}" width="150" alt="">
 				</a>
             </div>

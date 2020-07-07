@@ -22,7 +22,7 @@ class TransactionController extends Controller
 
     public function index()
     {
-        $transactions = Transaction::with(['provider', 'shop'])->get();
+        $transactions = Transaction::with(['provider', 'shop'])->orderBy('id', 'desc')->get();
 
         return view('back.transaction.index')->with([
             'page_name' => parent::getPluralModelName(),
