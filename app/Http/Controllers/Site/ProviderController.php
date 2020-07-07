@@ -14,16 +14,12 @@ class ProviderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $providers = User::where([]);
-
-        if (request()->has('search')) {
-            $providers = $providers->where('first_name', 'like', '%'.request()->input('search').'%')
-            ;
-        }
-
-        $providers = $providers->where(['type' => 2])->paginate(3);
+        $providers = User::when($request->search, function ($q) use ($request) {
+            return $q->where('first_name', 'like', '%'.$request->search.'%')
+            ->orWhere('last_name', 'like', '%'.$request->search.'%');
+        })->where('type', 2)->orderBy('id', 'desc')->paginate(3);
 
         //gets the providers with at least 5 reviews with 3 stars or more
         $reviewd_providers = User::where('type', 2)->whereHas('reviews', function ($query) {

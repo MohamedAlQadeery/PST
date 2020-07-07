@@ -16,6 +16,8 @@
         <div class="form-group">
             <input type="text" name="search" placeholder="ابحث هنا عن اسم المزود ..." class="form-control">
         </div>
+
+
         <input type="submit" value="ابحث" class="btn btn-secondary">
 
       </form>
