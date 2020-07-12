@@ -99,7 +99,7 @@ class MessageController extends Controller
             if (is_null($user)) {
                 return redirect()->back()->with('error', __('site.not_found'));
             }
-            $data = $request->except(['_token', 'to']);
+            $data = $request->except(['_token', 'to', 'provider_id']);
             $data['to_id'] = $user->id;
             $data['from_id'] = auth()->user()->id;
         }
@@ -108,6 +108,10 @@ class MessageController extends Controller
         $notification_data = ['message_id' => $message->id,
         'username' => $message->from->first_name.' '.$message->from->last_name, 'replay' => 0, ];
         $message->to->notify(new MessageNotification($notification_data));
+
+        if (strpos(url()->previous(), 'site')) {
+            return redirect()->route('site.providers.show', $request->provider_id)->with('success', __('site.message_created'));
+        }
 
         return redirect()->route('user.messages.index')->with('success', __('site.message_created'));
     }

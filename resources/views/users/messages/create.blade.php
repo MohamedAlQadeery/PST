@@ -55,7 +55,6 @@
                 <div class="form-group">
                     <label for="to">To:</label>
                     <input type="text" name="to" class="form-control" id="to" tabindex="1" placeholder="@lang('site.email')" />
-
                     {{-- <div class="field-options">
                         <a href="javascript:;" onclick="$(this).hide(); $('#cc').parent().removeClass('hidden'); $('#cc').focus();">CC</a>
                         <a href="javascript:;" onclick="$(this).hide(); $('#bcc').parent().removeClass('hidden'); $('#bcc').focus();">BCC</a>
