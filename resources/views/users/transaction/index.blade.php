@@ -58,6 +58,8 @@
                     <th>@lang('site.isDelivered')</th>
                     <th>@lang('site.type')</th>
                     <th>@lang('site.total')</th>
+                    <th>@lang('site.date')</th>
+
 					<th>@lang('site.action')</th>
 
 
@@ -98,7 +100,7 @@
                         @endif
                     </td>
 
-
+                    <td>{{$transaction->created_at->diffForHumans()}}</td>
 
                     <td>{{$transaction->total}}</td>
                     <td>

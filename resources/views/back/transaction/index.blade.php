@@ -55,6 +55,8 @@
                     <th>@lang('site.isDelivered')</th>
                     <th>@lang('site.type')</th>
                     <th>@lang('site.total')</th>
+                    <th>@lang('site.date')</th>
+
 					<th>@lang('site.action')</th>
 
 
@@ -65,6 +67,7 @@
                 <tr>
                     <td>{{++$index}}</td>
                     <td>{{$transaction->id}}</td>
+
                     <td>{{$transaction->provider->first_name.' '.$transaction->provider->last_name}}</td>
                     <td>{{$transaction->shop->name}}</td>
 
@@ -93,7 +96,10 @@
                         @endif
                     </td>
 
+
                     <td>{{$transaction->total}}</td>
+                    <td>{{$transaction->created_at->diffForHumans()}}</td>
+
                     <td>
                         <a href="{{route('admin.transactions.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
 

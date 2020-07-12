@@ -42,7 +42,7 @@
             </div>
             <div class="panel-body">
 
-                <form action="{{route('shops.update',$shop->id)}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+                <form action="{{route('admin.shops.update',$shop->id)}}" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
                     @csrf()
                     @method('patch')
 
