@@ -39,6 +39,7 @@ class StoreRequest extends FormRequest
             'mobile_number' => ['required'],
 
             'shop_email' => ['required', 'string', 'email', 'max:255', 'unique:shops,email'],
+            'bio' => ['required'],
         ];
     }
 }

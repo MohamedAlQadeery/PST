@@ -44,7 +44,8 @@
 		<table class="table table-bordered datatable" id="table-1">
 			<thead>
 				<tr>
-					<th>#</th>
+                    <th>#</th>
+                    <th>@lang('site.image')</th>
                     <th>@lang('site.full_name')</th>
                     <th>@lang('site.email')</th>
                     <th>@lang('site.type')</th>
@@ -58,7 +59,10 @@
 			<tbody>
                 @foreach($users as $index=>$user)
 				<tr>
-					<td>{{++$index}}</td>
+                    <td>{{++$index}}</td>
+                    <td style="width: 10%">
+                        <img src="{{$user->getImage()}}" class="img img-responsive">
+                    </td>
 					<td>{{$user->first_name.' '.$user->second_name.' '.$user->third_name.' '.$user->last_name}}</td>
 					<td>{{$user->email}}</td>
 					<td class="center">

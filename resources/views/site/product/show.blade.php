@@ -21,17 +21,17 @@
 					<span> الصنف:</span>
 					{{$product->category->name}}
 				</div>
-				<div class="item-detail">	
+				<div class="item-detail">
 					<span> التاريخ :</span>
 					{{$product_date}}
 				</div>
-				<div class="item-detail">	
+				<div class="item-detail">
 					<span> التقييم :</span>
 					<div  class="stars-outer">
 						<div  class="stars-inner"></div>
 					</div>
 				</div>
-				
+
 			</div>
 
 			<div  style="float:left"  class="col-sm-3">
@@ -155,7 +155,7 @@
 			<div class="col-sm-8">
 
 				<p class="text-justify">
-                    {{$product->description}}
+                    {!!$product->description!!}
                   </p>
 
 
@@ -203,17 +203,18 @@
 	{{-- <img src="/w3images/bandmember.jpg" alt="Avatar" style="width:90px"> --}}
 	<img src="{{$review->seller->getImage()}}" style="width:90px" class="img-circle')}}" />
 	{{-- <a href="#"> </a>	 --}}
-	<p><span>{{$review->seller->first_name.' '.$review->seller->last_name}}</span> 
+    <p><span>{{$review->seller->first_name.' '.$review->seller->last_name}}</span>
+        <small >  متجر : {{$review->seller->shop->name}}  </small>
 		<div class="stars-outer" style="font-size:20px; margin-right:19px">
 			<div style="width:{{$review->stars*20}}%" class="stars-inner"></div>
-		</div> 
+		</div>
 		<br>
 		<br>
 		<span style="font-size:15px;margin-right:19px;font-weight:bold">{{$review->body}}</span>
 	</p>
 </div>
 	@endforeach
-	
+
 </div>
 
 </section>
@@ -226,10 +227,10 @@
 			<div class="row">
 					<h3>أضف تقييمك</h3>
 			</div>
-	
+
 			<br>
 	<div class="row">
-	
+
 		<form action="{{route('site.productReview.store',$product->id)}}" method="post"
 			role="form" class="form-horizontal form-groups-bordered">
 				@csrf()
@@ -240,7 +241,7 @@
 				<input type="radio" name="stars" value="4"><i></i>
 				<input type="radio" name="stars" value="5"><i></i>
 			</span>
-	
+
 			<div class="row">
 				<div class="col-md-12">
 					<h3>أضف مراجعتك</h3>
@@ -248,21 +249,21 @@
 			</div>
 			<br>
 			<textarea name="body" cols="30" rows="10">
-	
+
 			</textarea>
 			<div class="callout-button">
 				<button type="submit" class="btn btn-success"><i class="entypo-star"></i>تأكيد</button>
-	
+
 			</div>
 		</form>
-	
+
 		</div>
 	</div>
-	
+
 </section>
 
 
-<hr>	
+<hr>
 
 <section class="portfolio-container">
 
@@ -325,7 +326,7 @@
 <script>
 	var rate = "<?php echo $rate ?>";
 
-	document.querySelector(`.stars-inner`).style.width = `${rate*10}%`; 
+	document.querySelector(`.stars-inner`).style.width = `${rate*10}%`;
 
 </script>
 

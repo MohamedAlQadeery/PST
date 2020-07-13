@@ -46,6 +46,7 @@ class ProviderController extends Controller
         $date = strtotime($request->dob);
         $data['dob'] = date('Y-m-d', $date);
         $user = User::create($data);
+        $user->assignRole(['مزود']);
         if ($request->image) {
             $image = parent::uploadImage($request->image);
             User::where('id', $user->id)->update(['image' => $image]);

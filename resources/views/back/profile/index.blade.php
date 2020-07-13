@@ -58,9 +58,11 @@
              <!-- tabs for the profile links -->
              <ul class="nav nav-tabs">
                 <li class="active"><a href="{{route('profile.show',$user->id)}}">@lang('site.profile')</a></li>
-                @canany(['all','edit-user'])
-            <li><a href="{{route('profile.edit',$user->id)}}">@lang('site.edit') @lang('site.profile')</a></li>
-                @endcan
+
+                @if(auth()->user()->id == $user->id)
+                <li><a href="{{route('profile.edit',$user->id)}}">@lang('site.edit') @lang('site.profile')</a></li>
+                @endif
+
              </ul>
           </div>
        </div>

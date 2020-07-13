@@ -11,11 +11,6 @@ use App\Http\Requests\Back\User\StoreRequest;
 
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:all|edit-user')->only('edit');
-    }
-
     public function edit($id)
     {
         $user = User::findOrFail($id);

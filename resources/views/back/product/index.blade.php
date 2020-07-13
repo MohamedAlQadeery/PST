@@ -66,7 +66,8 @@
 		<table class="table table-bordered datatable" id="table-1">
 			<thead>
 				<tr>
-					<th>#</th>
+                    <th>#</th>
+                    <th>@lang('site.image')</th>
                     <th>@lang('site.name')</th>
                     <th>@lang('site.barcode')</th>
                     <th>@lang('site.price_to_sell')</th>
@@ -84,7 +85,10 @@
 			<tbody>
                 @foreach($products as $index=>$product)
 				<tr>
-					<td>{{++$index}}</td>
+                    <td>{{++$index}}</td>
+                    <td style="width: 10%">
+                        <img src="{{$product->getImage()}}" class="img img-responsive">
+                    </td>
                     <td>{{$product->name}}</td>
                     <td class="center">{{$product->barcode}}</td>
                     <td class="center">{{$product->price_to_sell}}</td>

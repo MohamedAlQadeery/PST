@@ -17,6 +17,8 @@ class CreateProductShopTable extends Migration
             $table->integer('shop_id');
             $table->integer('quantity')->nullable();
             $table->integer('sell_count');
+            $table->double('price');
+
             $table->integer('status');
             $table->timestamps();
         });

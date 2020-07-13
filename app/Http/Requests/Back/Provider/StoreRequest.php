@@ -33,9 +33,7 @@ class StoreRequest extends FormRequest
             'age' => ['required', 'numeric'],
             'dob' => ['required'],
             'gender' => ['required'],
-
-
-  //
+            'bio' => ['required'],
         ];
     }
 }

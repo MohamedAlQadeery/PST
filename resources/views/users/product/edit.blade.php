@@ -253,3 +253,23 @@
 @endsection
 
 
+
+@section('script')
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.11/ckeditor.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.11/adapters/jquery.js"></script>
+<script>
+  var route_prefix = "/filemanager";
+  var base_url = "{{url('/')}}";
+
+  $('textarea[name=description]').ckeditor({
+    height: 100,
+    filebrowserImageBrowseUrl:base_url+route_prefix + '?type=Images',
+    filebrowserImageUploadUrl:base_url+route_prefix + '/upload?type=Images&_token={{csrf_token()}}',
+    filebrowserBrowseUrl:base_url+ route_prefix + '?type=Files',
+    filebrowserUploadUrl: base_url+route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
+  });
+</script>
+
+@endsection
+

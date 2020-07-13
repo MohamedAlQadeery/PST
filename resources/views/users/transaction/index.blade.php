@@ -100,9 +100,10 @@
                         @endif
                     </td>
 
-                    <td>{{$transaction->created_at->diffForHumans()}}</td>
 
                     <td>{{$transaction->total}}</td>
+                    <td>{{$transaction->created_at->diffForHumans()}}</td>
+
                     <td>
                         <a href="{{route('user.transactions.show',$transaction->id)}}" class="btn btn-info">@lang('site.show')</a>
 

@@ -228,6 +228,15 @@ var baseurl = '';
 							</div>
                         </div>
 
+                        <div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="entypo-user"></i>
+								</div>
+							<textarea name="bio" id="" cols="20" rows="5" class="form-control" placeholder="@lang('site.bio')"></textarea>
+							</div>
+                        </div>
+
 
                         <div class="form-group">
 							<div class="input-group">
